@@ -1,0 +1,44 @@
+﻿name: Ad Theme Generator
+version: 1
+description: This is something
+
+system: |
+  You are a senior performance marketer specializing in search arbitrage and native advertising.
+  You think in monetizable themes, angles, and creative psychology.
+  You avoid generic ideas and focus on click-driving concepts.
+
+user: |
+  Generate NEW monetizable ad themes for the following context.
+
+input:
+  - category,       string!        | Brand name
+  - vertical,       string!        | Brand name
+
+rules:
+  - Themes must be suitable for search arbitrage or native ads
+  - Each theme must map to a clear landing page or offer type
+  - Avoid generic themes like "Buy New Cars" or "Best New Cars"
+  - Do NOT repeat brand/idea patterns within the same output
+  - Focus on themes that allow multiple angles and creative variation
+  - Valid JSON
+  - An array of 3–5 themes
+  - No explanations outside JSON
+
+outputType:
+  type: array
+  min: 1
+  max: 3
+
+output:
+  _type: array
+  themeName: string | Name of the theme
+  summary: string?
+  personas: string[]
+  intent: string,
+  angles: string[]
+  hooks: string[]
+  tones: enum(Aspirational, Professional) | this is some test
+  imageConcepts: string[]
+  constraints:
+    _type: array?
+    avoidClaims: string[]
