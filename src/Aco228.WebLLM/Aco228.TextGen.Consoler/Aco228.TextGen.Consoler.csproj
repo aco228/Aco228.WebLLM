@@ -13,7 +13,7 @@
       <ProjectReference Include="..\Aco228.AIGen\Aco228.AIGen.csproj" />
       <ProjectReference Include="..\Aco228.TextGen.Claude\Aco228.TextGen.Claude.csproj" />
       <ProjectReference Include="..\Aco228.TextGen.DeepSeek\Aco228.TextGen.DeepSeek.csproj" />
-      <ProjectReference Include="..\Aco228.TextGen.Grok\Aco228.TextGen.Grok.csproj" />
+      <ProjectReference Include="..\Aco228.AIGen.Grok\Aco228.AIGen.Grok.csproj" />
     </ItemGroup>
 
     <ItemGroup>

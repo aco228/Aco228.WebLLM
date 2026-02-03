@@ -1,6 +1,6 @@
 ﻿using Aco228.AIGen.Models;
 
-namespace Aco228.TextGen.Gemini.Constants;
+namespace Aco228.AIGen.Gemini.Constants;
 
 internal static class GeminiModelList
 {

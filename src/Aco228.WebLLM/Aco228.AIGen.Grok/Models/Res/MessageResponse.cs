@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Aco228.TextGen.Grok.Models.Res;
+namespace Aco228.AIGen.Grok.Models.Res;
 
 public class MessageResponse
 {

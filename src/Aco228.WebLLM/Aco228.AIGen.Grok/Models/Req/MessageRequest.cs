@@ -1,6 +1,6 @@
 ﻿using Aco228.AIGen.Models;
 
-namespace Aco228.TextGen.Grok.Models.Req;
+namespace Aco228.AIGen.Grok.Models.Req;
 
 public class MessageRequest : TextGenApiRequestBase<MessageRequest>
 {

@@ -16,9 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.MongoDb", "..\..\..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.TextGen.Claude", "Aco228.TextGen.Claude\Aco228.TextGen.Claude.csproj", "{AD496E69-6C6B-4526-8239-68BEED8D5362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.TextGen.Gemini", "Aco228.TextGen.Gemini\Aco228.TextGen.Gemini.csproj", "{6EC40418-5B00-4270-8BF1-D13030B2F7FF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.Gemini", "Aco228.AIGen.Gemini\Aco228.AIGen.Gemini.csproj", "{6EC40418-5B00-4270-8BF1-D13030B2F7FF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.TextGen.Grok", "Aco228.TextGen.Grok\Aco228.TextGen.Grok.csproj", "{B96F4787-AC07-4323-9658-D4E5A3B168D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.Grok", "Aco228.AIGen.Grok\Aco228.AIGen.Grok.csproj", "{B96F4787-AC07-4323-9658-D4E5A3B168D3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.TextGen.DeepSeek", "Aco228.TextGen.DeepSeek\Aco228.TextGen.DeepSeek.csproj", "{9F7F2433-0D90-4AA5-8715-D52049F184D7}"
 EndProject

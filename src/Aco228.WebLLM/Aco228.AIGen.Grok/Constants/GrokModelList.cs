@@ -1,6 +1,6 @@
 ﻿using Aco228.AIGen.Models;
 
-namespace Aco228.TextGen.Grok.Constants;
+namespace Aco228.AIGen.Grok.Constants;
 
 internal static class GrokModelList
 {

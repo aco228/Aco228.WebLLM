@@ -1,11 +1,11 @@
 ﻿using System.Text;
+using Aco228.AIGen.Grok.Constants;
+using Aco228.AIGen.Grok.Models.Req;
+using Aco228.AIGen.Grok.Services.Web;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;
-using Aco228.TextGen.Grok.Constants;
-using Aco228.TextGen.Grok.Models.Req;
-using Aco228.TextGen.Grok.Services.Web;
 
-namespace Aco228.TextGen.Grok.Services;
+namespace Aco228.AIGen.Grok.Services;
 
 public interface IGrokTextGenService : ITextGen { }
 

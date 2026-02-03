@@ -1,6 +1,6 @@
 ﻿using Aco228.WService.Base;
 
-namespace Aco228.TextGen.Grok.Code;
+namespace Aco228.AIGen.Grok.Code;
 
 public class GrokApiConfiguration : ApiServiceConf
 {

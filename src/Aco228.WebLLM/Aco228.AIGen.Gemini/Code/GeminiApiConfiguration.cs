@@ -1,6 +1,6 @@
 ﻿using Aco228.WService.Base;
 
-namespace Aco228.TextGen.Gemini.Code;
+namespace Aco228.AIGen.Gemini.Code;
 
 public class GeminiApiConfiguration : ApiServiceConf
 {

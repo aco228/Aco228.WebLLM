@@ -1,9 +1,9 @@
-﻿using Aco228.TextGen.Grok.Code;
-using Aco228.TextGen.Grok.Models.Req;
-using Aco228.TextGen.Grok.Models.Res;
+﻿using Aco228.AIGen.Grok.Code;
+using Aco228.AIGen.Grok.Models.Req;
+using Aco228.AIGen.Grok.Models.Res;
 using Aco228.WService;
 
-namespace Aco228.TextGen.Grok.Services.Web;
+namespace Aco228.AIGen.Grok.Services.Web;
 
 public interface IGrokChatService : IGrokApiService
 {
