@@ -36,7 +36,7 @@ builder.RegisterClaudeServices();
 builder.RegisterGrokServices();
 builder.RegisterDeepSeekServices();
 builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);
-var serviceProvider = builder.BuildCollection();
+var serviceProvider = await builder.BuildCollection();
 
 var adthemeGenerator = serviceProvider.GetService<IAdThemeGeneratorPrompt>()!;
 var res = await adthemeGenerator.Execute(new PromptAdThemeGeneratorRequest()
