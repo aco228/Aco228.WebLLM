@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Aco228.AIGen.Models;
 
-namespace Aco228.AIGen.ChatGPT.Models.Web.Request;
+namespace Aco228.AIGen.ChatGPT.Models.Web.Texts;
 
 public class CreateTextRequest : TextGenApiRequestBase<CreateTextRequest>
 {

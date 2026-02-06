@@ -38,6 +38,12 @@ builder.RegisterDeepSeekServices();
 builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);
 var serviceProvider = await builder.BuildCollection();
 
+var file = new FileInfo("C:\\Users\\Lenovo\\Desktop\\arb.db\\tst.jpg");
+var gptFileService = serviceProvider.GetService<IChatgptFileApiService>()!;
+var fileDeleteRes = await gptFileService.DeleteFile("file-C2UkyAnjG7bUS5rRQCXVPt");
+
+var openAiService = await gptFileService.UploadFile(file);
+
 var adthemeGenerator = serviceProvider.GetService<IAdThemeGeneratorPrompt>()!;
 var res = await adthemeGenerator.Execute(new PromptAdThemeGeneratorRequest()
 {

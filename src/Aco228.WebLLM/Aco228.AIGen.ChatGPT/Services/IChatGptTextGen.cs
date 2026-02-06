@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using Aco228.AIGen.ChatGPT.Constants;
-using Aco228.AIGen.ChatGPT.Models.Web.Request;
+using Aco228.AIGen.ChatGPT.Models.Web.Texts;
 using Aco228.AIGen.ChatGPT.Services.Web;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;

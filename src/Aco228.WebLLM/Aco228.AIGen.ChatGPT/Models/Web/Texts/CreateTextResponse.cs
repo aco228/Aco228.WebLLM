@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Aco228.AIGen.ChatGPT.Models.Web.Response;
+namespace Aco228.AIGen.ChatGPT.Models.Web.Texts;
 
 public class CreateTextResponse
 {
