@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
+using Aco228.AIGen.Attributes;
 using Aco228.AIGen.Infrastructure.PromptSerializer;
 using Aco228.AIGen.Infrastructure.PromptSerializer.Helpers;
 using Aco228.AIGen.Models;
@@ -48,51 +50,48 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     
     public async Task<TRes?> Execute(TReq request)
     {
+        var llmModel = (ModelDefinition ?? TextGenManager.ModelDefinitions)
+            .Where(x => x.SupportsJson)
+            .Where(x => ModelLevel == null || x.Level == ModelLevel)
+            .Where(x => TextGenProviders?.Contains(x.Provider) ?? true)
+            .Shuffle().First();
+        
+        var (systemPrompt, userText) = await GetPromptData(request);
+        
+        var prompt = await GetPromptText(request);
+
+        var textGenerationRequest = new TextGenerationRequest()
+        {
+            Model = llmModel,
+            User = userText,
+            System = systemPrompt,
+            ImageUrls = GetImageUrls(request),
+
+        };
+        
+        var response = await TextGenManager.GetResponse(textGenerationRequest);
+        
         return null;
-        // var llmModel = (ModelDefinition ?? TextGenManager.ModelDefinitions)
-        //     .Where(x => x.SupportsJson)
-        //     .Where(x => ModelLevel == null || x.Level == ModelLevel)
-        //     .Where(x => TextGenProviders?.Contains(x.Provider) ?? true)
-        //     .Shuffle().First();
-        //
-        // var (systemPrompt, userText) = GetPromptData(request);
-        //
-        // var textGenerationRequest = new TextGenerationRequest()
-        // {
-        //     Type = TextGenProviders?.Take() ?? null,
-        //     Model = llmModel,
-        //     System = systemPrompt,
-        //     Prompt = userText,
-        //     FileUrls = GetFileUrlList(request),
-        // };
-        //
-        // var response = await TextGenManager.Generate(textGenerationRequest);
-        //
-        // if (typeof(TRes) == typeof(string))
-        //     return response as TRes;
-        //
-        // var result = PromptHelper.DeserializeResponse<TRes>(response);
-        // return result;
     }
-    //
-    // private List<string> GetFileUrlList(TReq request)
-    // {
-    //     var filesList = new List<string>();
-    //
-    //     foreach (var propertyInfo in typeof(TReq).GetProperties())
-    //     {
-    //         var imgProp = propertyInfo.GetCustomAttribute<PromptFileIdAttribute>();
-    //         if(imgProp == null)
-    //             continue;
-    //         
-    //         if(propertyInfo.PropertyType != typeof(string))
-    //             throw new Exception("Only string properties are supported for PromptFileIdAttribute");
-    //         var val = propertyInfo.GetValue(request)?.ToString();
-    //         
-    //         if(!string.IsNullOrEmpty(val))
-    //             filesList.Add(val);
-    //     }
-    //
-    //     return filesList;
-    // }
+    
+    private List<string> GetImageUrls(TReq request)
+    {
+        var filesList = new List<string>();
+    
+        foreach (var propertyInfo in typeof(TReq).GetProperties())
+        {
+            var imgProp = propertyInfo.GetCustomAttribute<PromptImageUrlAttribute>();
+            if(imgProp == null)
+                continue;
+            
+            if(propertyInfo.PropertyType != typeof(string))
+                throw new Exception("Only string properties are supported for PromptFileIdAttribute");
+            var val = propertyInfo.GetValue(request)?.ToString();
+            
+            if(!string.IsNullOrEmpty(val))
+                filesList.Add(val);
+        }
+    
+        return filesList;
+    }
 }

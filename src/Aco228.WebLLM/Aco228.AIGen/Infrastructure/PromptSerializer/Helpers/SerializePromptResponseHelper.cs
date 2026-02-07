@@ -4,14 +4,21 @@ using System.Text.Json;
 using Aco228.AIGen.Attributes;
 using Aco228.Common.Extensions;
 using Aco228.Common.Models;
+using MongoDB.Bson;
 
 namespace Aco228.AIGen.Infrastructure.PromptSerializer.Helpers;
 
 internal class SerializePromptResponseHelper<TRes>
 {
-    private record ClassProperty(string Name, TypeDeconstructor Type, PromptHintAttribute? HintAttribute);
-    
-    private Dictionary<string, ClassProperty> _usedTypes = new();
+    private static List<Type> ForbiddenTypes = new()
+    {
+        typeof(ObjectId),
+    };
+
+    public static List<string> ForbiddenNames => new()
+    {
+        "CreatedUtc", "UpdatedUtc"
+    };
 
     private static List<string> Guidelines = new()
     {
@@ -23,12 +30,8 @@ internal class SerializePromptResponseHelper<TRes>
         "Output must strictly conform to schema or is invalid.",
     };
 
-    
-    public SerializePromptResponseHelper()
-    {
-        
-    }
-    
+    private record ClassProperty(string Name, TypeDeconstructor Type, PromptHintAttribute? HintAttribute);
+    private Dictionary<ClassProperty, List<ClassProperty>> Structure = new();
     
     public StringBuilder Serialize()
     {
@@ -52,7 +55,8 @@ internal class SerializePromptResponseHelper<TRes>
             if (obj == null)
                 throw new Exception("Unable to create object of type " + responseType);
         
-            DummyPopulate(obj);
+            var classProperty = new ClassProperty("", typeDefinition, null);
+            DummyPopulate(obj, classProperty);
             
             jsonRepresentation = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
@@ -61,30 +65,45 @@ internal class SerializePromptResponseHelper<TRes>
         
         
         result
-            .AppendList("Schema properties", ConstructPropertyHints())
+            .AppendString("Schema properties", ConstructPropertyHints())
             .AppendString("Example schema", jsonRepresentation);
         
         return result;
     }
 
-    private List<string> ConstructPropertyHints()
+    private string ConstructPropertyHints()
     {
-        var guidelines = new List<string>();
-        foreach (var (_, classProperty) in _usedTypes)
+        var sb = new StringBuilder();
+        foreach (var (key, types) in Structure.Reverse())
         {
-            if (classProperty.HintAttribute == null) continue;
+            var typeCandidates = types.Where(x => x.HintAttribute != null).ToList();
+            if (typeCandidates.Any() == false)
+                continue;
+
+            var sectionName = string.IsNullOrEmpty(key.Name)
+                ? $"## Root level properties ({key.Type.GetJsonObjectDefinition()})"
+                : $"## {key.Name.ToCamelCase()} ({key.Type.GetJsonObjectDefinition()})";
             
-            var propertyType = classProperty.Type.IsClass ? "" : classProperty.Type.Type.Name.ToLowerInvariant();
-            if (classProperty.Type.IsList) propertyType += " array";
+            sb.AppendLine($"{sectionName} {key.HintAttribute?.GetValue()}");
+            if(key.Type.IsList)
+                sb.AppendLine("Create one set of properties for each item in the array.");
             
-            guidelines.Add($"({propertyType}) {classProperty.Name.ToCamelCase()} = {classProperty.HintAttribute.GetValue()}");
+            foreach (var classProperty in typeCandidates)
+            {
+                var propertyType = classProperty.Type.IsClass ? "object" : classProperty.Type.Type.Name.ToLowerInvariant();
+                if (classProperty.Type.IsList) propertyType += " array";
+            
+                sb.AppendLine($"- *{classProperty.Name.ToCamelCase()}* ({propertyType}): {classProperty.HintAttribute!.GetValue()}");   
+            }
+            sb.AppendLine();
         }
 
-        return guidelines;
+        return sb.ToString();
     }
     
-    private void DummyPopulate(object inputObject)
+    private void DummyPopulate(object inputObject, ClassProperty inputClassProperty)
     {
+        var deconstructorTypes = new List<ClassProperty>();
         var typeDeconstructor = TypeDeconstructor.Get(inputObject.GetType());
         
         object? obj = typeDeconstructor.IsList
@@ -94,17 +113,25 @@ internal class SerializePromptResponseHelper<TRes>
         var props = obj.GetType().GetProperties();
         foreach (var prop in props)
         {
+            if(ForbiddenTypes.Contains(prop.PropertyType))
+                continue;
+            
+            if(ForbiddenNames.Contains(prop.Name))
+                continue;
+            
             var hintAttribute = prop.GetCustomAttribute<PromptHintAttribute>();
             var hintExamples = prop.GetCustomAttribute<PromptExampleAttribute>();
             var typeDefinition = TypeDeconstructor.Get(prop.PropertyType);
-            _usedTypes.TryAdd(prop.Name, new(prop.Name, typeDefinition, hintAttribute));
+            var classProperty = new ClassProperty(prop.Name, typeDefinition, hintAttribute);
+            
+            deconstructorTypes.Add(classProperty);
             
             if (typeDefinition.IsList)
             {
                 var (list, initialObject) = CreateDummyList(typeDefinition, hintExamples?.Value);
 
                 if (typeDefinition.IsClass)
-                    DummyPopulate(initialObject);
+                    DummyPopulate(initialObject, classProperty);
                 
                 prop.SetValue(obj, list);
             }
@@ -113,15 +140,17 @@ internal class SerializePromptResponseHelper<TRes>
                 var classValue = Activator.CreateInstance(prop.PropertyType)!;
                 
                 if(typeDefinition.IsClass)
-                    DummyPopulate(classValue);
+                    DummyPopulate(classValue, classProperty);
                 
                 prop.SetValue(obj, classValue);
             }
 
             if (prop.PropertyType == typeof(string))
                 prop.SetValue(obj, hintExamples?.Value.FirstOrDefault() ?? "");
-            
         }
+        
+        if(!Structure.Any(x => x.Key.Name == inputClassProperty.Name))
+            Structure.Add(inputClassProperty, deconstructorTypes);
     }
 
     private static Tuple<object, object> CreateDummyList(TypeDeconstructor typeDefinition, object[]? insertData = null)

@@ -16,4 +16,8 @@
       <Folder Include="Infrastructure\PromptSerializer\Models\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MongoDB.Bson" Version="3.6.0" />
+    </ItemGroup>
+
 </Project>

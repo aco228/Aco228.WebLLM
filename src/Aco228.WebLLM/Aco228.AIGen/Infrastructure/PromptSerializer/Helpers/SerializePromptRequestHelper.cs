@@ -33,7 +33,7 @@ internal static class SerializePromptRequestHelper
             
             var promptHint = prop.GetCustomAttribute<PromptHintAttribute>();
             var promptIgnoreAttribute = prop.GetCustomAttribute<PromptIgnoreAttribute>();
-            var promptFileIdAttribute = prop.GetCustomAttribute<PromptFileIdAttribute>();
+            var promptFileIdAttribute = prop.GetCustomAttribute<PromptImageUrlAttribute>();
 
             if (promptIgnoreAttribute != null || promptFileIdAttribute != null)
                 continue;
