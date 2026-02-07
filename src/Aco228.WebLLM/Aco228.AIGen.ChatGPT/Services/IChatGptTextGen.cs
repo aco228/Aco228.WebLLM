@@ -26,56 +26,40 @@ public class ChatGptTextGen : TextGenBase, IChatGptTextGen
         AddModels(ChatGptModelList.Models);
     }
 
-    public override Task<string> Generate(TextGenerationRequest textGenerationRequest)
+    protected override async Task<TextGenResponse> ExecuteRequest(TextGenRequest request)
     {
-        var request = new CreateTextRequest()
-            .UseModel(textGenerationRequest.Model?.ModelApiName)
-            .AddMessage(ModelRole.system, textGenerationRequest.System)
-            .AddMessage(ModelRole.user, textGenerationRequest.Prompt, textGenerationRequest.FileUrls);
-        
-        return ProduceResponse(request);
-    }
-
-    public override Task<string> Generate(string prompt)
-    {
-        var request = new CreateTextRequest()
-            .UseModel(TakeNextModel())
-            .AddMessage(ModelRole.user, prompt);
-        
-        return ProduceResponse(request);
-    }
-
-    public override Task<string> Generate(string system, string prompt)
-    {
-        var request = new CreateTextRequest()
-            .UseModel(TakeNextModel())
-            .AddMessage(ModelRole.system, system)
-            .AddMessage(ModelRole.user, prompt);
-        
-        return ProduceResponse(request);
-    }
-
-    public override Task<string> Generate(string model, string system, string prompt)
-    {
-        var request = new CreateTextRequest()
-            .UseModel(model)
-            .AddMessage(ModelRole.system, system)
-            .AddMessage(ModelRole.user, prompt);
-        
-        return ProduceResponse(request);
-    }
-
-    private async Task<string> ProduceResponse(CreateTextRequest request)
-    {
-        var response = await _textApiService.GetResponse(request);
-        
-        var txtResponse = new StringBuilder();
-        foreach (var output in response.output)
+        var result = new TextGenResponse()
         {
-            foreach (var contentDto in output.content)
-                txtResponse.Append(contentDto.text);
-        }
+            Model = request.Model!,
+        };
+        var apiRequest = CreateRequest(request);
+       
+        var apiResponse = await _textApiService.GetResponse(apiRequest);
+        result.InputTokens = apiResponse.usage.input_tokens;
+        result.OutputTokens = apiResponse.usage.output_tokens;
+
+        var txtResponse = new StringBuilder();
+        foreach (var outputDto in apiResponse.output)
+        foreach (var contentDto in outputDto.content)
+            txtResponse.Append(contentDto.text);
+
+        result.Response = txtResponse.ToString();
+        result.UserPrompt = request.User; 
+        result.SystemPrompt = request.System; 
+        return result;
+    }
+
+    private CreateTextRequest CreateRequest(TextGenRequest request)
+    {
+        var apiRequest = new CreateTextRequest()
+        {
+            Model = request.Model,
+        };
         
-        return txtResponse.ToString();
+        apiRequest.AddInput("user", request.User, request.ImageUrls);
+        if(!string.IsNullOrEmpty(request.System))
+            apiRequest.AddInput("system", request.System);
+        
+        return apiRequest;
     }
 }

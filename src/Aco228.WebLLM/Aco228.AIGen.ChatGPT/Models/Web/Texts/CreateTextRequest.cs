@@ -3,7 +3,7 @@ using Aco228.AIGen.Models;
 
 namespace Aco228.AIGen.ChatGPT.Models.Web.Texts;
 
-public class CreateTextRequest : TextGenApiRequestBase<CreateTextRequest>
+public class CreateTextRequest
 {
     [JsonPropertyName("model")]
     public string Model { get; set; } = "gpt-4.1";
@@ -11,23 +11,6 @@ public class CreateTextRequest : TextGenApiRequestBase<CreateTextRequest>
     [JsonPropertyName("input")] 
     public List<InputDto> Input { get; set; } = new();
 
-    public override CreateTextRequest UseModel(string? model)
-    {
-        if (string.IsNullOrEmpty(model))
-            return this;
-        
-        Model = model;
-        return this;
-    }
-    
-    public override CreateTextRequest AddMessage(ModelRole role, string? content, List<string>? fileUrls = null)
-    {
-        if (string.IsNullOrEmpty(content))
-            return this;
-        
-        Input.Add(new InputDto {role = role.ToString(), content = CreateContent(content, fileUrls)});
-        return this;
-    }
 
     private static List<InputDtoContent> CreateContent(string userPrompt, List<string>? fileUrls = null)
     {
@@ -38,13 +21,35 @@ public class CreateTextRequest : TextGenApiRequestBase<CreateTextRequest>
         
         return res;
     }
+
+    public CreateTextRequest AddInput(string role, string text, List<string>? imageUrls = null)
+    {
+        var input = new InputDto()
+        {
+            role = role
+        };
+        input.content.Add(new()
+        {
+            type = "input_text", 
+            text = text
+        });
+
+        if (imageUrls != null && imageUrls.Any())
+        {
+            foreach (var imageUrl in imageUrls)
+                input.content.Add(new() {type = "input_image", image_url = new() { url = imageUrl}});
+        }
+                
+        Input.Add(input);
+        return this;
+    }
 }
 
 
 public class InputDto
 {
     public string role { get; set; }
-    public List<InputDtoContent> content { get; set; }
+    public List<InputDtoContent> content { get; set; } = new();
 }
 
 public class InputDtoContent

@@ -1,4 +1,5 @@
 ﻿using Aco228.AIGen.Models;
+using Aco228.Common.Infrastructure;
 using Aco228.Common.Models;
 
 namespace Aco228.AIGen.Services;
@@ -6,37 +7,26 @@ namespace Aco228.AIGen.Services;
 public interface ITextGen : ITransient
 {
     TextGenProvider Provider { get; }
-    List<ModelDefinition> Models { get; }
-    Task<string> Generate(TextGenerationRequest request);
-    Task<string> Generate(ModelDefinition modelDefinition, string prompt);
-    Task<string> Generate(string prompt);
-    Task<string> Generate(string system, string prompt);
-    Task<string> Generate(string model, string system, string prompt);
+    ManagedList<ModelDefinition> Models { get; }
+    Task<TextGenResponse> Generate(TextGenRequest request);
 }
 
 public abstract class TextGenBase : ITextGen
 {
     public abstract TextGenProvider Provider { get; }
-    public List<ModelDefinition> Models { get; private set; } = new();
+    public ManagedList<ModelDefinition> Models { get; private set; } = new();
 
-    public abstract Task<string> Generate(string prompt);
-    public abstract Task<string> Generate(string system, string prompt);
-    public abstract Task<string> Generate(string model, string system, string prompt);
     public abstract void Prepare();
+    protected abstract Task<TextGenResponse> ExecuteRequest(TextGenRequest request);
 
     public TextGenBase()
     {
         Prepare();
     }
-
-    public abstract Task<string> Generate(TextGenerationRequest request);
-
-    public Task<string> Generate(ModelDefinition modelDefinition, string prompt)
+    
+    public Task<TextGenResponse> Generate(TextGenRequest request)
     {
-        if (modelDefinition.Provider != Provider)
-            throw new ArgumentException($"ModelDefinition provider {modelDefinition.Provider} does not match TextGen type {Provider}");
-        
-        return Generate(prompt);
+        return ExecuteRequest(request);
     }
 
     protected void AddModels(List<ModelDefinition> models)

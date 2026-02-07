@@ -29,15 +29,23 @@ using Aco228.WService.Infrastructure;
 using DotNetEnv;
 using Microsoft.Extensions.DependencyInjection;
 
-
 var serviceProvider = await ServiceProviderHelper.Construct(typeof(Program), builder =>
 {
     builder.RegisterAIGenServices();
     builder.RegisterChatGptServices();
-    builder.RegisterClaudeServices();
-    builder.RegisterGrokServices();
-    builder.RegisterDeepSeekServices();
+    // builder.RegisterClaudeServices();
+    // builder.RegisterGrokServices();
+    // builder.RegisterDeepSeekServices();
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
+});
+
+
+
+var textGen = ServiceProviderHelper.GetService<ITextGenManager>()!;
+var response = await textGen.GetResponse(new()
+{
+    Type = TextGenProvider.ChatGPT,
+    User = "How are you?"
 });
 
 var adthemeGenerator = PromptHelper.Get<AdThemeGeneratorPrompt>();
