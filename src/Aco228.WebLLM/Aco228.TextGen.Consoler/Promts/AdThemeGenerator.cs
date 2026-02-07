@@ -1,35 +1,11 @@
-﻿using System.Text.Json.Serialization;
-using Aco228.AIGen.Attributes;
-using Aco228.AIGen.Models;
+﻿using Aco228.AIGen.Attributes;
 using Aco228.AIGen.Services;
-using Aco228.Common.Models;
 
 namespace Aco228.TextGen.Consoler.Promts;
-
-public interface IAdThemeGeneratorPrompt : IPrompt<PromptAdThemeGeneratorRequest, List<PromptAdThemeGeneratorResponse>>, ITransient  {} 
-public class AdThemeGeneratorPrompt : PromptBase<PromptAdThemeGeneratorRequest, List<PromptAdThemeGeneratorResponse>>, IAdThemeGeneratorPrompt
+ 
+public class AdThemeGeneratorPrompt : PromptBase<PromptAdThemeGeneratorRequest, List<PromptAdThemeGeneratorResponse>>
 {
-    protected override TextGenType? GenType => TextGenType.Claude;
-
-    protected override string SystemPrompt => @"
-    You are a senior performance marketer specializing in search arbitrage and native advertising.
-    You think in monetizable themes, angles, and creative psychology.
-    You avoid generic ideas and focus on click-driving concepts.";
-        
-    protected override string UserPrompt => @"
-    Generate NEW monetizable ad themes for the following context.";
-
-    protected override List<string> Rules => new ()
-    {
-        "Themes must be suitable for search arbitrage or native ads",
-        "Themes should support arbitrage margins through informational or curiosity-driven clicks.",
-        "Each theme must map to a clear landing page or offer type",
-        "Avoid generic themes like 'Buy New Cars' or 'Best New Cars'",
-        "Do NOT repeat brand/idea patterns within the same output",
-        "Focus on themes that allow multiple angles and creative variation",
-        "You MUST NOT use words or context of `discounts`, `limited-time`, `last chance`",
-        "You MUST NOT promote urgency",
-    };
+    protected override string PromptName => "adThemeGenerator.v1";
 }
 
 public sealed class PromptAdThemeGeneratorRequest

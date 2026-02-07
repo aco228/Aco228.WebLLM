@@ -1,6 +1,6 @@
 ﻿namespace Aco228.AIGen.Models;
 
-public enum TextGenType
+public enum TextGenProvider
 {
     ChatGPT = 1,
     Claude = 2,

@@ -3,7 +3,7 @@
 
 public class ModelDefinition
 {
-    public TextGenType Provider { get; set; }
+    public TextGenProvider Provider { get; set; }
     public ModelLevel Level { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }

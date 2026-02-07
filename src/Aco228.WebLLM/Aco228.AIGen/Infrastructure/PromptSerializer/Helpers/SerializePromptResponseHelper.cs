@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using Aco228.AIGen.Attributes;
 using Aco228.Common.Extensions;
@@ -29,9 +30,9 @@ internal class SerializePromptResponseHelper<TRes>
     }
     
     
-    public string Serialize(
-        List<string>? additionalGuidelines = null)
+    public StringBuilder Serialize()
     {
+        var result = new StringBuilder();
         var responseType = typeof(TRes);
         var typeDefinition = TypeDeconstructor.Get(responseType);
         var guidelines = new List<string>();
@@ -58,10 +59,8 @@ internal class SerializePromptResponseHelper<TRes>
         else
             guidelines.Clear();
         
-        guidelines = guidelines.GetAddRange(additionalGuidelines);
         
-        string result = ""
-            .AppendList("Guidelines", guidelines)
+        result
             .AppendList("Schema properties", ConstructPropertyHints())
             .AppendString("Example schema", jsonRepresentation);
         

@@ -13,7 +13,7 @@ public interface IChatGptTextGen : ITextGen
 
 public class ChatGptTextGen : TextGenBase, IChatGptTextGen
 {
-    public override TextGenType Type => TextGenType.ChatGPT;
+    public override TextGenProvider Provider => TextGenProvider.ChatGPT;
     private readonly IChatGptTextApiService _textApiService;
 
     public ChatGptTextGen(IChatGptTextApiService textApiService)

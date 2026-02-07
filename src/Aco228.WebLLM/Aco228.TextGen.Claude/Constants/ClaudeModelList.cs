@@ -9,7 +9,7 @@ internal static class ClaudeModelList
         // Claude - Pro Level (Current - Claude 4.5 family)
         new ModelDefinition
         {
-            Provider = TextGenType.Claude,
+            Provider = TextGenProvider.Claude,
             Level = ModelLevel.Pro,
             Name = "Claude Opus 4.5",
             Description = "Anthropic's most capable model - best for complex tasks and coding",
@@ -26,7 +26,7 @@ internal static class ClaudeModelList
 // Claude - Mid Level (Current - Claude 4.5 family)
         new ModelDefinition
         {
-            Provider = TextGenType.Claude,
+            Provider = TextGenProvider.Claude,
             Level = ModelLevel.Mid,
             Name = "Claude Sonnet 4.5",
             Description = "Balanced latest generation Claude model - recommended for most use cases",
@@ -42,7 +42,7 @@ internal static class ClaudeModelList
 
         new ModelDefinition
         {
-            Provider = TextGenType.Claude,
+            Provider = TextGenProvider.Claude,
             Level = ModelLevel.Mid,
             Name = "Claude Sonnet 4",
             Description = "Latest Sonnet model with strong performance for coding and tasks",
@@ -59,7 +59,7 @@ internal static class ClaudeModelList
 // Claude - Low Level (Current - Claude 4.5 family)
         new ModelDefinition
         {
-            Provider = TextGenType.Claude,
+            Provider = TextGenProvider.Claude,
             Level = ModelLevel.Low,
             Name = "Claude Haiku 4.5",
             Description = "Latest compact and fast Claude model",
@@ -75,7 +75,7 @@ internal static class ClaudeModelList
 
         new ModelDefinition
         {
-            Provider = TextGenType.Claude,
+            Provider = TextGenProvider.Claude,
             Level = ModelLevel.Low,
             Name = "Claude 3.5 Haiku",
             Description = "Haiku model with vision support",

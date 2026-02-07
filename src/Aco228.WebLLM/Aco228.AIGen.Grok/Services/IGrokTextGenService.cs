@@ -11,7 +11,7 @@ public interface IGrokTextGenService : ITextGen { }
 
 public class GrokTextGenService : TextGenBase, IGrokTextGenService
 {
-    public override TextGenType Type => TextGenType.Grok;
+    public override TextGenProvider Provider => TextGenProvider.Grok;
     private readonly IGrokChatService _service;
 
     public GrokTextGenService(IGrokChatService service)

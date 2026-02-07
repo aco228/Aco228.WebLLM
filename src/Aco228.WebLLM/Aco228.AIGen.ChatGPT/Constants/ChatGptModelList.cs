@@ -9,7 +9,7 @@ internal static class ChatGptModelList
         // OpenAI - Pro Level
         new ModelDefinition
         {
-            Provider = TextGenType.ChatGPT,
+            Provider = TextGenProvider.ChatGPT,
             Level = ModelLevel.Pro,
             Name = "GPT-4o",
             Description = "OpenAI's most advanced multimodal model with superior reasoning",
@@ -25,7 +25,7 @@ internal static class ChatGptModelList
 
         new ModelDefinition
         {
-            Provider = TextGenType.ChatGPT,
+            Provider = TextGenProvider.ChatGPT,
             Level = ModelLevel.Pro,
             Name = "GPT-4 Turbo",
             Description = "High-capability model with 128K context window",
@@ -42,7 +42,7 @@ internal static class ChatGptModelList
 // OpenAI - Mid Level
         new ModelDefinition
         {
-            Provider = TextGenType.ChatGPT,
+            Provider = TextGenProvider.ChatGPT,
             Level = ModelLevel.Mid,
             Name = "GPT-4",
             Description = "OpenAI's original GPT-4 model with strong reasoning",
@@ -59,7 +59,7 @@ internal static class ChatGptModelList
 // OpenAI - Low Level
         new ModelDefinition
         {
-            Provider = TextGenType.ChatGPT,
+            Provider = TextGenProvider.ChatGPT,
             Level = ModelLevel.Low,
             Name = "GPT-3.5 Turbo",
             Description = "Fast and efficient model for most tasks",

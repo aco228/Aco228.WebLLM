@@ -21,31 +21,27 @@ using Aco228.TextGen.DeepSeek.Services.Web;
 using Aco228.AIGen.Grok;
 using Aco228.AIGen.Grok.Services;
 using Aco228.AIGen.Grok.Services.Web;
+using Aco228.AIGen.Helpers;
+using Aco228.Common;
+using Aco228.Common.Helpers;
 using Aco228.WService;
 using Aco228.WService.Infrastructure;
 using DotNetEnv;
 using Microsoft.Extensions.DependencyInjection;
 
-Env.Load();
 
-var builder = new ServiceCollection();
-builder.RegisterServicesFromAssembly(typeof(Program).Assembly);
-builder.RegisterAIGenServices();
-builder.RegisterChatGptServices();
-builder.RegisterClaudeServices();
-builder.RegisterGrokServices();
-builder.RegisterDeepSeekServices();
-builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);
-var serviceProvider = await builder.BuildCollection();
+var serviceProvider = await ServiceProviderHelper.Construct(typeof(Program), builder =>
+{
+    builder.RegisterAIGenServices();
+    builder.RegisterChatGptServices();
+    builder.RegisterClaudeServices();
+    builder.RegisterGrokServices();
+    builder.RegisterDeepSeekServices();
+    builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
+});
 
-var file = new FileInfo("C:\\Users\\Lenovo\\Desktop\\arb.db\\tst.jpg");
-var gptFileService = serviceProvider.GetService<IChatgptFileApiService>()!;
-var fileDeleteRes = await gptFileService.DeleteFile("file-C2UkyAnjG7bUS5rRQCXVPt");
-
-var openAiService = await gptFileService.UploadFile(file);
-
-var adthemeGenerator = serviceProvider.GetService<IAdThemeGeneratorPrompt>()!;
-var res = await adthemeGenerator.Execute(new PromptAdThemeGeneratorRequest()
+var adthemeGenerator = PromptHelper.Get<AdThemeGeneratorPrompt>();
+var prompt = await adthemeGenerator.GetPromptText(new PromptAdThemeGeneratorRequest()
 {
     Category = "Health",
     Vertical = "Weight Loss",
@@ -61,29 +57,5 @@ var res = await adthemeGenerator.Execute(new PromptAdThemeGeneratorRequest()
 });
 
 
-var chatWebService = serviceProvider.GetService<IChatGptTextGen>()!;
-// var gptRes = await chatWebService.GetResponse("How are you today?");
-
-// var dto = JsonToClassConverter.ConvertJsonToClass(gptRes, "GptTextResponseDTO");
-
-int a = 0;
-
-// var service = WServiceHelper.GetWebService<IDummyApiService>();
-// var service = WServiceHelper.GetWebService<IGithubWebService>();
-// var response = await service.GetRepos("aco228");
-
-// var classResponse = new WCreateClassModelService().ConvertJsonToClass(response, "RepoDTO");
-// Console.WriteLine(classResponse);
-
-// var response = await File.ReadAllTextAsync("C:\\Users\\Lenovo\\Desktop\\temp\\github.json");
-// var data = JsonSerializer.Deserialize<List<RepoSmallDTO>>(response, WJsonSettings.DefaultOptions);
-
-var service1 = serviceProvider.GetService<IDummyApiService>();
-var service2 = serviceProvider.GetService<IDummyApiService>();
-var service = serviceProvider.GetService<IDummyApiService>();
-var response = await service.PatchPost(1, new()
-{
-    DasIstTitle = "Koji je kurac u pitanju",
-});
-
-Console.WriteLine("Hello, World! + " + response);
+int brk = 0;
+Console.WriteLine("Hello, World! + ");

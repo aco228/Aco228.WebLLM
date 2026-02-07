@@ -1,21 +1,21 @@
 ﻿using System.Collections;
 using System.Reflection;
+using System.Text;
 using Aco228.AIGen.Attributes;
 
 namespace Aco228.AIGen.Infrastructure.PromptSerializer.Helpers;
 
 internal static class SerializePromptRequestHelper
 {
-    public static string SerializeToString<TReq>(TReq input)
+    public static StringBuilder SerializeToString<TReq>(TReq input)
     {
-        var list = SerializeToList(input);
-        var result = string.Join(Environment.NewLine, list);
+        var result = SerializeToList(input);
         return result;
     }
     
-    public static List<string> SerializeToList<TReq>(TReq input)
+    public static StringBuilder SerializeToList<TReq>(TReq input)
     {
-        var result = new List<string>();
+        var result = new StringBuilder();
         var props = input!.GetType().GetProperties();
 
         foreach (var prop in props)
@@ -42,8 +42,8 @@ internal static class SerializePromptRequestHelper
             
             if (promptHint != null && promptHint.Value.Any())
                 propName = string.Join(" ", promptHint.Value);
-            
-            result.Add($"{propName} = {propStringValue}");
+
+            result.AppendLine($"{propName} = {propStringValue}");
         }
 
         return result;

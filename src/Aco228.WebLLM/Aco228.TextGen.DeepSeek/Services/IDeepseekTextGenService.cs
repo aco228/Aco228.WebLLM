@@ -12,7 +12,7 @@ public interface IDeepseekTextGenService : ITextGen { }
 public class DeepseekTextGenService : TextGenBase, IDeepseekTextGenService
 {
     private readonly IDeepseekChatService _service;
-    public override TextGenType Type => TextGenType.DeepSeek;
+    public override TextGenProvider Provider => TextGenProvider.DeepSeek;
 
     public DeepseekTextGenService(IDeepseekChatService service)
     {

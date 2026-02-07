@@ -5,7 +5,7 @@ namespace Aco228.AIGen.Services;
 
 public interface ITextGen : ITransient
 {
-    TextGenType Type { get; }
+    TextGenProvider Provider { get; }
     List<ModelDefinition> Models { get; }
     Task<string> Generate(TextGenerationRequest request);
     Task<string> Generate(ModelDefinition modelDefinition, string prompt);
@@ -16,7 +16,7 @@ public interface ITextGen : ITransient
 
 public abstract class TextGenBase : ITextGen
 {
-    public abstract TextGenType Type { get; }
+    public abstract TextGenProvider Provider { get; }
     public List<ModelDefinition> Models { get; private set; } = new();
 
     public abstract Task<string> Generate(string prompt);
@@ -33,8 +33,8 @@ public abstract class TextGenBase : ITextGen
 
     public Task<string> Generate(ModelDefinition modelDefinition, string prompt)
     {
-        if (modelDefinition.Provider != Type)
-            throw new ArgumentException($"ModelDefinition provider {modelDefinition.Provider} does not match TextGen type {Type}");
+        if (modelDefinition.Provider != Provider)
+            throw new ArgumentException($"ModelDefinition provider {modelDefinition.Provider} does not match TextGen type {Provider}");
         
         return Generate(prompt);
     }

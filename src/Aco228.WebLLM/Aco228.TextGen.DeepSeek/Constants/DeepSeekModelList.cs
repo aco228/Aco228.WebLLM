@@ -9,7 +9,7 @@ internal static class DeepSeekModelList
         // DeepSeek - Pro Level
         new ModelDefinition
         {
-            Provider = TextGenType.DeepSeek,
+            Provider = TextGenProvider.DeepSeek,
             Level = ModelLevel.Mid,
             Name = "DeepSeek V3.2",
             Description = "DeepSeek's most advanced model",
@@ -26,7 +26,7 @@ internal static class DeepSeekModelList
         // DeepSeek - Pro Level
         new ModelDefinition
         {
-            Provider = TextGenType.DeepSeek,
+            Provider = TextGenProvider.DeepSeek,
             Level = ModelLevel.Pro,
             Name = "DeepSeek V3.2 (Thinking Mode)",
             Description = "DeepSeek's most advanced reasoning model",

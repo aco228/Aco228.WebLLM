@@ -2,7 +2,7 @@
 
 public class TextGenerationRequest
 {
-    public TextGenType? Type { get; set; }
+    public TextGenProvider? Type { get; set; }
     public ModelDefinition? Model { get; set; }
     public string Prompt { get; set; }
     public string? System { get; set; }

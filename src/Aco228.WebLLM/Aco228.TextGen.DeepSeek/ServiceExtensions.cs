@@ -18,7 +18,7 @@ public static class ServiceExtensions
         services.RegisterPostBuildAction((pr) =>
         {
             var manager = pr.GetService<ITextGenManager>()!;
-            manager.Register<IDeepseekTextGenService>(TextGenType.DeepSeek, DeepSeekModelList.Models);
+            manager.Register<IDeepseekTextGenService>(TextGenProvider.DeepSeek, DeepSeekModelList.Models);
         });
     }
 }

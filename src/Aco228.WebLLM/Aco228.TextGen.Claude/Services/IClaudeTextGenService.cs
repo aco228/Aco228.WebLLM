@@ -11,7 +11,7 @@ public interface IClaudeTextGenService : ITextGen { }
 
 public class ClaudeTextGenService : TextGenBase, IClaudeTextGenService
 {
-    public override TextGenType Type => TextGenType.Claude;
+    public override TextGenProvider Provider => TextGenProvider.Claude;
     private readonly IClaudeChatApiService _service;
 
     public ClaudeTextGenService(IClaudeChatApiService service)

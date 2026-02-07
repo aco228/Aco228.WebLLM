@@ -18,7 +18,7 @@ public static class ServiceExtensions
         services.RegisterPostBuildAction((serviceProvider) =>
         {
             var manager = serviceProvider.GetService<ITextGenManager>()!;
-            manager.Register<IChatGptTextGen>(TextGenType.ChatGPT, ChatGptModelList.Models);
+            manager.Register<IChatGptTextGen>(TextGenProvider.ChatGPT, ChatGptModelList.Models);
         });
     }
     

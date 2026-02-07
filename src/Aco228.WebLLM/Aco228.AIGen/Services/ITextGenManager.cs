@@ -9,12 +9,12 @@ public interface ITextGenManager : ISingleton
 {
     List<ModelDefinition> ModelDefinitions { get; }
     Task<string> Generate(TextGenerationRequest request);
-    Task<string> Generate(TextGenType type, string prompt);
-    Task<string> Generate(TextGenType type, string system, string prompt);
-    Task<string> Generate(TextGenType type, string model, string system, string prompt);
+    Task<string> Generate(TextGenProvider provider, string prompt);
+    Task<string> Generate(TextGenProvider provider, string system, string prompt);
+    Task<string> Generate(TextGenProvider provider, string model, string system, string prompt);
     Task<string> Generate(ModelDefinition definition, string system, string prompt);
     
-    void Register<T>(TextGenType type, List<ModelDefinition> models) where T : ITextGen;
+    void Register<T>(TextGenProvider provider, List<ModelDefinition> models) where T : ITextGen;
 }
 
 public class TextGenManager : ITextGenManager
@@ -26,9 +26,9 @@ public class TextGenManager : ITextGenManager
     {
         ITextGen? textGen = null;
         if (request.Model != null)
-            textGen = _textGens.FirstOrDefault(x => x.Type == request.Model.Provider && x.Models.Any(y => y.ModelApiName == request.Model.ModelApiName));
+            textGen = _textGens.FirstOrDefault(x => x.Provider == request.Model.Provider && x.Models.Any(y => y.ModelApiName == request.Model.ModelApiName));
         if(textGen == null && request.Type != null)
-            textGen = _textGens.FirstOrDefault(x => x.Type == request.Type);
+            textGen = _textGens.FirstOrDefault(x => x.Provider == request.Type);
         
         if(textGen == null)
             textGen = _textGens.Take();
@@ -38,27 +38,27 @@ public class TextGenManager : ITextGenManager
         return await textGen.Generate(request);       
     }
 
-    public Task<string> Generate(TextGenType type, string prompt)
+    public Task<string> Generate(TextGenProvider provider, string prompt)
     {
-        var textGen = _textGens.FirstOrDefault(x => x.Type == type);
+        var textGen = _textGens.FirstOrDefault(x => x.Provider == provider);
         if (textGen == null)
             return Task.FromResult("");
         
         return textGen.Generate(prompt);
     }
     
-    public Task<string> Generate(TextGenType type, string system, string prompt)
+    public Task<string> Generate(TextGenProvider provider, string system, string prompt)
     {
-        var textGen = _textGens.FirstOrDefault(x => x.Type == type);
+        var textGen = _textGens.FirstOrDefault(x => x.Provider == provider);
         if (textGen == null)
             return Task.FromResult("");
         
         return textGen.Generate(system, prompt);
     }
 
-    public Task<string> Generate(TextGenType type, string model, string system, string prompt)
+    public Task<string> Generate(TextGenProvider provider, string model, string system, string prompt)
     {
-        var textGen = _textGens.FirstOrDefault(x => x.Type == type);
+        var textGen = _textGens.FirstOrDefault(x => x.Provider == provider);
         if (textGen == null)
             return Task.FromResult("");
         
@@ -68,7 +68,7 @@ public class TextGenManager : ITextGenManager
     public Task<string> Generate(ModelDefinition definition, string system, string prompt)
         => Generate(definition.Provider, definition.ModelApiName, system, prompt);
 
-    public void Register<T>(TextGenType type, List<ModelDefinition> models) where T : ITextGen
+    public void Register<T>(TextGenProvider provider, List<ModelDefinition> models) where T : ITextGen
     {
         var service = ServiceProviderHelper.GetServiceByType(typeof(T)) as ITextGen;
         _textGens.Add(service!);
