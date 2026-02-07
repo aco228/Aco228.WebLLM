@@ -41,18 +41,28 @@ public class TextGenManager : ITextGenManager
         if(textGen == null) 
             throw new  Exception("No text gen available");
 
+        ModelDefinition? modelDefinition = null;
+        if(!string.IsNullOrEmpty(request.ModelName))
+            modelDefinition = ModelDefinitions.FirstOrDefault(x =>  x.ModelApiName == request.ModelName && x.Provider == textGen.Provider);
+        else if (request.Model != null)
+            modelDefinition = request.Model;
+        else
+            modelDefinition = textGen.Models.TakeRandom(x => x.Level is ModelLevel.Low or ModelLevel.Mid);
+        
+        if (modelDefinition == null)
+            throw new Exception("No model available");
+
         var textGenRequest = new TextGenRequest()
         {
-            Model = request.Model?.ModelApiName ?? textGen.Models.TakeRandom(x => x.Level is ModelLevel.Low or ModelLevel.Mid)?.ModelApiName,
+            Model = modelDefinition,
             User = request.User,
             System = request.System,
             ImageUrls = request.ImageUrls,
         };
         
-        if(string.IsNullOrEmpty(textGenRequest.Model))
-            throw new Exception("No model specified");
-        
         var textGenResponse = await textGen.Generate(textGenRequest);
+        textGenResponse.InputCost = (textGenResponse.InputTokens / 1_000_000.0) * modelDefinition.InputPricePerMillion;
+        textGenResponse.OuputCost = (textGenResponse.OutputTokens / 1_000_000.0) * modelDefinition.OutputPricePerMillion;
         return textGenResponse;
     }
     

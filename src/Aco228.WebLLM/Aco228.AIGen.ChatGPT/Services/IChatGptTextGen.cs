@@ -28,10 +28,7 @@ public class ChatGptTextGen : TextGenBase, IChatGptTextGen
 
     protected override async Task<TextGenResponse> ExecuteRequest(TextGenRequest request)
     {
-        var result = new TextGenResponse()
-        {
-            Model = request.Model!,
-        };
+        var result = new TextGenResponse();
         var apiRequest = CreateRequest(request);
        
         var apiResponse = await _textApiService.GetResponse(apiRequest);
@@ -42,10 +39,7 @@ public class ChatGptTextGen : TextGenBase, IChatGptTextGen
         foreach (var outputDto in apiResponse.output)
         foreach (var contentDto in outputDto.content)
             txtResponse.Append(contentDto.text);
-
-        result.Response = txtResponse.ToString();
-        result.UserPrompt = request.User; 
-        result.SystemPrompt = request.System; 
+        
         return result;
     }
 
@@ -53,7 +47,7 @@ public class ChatGptTextGen : TextGenBase, IChatGptTextGen
     {
         var apiRequest = new CreateTextRequest()
         {
-            Model = request.Model,
+            Model = request.Model.ModelApiName,
         };
         
         apiRequest.AddInput("user", request.User, request.ImageUrls);

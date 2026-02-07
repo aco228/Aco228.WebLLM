@@ -3,6 +3,7 @@
 public class TextGenerationRequest
 {
     public TextGenProvider? Type { get; set; }
+    public string? ModelName { get; set; }
     public ModelDefinition? Model { get; set; }
     public string User { get; set; }
     public string? System { get; set; }
