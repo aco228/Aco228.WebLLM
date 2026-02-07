@@ -24,6 +24,11 @@ public class ClaudeTextGenService : TextGenBase, IClaudeTextGenService
         AddModels(ClaudeModelList.Models);
     }
 
+    public override Task<string> Generate(TextGenerationRequest request)
+    {
+        throw new NotImplementedException();
+    }
+
     public override Task<string> Generate(string prompt)
     {
         var request = new MessageRequest()

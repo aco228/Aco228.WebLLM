@@ -7,6 +7,7 @@ public interface ITextGen : ITransient
 {
     TextGenType Type { get; }
     List<ModelDefinition> Models { get; }
+    Task<string> Generate(TextGenerationRequest request);
     Task<string> Generate(ModelDefinition modelDefinition, string prompt);
     Task<string> Generate(string prompt);
     Task<string> Generate(string system, string prompt);
@@ -27,7 +28,9 @@ public abstract class TextGenBase : ITextGen
     {
         Prepare();
     }
-    
+
+    public abstract Task<string> Generate(TextGenerationRequest request);
+
     public Task<string> Generate(ModelDefinition modelDefinition, string prompt)
     {
         if (modelDefinition.Provider != Type)

@@ -29,32 +29,39 @@ internal class SerializePromptResponseHelper<TRes>
     }
     
     
-    public string Serialize()
+    public string Serialize(
+        List<string>? additionalGuidelines = null)
     {
         var responseType = typeof(TRes);
         var typeDefinition = TypeDeconstructor.Get(responseType);
-        
-        if(!typeDefinition.IsClass)
-            throw new Exception("Response type must be a class");
+        var guidelines = new List<string>();
+        string? jsonRepresentation = null;
 
-        object? obj = null;
-        if (typeDefinition.IsList)
+        if (responseType.IsClassObject())
         {
-            var (list, initialObject) = CreateDummyList(typeDefinition);
-            obj = list;
+            object? obj = null;
+            if (typeDefinition.IsList)
+            {
+                var (list, initialObject) = CreateDummyList(typeDefinition);
+                obj = list;
+            }
+            else if (typeDefinition.IsClass)
+                obj = Activator.CreateInstance(typeof(TRes));
+
+            if (obj == null)
+                throw new Exception("Unable to create object of type " + responseType);
+        
+            DummyPopulate(obj);
+            
+            jsonRepresentation = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
         }
-        else if (typeDefinition.IsClass)
-            obj = Activator.CreateInstance(typeof(TRes));
-
-        if (obj == null)
-            throw new Exception("Unable to create object of type " + responseType);
+        else
+            guidelines.Clear();
         
-        DummyPopulate(obj);
+        guidelines = guidelines.GetAddRange(additionalGuidelines);
         
-        var jsonRepresentation = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase });
-
         string result = ""
-            .AppendList("Guidelines", Guidelines)
+            .AppendList("Guidelines", guidelines)
             .AppendList("Schema properties", ConstructPropertyHints())
             .AppendString("Example schema", jsonRepresentation);
         
@@ -71,7 +78,7 @@ internal class SerializePromptResponseHelper<TRes>
             var propertyType = classProperty.Type.IsClass ? "" : classProperty.Type.Type.Name.ToLowerInvariant();
             if (classProperty.Type.IsList) propertyType += " array";
             
-            guidelines.Add($"({propertyType}) {classProperty.Name.ToCamelCase()} = {classProperty.HintAttribute.Value}");
+            guidelines.Add($"({propertyType}) {classProperty.Name.ToCamelCase()} = {classProperty.HintAttribute.GetValue()}");
         }
 
         return guidelines;

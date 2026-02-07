@@ -1,16 +1,21 @@
 ﻿using System.Text.Json;
 using System.Text.RegularExpressions;
+using Aco228.AIGen.Services;
+using Aco228.Common;
 using Aco228.Common.Extensions;
 
 namespace Aco228.AIGen.Helpers;
 
-internal static class PromptHelpers
+public static class PromptHelper
 {
     private static readonly Regex _listRegex = new Regex(@"\[[\s\S]*\]");
     private static readonly Regex _objectRegex = new Regex(@"\{[\s\S]*\}");
+
+    public static T Get<T>() where T : IPromptBase
+        => ServiceProviderHelper.Construct<T>();
     
     
-    public static TRes? DeserializeResponse<TRes>(string llmResponse)
+    internal static TRes? DeserializeResponse<TRes>(string llmResponse)
     {
         if (string.IsNullOrEmpty(llmResponse))
             return default;

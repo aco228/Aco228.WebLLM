@@ -1,5 +1,6 @@
 ﻿using Aco228.AIGen.Models;
 using Aco228.Common;
+using Aco228.Common.Infrastructure;
 using Aco228.Common.Models;
 
 namespace Aco228.AIGen.Services;
@@ -7,6 +8,7 @@ namespace Aco228.AIGen.Services;
 public interface ITextGenManager : ISingleton
 {
     List<ModelDefinition> ModelDefinitions { get; }
+    Task<string> Generate(TextGenerationRequest request);
     Task<string> Generate(TextGenType type, string prompt);
     Task<string> Generate(TextGenType type, string system, string prompt);
     Task<string> Generate(TextGenType type, string model, string system, string prompt);
@@ -17,12 +19,29 @@ public interface ITextGenManager : ISingleton
 
 public class TextGenManager : ITextGenManager
 {
-    Dictionary<TextGenType, ITextGen> _textGens = new();
+    ManagedList<ITextGen> _textGens = new();
     public List<ModelDefinition> ModelDefinitions { get; private set; } = new();
+
+    public async Task<string> Generate(TextGenerationRequest request)
+    {
+        ITextGen? textGen = null;
+        if (request.Model != null)
+            textGen = _textGens.FirstOrDefault(x => x.Type == request.Model.Provider && x.Models.Any(y => y.ModelApiName == request.Model.ModelApiName));
+        if(textGen == null && request.Type != null)
+            textGen = _textGens.FirstOrDefault(x => x.Type == request.Type);
+        
+        if(textGen == null)
+            textGen = _textGens.Take();
+        
+        if(textGen == null) throw new  Exception("No text gen available");
+        
+        return await textGen.Generate(request);       
+    }
 
     public Task<string> Generate(TextGenType type, string prompt)
     {
-        if(!_textGens.TryGetValue(type, out var textGen))
+        var textGen = _textGens.FirstOrDefault(x => x.Type == type);
+        if (textGen == null)
             return Task.FromResult("");
         
         return textGen.Generate(prompt);
@@ -30,7 +49,8 @@ public class TextGenManager : ITextGenManager
     
     public Task<string> Generate(TextGenType type, string system, string prompt)
     {
-        if(!_textGens.TryGetValue(type, out var textGen))
+        var textGen = _textGens.FirstOrDefault(x => x.Type == type);
+        if (textGen == null)
             return Task.FromResult("");
         
         return textGen.Generate(system, prompt);
@@ -38,7 +58,8 @@ public class TextGenManager : ITextGenManager
 
     public Task<string> Generate(TextGenType type, string model, string system, string prompt)
     {
-        if(!_textGens.TryGetValue(type, out var textGen))
+        var textGen = _textGens.FirstOrDefault(x => x.Type == type);
+        if (textGen == null)
             return Task.FromResult("");
         
         return textGen.Generate(model, system, prompt);
@@ -50,7 +71,7 @@ public class TextGenManager : ITextGenManager
     public void Register<T>(TextGenType type, List<ModelDefinition> models) where T : ITextGen
     {
         var service = ServiceProviderHelper.GetServiceByType(typeof(T)) as ITextGen;
-        _textGens.Add(type, service!);
+        _textGens.Add(service!);
         ModelDefinitions.AddRange(models);
     }
 }

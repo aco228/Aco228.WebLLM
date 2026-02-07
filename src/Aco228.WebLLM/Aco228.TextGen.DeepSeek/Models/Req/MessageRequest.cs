@@ -19,13 +19,9 @@ public class MessageRequest : TextGenApiRequestBase<MessageRequest>
         return this;
     }
 
-    public override MessageRequest AddMessage(ModelRole role, string content)
+    public override MessageRequest AddMessage(ModelRole role, string? content, List<string>? fileUrls = null)
     {
-        if (string.IsNullOrEmpty(content))
-            return this;
-        
-        messages.Add(new DeepSeekChatRequestMessage {role = role.ToString(), content = content});
-        return this;
+        throw new NotImplementedException();
     }
 }
 

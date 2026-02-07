@@ -23,7 +23,12 @@ public class DeepseekTextGenService : TextGenBase, IDeepseekTextGenService
     {
         AddModels(DeepSeekModelList.Models);
     }
-    
+
+    public override Task<string> Generate(TextGenerationRequest request)
+    {
+        throw new NotImplementedException();
+    }
+
     public override Task<string> Generate(string prompt)
     {
         var request = new MessageRequest()

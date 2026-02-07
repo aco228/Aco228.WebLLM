@@ -26,6 +26,16 @@ public class ChatGptTextGen : TextGenBase, IChatGptTextGen
         AddModels(ChatGptModelList.Models);
     }
 
+    public override Task<string> Generate(TextGenerationRequest textGenerationRequest)
+    {
+        var request = new CreateTextRequest()
+            .UseModel(textGenerationRequest.Model?.ModelApiName)
+            .AddMessage(ModelRole.system, textGenerationRequest.System)
+            .AddMessage(ModelRole.user, textGenerationRequest.Prompt, textGenerationRequest.FileUrls);
+        
+        return ProduceResponse(request);
+    }
+
     public override Task<string> Generate(string prompt)
     {
         var request = new CreateTextRequest()
@@ -39,7 +49,7 @@ public class ChatGptTextGen : TextGenBase, IChatGptTextGen
     {
         var request = new CreateTextRequest()
             .UseModel(TakeNextModel())
-            .AddMessage(ModelRole.developer, system)
+            .AddMessage(ModelRole.system, system)
             .AddMessage(ModelRole.user, prompt);
         
         return ProduceResponse(request);
@@ -49,7 +59,7 @@ public class ChatGptTextGen : TextGenBase, IChatGptTextGen
     {
         var request = new CreateTextRequest()
             .UseModel(model)
-            .AddMessage(ModelRole.developer, system)
+            .AddMessage(ModelRole.system, system)
             .AddMessage(ModelRole.user, prompt);
         
         return ProduceResponse(request);

@@ -7,6 +7,6 @@ public abstract class TextGenApiRequestBase<T> where T : class
     
     public abstract T UseModel(string? model);
     
-    public abstract T AddMessage(ModelRole role, string content);
+    public abstract T AddMessage(ModelRole role, string? content, List<string>? fileUrls = null);
 
 }

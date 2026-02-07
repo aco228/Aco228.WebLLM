@@ -31,8 +31,17 @@ internal static class SerializePromptRequestHelper
             if(string.IsNullOrEmpty(propStringValue)) 
                 continue;
             
-            var promptHint = prop.PropertyType.GetCustomAttribute<PromptHintAttribute>();
-            var propName = promptHint?.Value ?? prop.Name;
+            var promptHint = prop.GetCustomAttribute<PromptHintAttribute>();
+            var promptIgnoreAttribute = prop.GetCustomAttribute<PromptIgnoreAttribute>();
+            var promptFileIdAttribute = prop.GetCustomAttribute<PromptFileIdAttribute>();
+
+            if (promptIgnoreAttribute != null || promptFileIdAttribute != null)
+                continue;
+            
+            var propName = prop.Name;
+            
+            if (promptHint != null && promptHint.Value.Any())
+                propName = string.Join(" ", promptHint.Value);
             
             result.Add($"{propName} = {propStringValue}");
         }
