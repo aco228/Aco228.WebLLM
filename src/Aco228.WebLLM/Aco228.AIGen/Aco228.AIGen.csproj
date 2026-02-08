@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\Aco228.Common\src\Aco228.Common\Aco228.Common.csproj" />
+      <ProjectReference Include="..\..\..\..\Aco228.Runners\src\Aco228.Runners\Aco228.Runners.csproj" />
     </ItemGroup>
 
     <ItemGroup>

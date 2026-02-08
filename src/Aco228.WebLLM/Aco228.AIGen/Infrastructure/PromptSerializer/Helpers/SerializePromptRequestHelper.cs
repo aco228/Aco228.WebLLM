@@ -1,7 +1,10 @@
 ﻿using System.Collections;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Aco228.AIGen.Attributes;
+using Aco228.Runners.Documents;
 
 namespace Aco228.AIGen.Infrastructure.PromptSerializer.Helpers;
 
@@ -24,18 +27,30 @@ internal static class SerializePromptRequestHelper
             if (propValue == null) 
                 continue;
             
-            var propStringValue = propValue is not string && propValue is IEnumerable enumerable 
-                ? string.Join(", ", enumerable.Cast<object>())
-                : propValue.ToString() ?? string.Empty;
+            // var propStringValue = propValue is not string && propValue is IEnumerable enumerable 
+            //     ? string.Join(", ", enumerable.Cast<object>())
+            //     : propValue.ToString() ?? string.Empty;
+
+            if (typeof(IActionMongoModel).IsAssignableFrom(prop.PropertyType))
+            {
+                var insideDocument = (propValue as IActionMongoModel)?.GetInsideDocument();
+                if(insideDocument == null)
+                    throw new InvalidOperationException("Unable to get inside document for IActionMongoModel");
+                
+                propValue = insideDocument;
+            }
+            
+            var propStringValue = JsonSerializer.Serialize(propValue);
             
             if(string.IsNullOrEmpty(propStringValue)) 
                 continue;
             
             var promptHint = prop.GetCustomAttribute<PromptHintAttribute>();
             var promptIgnoreAttribute = prop.GetCustomAttribute<PromptIgnoreAttribute>();
+            var jsonIgnoreAttribute = prop.GetCustomAttribute<JsonIgnoreAttribute>();
             var promptFileIdAttribute = prop.GetCustomAttribute<PromptImageUrlAttribute>();
 
-            if (promptIgnoreAttribute != null || promptFileIdAttribute != null)
+            if (promptIgnoreAttribute != null || jsonIgnoreAttribute != null || promptFileIdAttribute != null)
                 continue;
             
             var propName = prop.Name;

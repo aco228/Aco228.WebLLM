@@ -36,10 +36,11 @@ public class ChatGptTextGen : TextGenBase, IChatGptTextGen
         result.OutputTokens = apiResponse.usage.output_tokens;
 
         var txtResponse = new StringBuilder();
-        foreach (var outputDto in apiResponse.output)
+        foreach (var outputDto in apiResponse.output.Where(x => x.content?.Any() == true))
         foreach (var contentDto in outputDto.content)
             txtResponse.Append(contentDto.text);
         
+        result.Response = txtResponse.ToString();
         return result;
     }
 

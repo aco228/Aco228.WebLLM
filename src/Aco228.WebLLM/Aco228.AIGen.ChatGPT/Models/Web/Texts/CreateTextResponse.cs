@@ -60,7 +60,7 @@ public class OutputDTO
     public string id { get; set; }
     public string type { get; set; }
     public string status { get; set; }
-    public List<ContentDTO> content { get; set; }
+    public List<ContentDTO>? content { get; set; }
     public string role { get; set; }
 }
 

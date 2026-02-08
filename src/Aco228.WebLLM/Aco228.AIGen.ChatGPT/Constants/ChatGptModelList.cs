@@ -1,4 +1,5 @@
-﻿using Aco228.AIGen.Models;
+﻿using Aco228.AIGen.ChatGPT.Models;
+using Aco228.AIGen.Models;
 
 namespace Aco228.AIGen.ChatGPT.Constants;
 
@@ -6,71 +7,54 @@ internal static class ChatGptModelList
 {
     public static List<ModelDefinition> Models = new()
     {
-        // OpenAI - Pro Level
         new ModelDefinition
         {
             Provider = TextGenProvider.ChatGPT,
             Level = ModelLevel.Pro,
-            Name = "GPT-4o",
-            Description = "OpenAI's most advanced multimodal model with superior reasoning",
-            ModelApiName = "gpt-4o",
-            MaxContextTokens = 128000,
-            IsVisionSupported = true,
-            IsFileUploadSupported = true,
-            SupportsJson = true,
-            ParametersInBillions = 200,
-            InputPricePerMillion = 2.50,
-            OutputPricePerMillion = 10.00
+            Name = ChatGptModelType.GPT5_2.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5_2),
+            InputPricePerMillion = 1.75,
+            OutputPricePerMillion = 14.00
         },
-
-        new ModelDefinition
-        {
-            Provider = TextGenProvider.ChatGPT,
-            Level = ModelLevel.Pro,
-            Name = "GPT-4 Turbo",
-            Description = "High-capability model with 128K context window",
-            ModelApiName = "gpt-4-turbo",
-            MaxContextTokens = 128000,
-            IsVisionSupported = true,
-            IsFileUploadSupported = true,
-            SupportsJson = true,
-            ParametersInBillions = 1760,
-            InputPricePerMillion = 10.00,
-            OutputPricePerMillion = 30.00
-        },
-
-// OpenAI - Mid Level
+        
         new ModelDefinition
         {
             Provider = TextGenProvider.ChatGPT,
             Level = ModelLevel.Mid,
-            Name = "GPT-4",
-            Description = "OpenAI's original GPT-4 model with strong reasoning",
-            ModelApiName = "gpt-4",
-            MaxContextTokens = 8192,
-            IsVisionSupported = false,
-            IsFileUploadSupported = false,
-            SupportsJson = true,
-            ParametersInBillions = 1760,
-            InputPricePerMillion = 30.00,
-            OutputPricePerMillion = 60.00
+            Name = ChatGptModelType.GPT5_1.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5_1),
+            InputPricePerMillion = 1.25,
+            OutputPricePerMillion = 10.00
         },
-
-// OpenAI - Low Level
+        
+        new ModelDefinition
+        {
+            Provider = TextGenProvider.ChatGPT,
+            Level = ModelLevel.Mid,
+            Name = ChatGptModelType.GPT5.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5),
+            InputPricePerMillion = 1.25,
+            OutputPricePerMillion = 10.00
+        },
+        
         new ModelDefinition
         {
             Provider = TextGenProvider.ChatGPT,
             Level = ModelLevel.Low,
-            Name = "GPT-3.5 Turbo",
-            Description = "Fast and efficient model for most tasks",
-            ModelApiName = "gpt-3.5-turbo",
-            MaxContextTokens = 16384,
-            IsVisionSupported = false,
-            IsFileUploadSupported = false,
-            SupportsJson = true,
-            ParametersInBillions = 175,
-            InputPricePerMillion = 0.50,
-            OutputPricePerMillion = 1.50
+            Name = ChatGptModelType.GPT5_MINI.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5_MINI),
+            InputPricePerMillion = 0.25,
+            OutputPricePerMillion = 2
+        },
+        
+        new ModelDefinition
+        {
+            Provider = TextGenProvider.ChatGPT,
+            Level = ModelLevel.Low,
+            Name = ChatGptModelType.GPT5_NANO.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5_NANO),
+            InputPricePerMillion = 0.05,
+            OutputPricePerMillion = 0.4
         },
     };
 }

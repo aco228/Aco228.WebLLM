@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using System.Text;
 using Aco228.AIGen.Attributes;
+using Aco228.AIGen.Helpers;
 using Aco228.AIGen.Infrastructure.PromptSerializer;
 using Aco228.AIGen.Infrastructure.PromptSerializer.Helpers;
 using Aco228.AIGen.Models;
@@ -38,9 +39,11 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
         var userPrompt = new StringBuilder(UserPrompt)
             .Append(Environment.NewLine)
             .Append(SerializePromptRequestHelper.SerializeToString(request));
-    
-        return new(systemPrompt.ToString(), userPrompt.ToString());
+        
+        return new(await ModifySystemPrompt(systemPrompt.ToString()), userPrompt.ToString());
     }
+    
+    protected virtual Task<string> ModifySystemPrompt(string systemPrompt) => Task.FromResult(systemPrompt);
     
     public async Task<string> GetPromptText(TReq request)
     {
@@ -51,14 +54,11 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     public async Task<TRes?> Execute(TReq request)
     {
         var llmModel = (ModelDefinition ?? TextGenManager.ModelDefinitions)
-            .Where(x => x.SupportsJson)
             .Where(x => ModelLevel == null || x.Level == ModelLevel)
             .Where(x => TextGenProviders?.Contains(x.Provider) ?? true)
             .Shuffle().First();
         
         var (systemPrompt, userText) = await GetPromptData(request);
-        
-        var prompt = await GetPromptText(request);
 
         var textGenerationRequest = new TextGenerationRequest()
         {
@@ -69,9 +69,10 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
 
         };
         
-        var response = await TextGenManager.GetResponse(textGenerationRequest);
+        var textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);
+        var result = PromptHelper.DeserializeResponse<TRes>(textGenResponse.Response);
         
-        return null;
+        return result;
     }
     
     private List<string> GetImageUrls(TReq request)
