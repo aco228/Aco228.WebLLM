@@ -38,7 +38,7 @@ internal class SerializePromptResponseHelper<TRes>
         var result = new StringBuilder();
         var responseType = typeof(TRes);
         var typeDefinition = TypeDeconstructor.Get(responseType);
-        var guidelines = new List<string>();
+        var guidelines = new List<string>(Guidelines);
         string? jsonRepresentation = null;
 
         if (responseType.IsClassObject())
@@ -66,7 +66,8 @@ internal class SerializePromptResponseHelper<TRes>
         
         result
             .AppendString("Schema properties", ConstructPropertyHints())
-            .AppendString("Example schema", jsonRepresentation);
+            .AppendList("Guidelines", guidelines)
+            .AppendString("JSON format you must return", jsonRepresentation);
         
         return result;
     }

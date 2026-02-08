@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 using Aco228.AIGen.Services;
 using Aco228.Common;
 using Aco228.Common.Extensions;
+using Aco228.Common.Models;
 
 namespace Aco228.AIGen.Helpers;
 
@@ -20,18 +21,20 @@ public static class PromptHelper
         if (string.IsNullOrEmpty(llmResponse))
             return default;
         
-        TRes? result = default;
+        var typeDefinition = TypeDeconstructor.Get(typeof(TRes));
         
-        var listContent = _listRegex.Match(llmResponse).Value;
-        if (!string.IsNullOrEmpty(listContent))
-            result = listContent.JsonDeserialize<TRes>();
-        else
-        {
-            var objectContent = _objectRegex.Match(llmResponse).Value;
-            if (!string.IsNullOrEmpty(objectContent))
-                result = objectContent.JsonDeserialize<TRes>();
-        }
+        TRes? result = default;
+        string? jsonContent = null;
 
+        if (typeDefinition.IsList)
+            jsonContent = _listRegex.Match(llmResponse).Value;
+        else if (typeDefinition.IsClass)
+            jsonContent = _objectRegex.Match(llmResponse).Value;
+        
+        if(string.IsNullOrEmpty(jsonContent)) 
+            throw new Exception("Unable to deserialize response");
+        
+        result = jsonContent.JsonDeserialize<TRes>();
         return result;
     } 
 }
