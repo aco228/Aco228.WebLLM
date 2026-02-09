@@ -25,12 +25,9 @@ public class ChatGptApiConfiguration : ApiServiceConf
 
     public override void OnBeforeRequest(WebApiMethodType methodType, ref string url, ref HttpContent? httpContent, string? httpContentString)
     {
-        Console.WriteLine($"OnBeforeRequest: [{methodType}].{url} :: {httpContentString}");
     }
 
     public override void OnResponseReceived(WebApiMethodType methodType, string url, HttpContent? httpContent, string? httpContentString, HttpResponseMessage response, string stringResponse)
     {
-        Console.WriteLine($"OnStringReceived: [{methodType}].{url} :: {httpContentString}");
-        Console.WriteLine(stringResponse);
     }
 }
