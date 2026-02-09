@@ -143,6 +143,7 @@ internal class SerializePromptResponseHelper<TRes>
                 if(typeDefinition.IsClass)
                     DummyPopulate(classValue, classProperty);
                 
+                
                 prop.SetValue(obj, classValue);
             }
 
