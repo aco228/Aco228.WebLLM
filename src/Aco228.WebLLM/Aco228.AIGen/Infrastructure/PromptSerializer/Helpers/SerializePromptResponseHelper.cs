@@ -41,7 +41,7 @@ internal class SerializePromptResponseHelper<TRes>
         var guidelines = new List<string>(Guidelines);
         string? jsonRepresentation = null;
 
-        if (responseType.IsClassObject())
+        if (typeDefinition.IsClass)
         {
             object? obj = null;
             if (typeDefinition.IsList)
