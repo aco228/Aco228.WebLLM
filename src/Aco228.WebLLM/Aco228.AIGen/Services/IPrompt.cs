@@ -66,7 +66,6 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
             User = userText,
             System = systemPrompt,
             ImageUrls = GetImageUrls(request),
-
         };
         
         var textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);

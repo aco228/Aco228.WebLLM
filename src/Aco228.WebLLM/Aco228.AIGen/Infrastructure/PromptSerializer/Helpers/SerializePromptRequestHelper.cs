@@ -25,20 +25,6 @@ internal static class SerializePromptRequestHelper
 
         foreach (var prop in props)
         {
-            var propValue = prop.GetValue(input);
-
-            if (typeof(IActionMongoModel).IsAssignableFrom(prop.PropertyType))
-            {   
-                var insideDocument = (propValue as IActionMongoModel)?.GetInsideDocument();
-                if(insideDocument == null)
-                    throw new InvalidOperationException("Unable to get inside document for IActionMongoModel");
-                
-                propValue = insideDocument;
-                var actionMongoStringBuilder = DecompileActionMongoModel(propValue, new StringBuilder(), prop.Name);
-                result.AppendLine(actionMongoStringBuilder.ToString());
-                continue;
-            }
-            
             ExtractPropertyData(input, prop, result, prop.Name);
         }
 
@@ -63,7 +49,19 @@ internal static class SerializePromptRequestHelper
 
         if (promptIgnoreAttribute != null || jsonIgnoreAttribute != null || promptFileIdAttribute != null)
             return;
-
+        
+        if (typeof(IActionMongoModel).IsAssignableFrom(prop.PropertyType))
+        {   
+            var insideDocument = (propValue as IActionMongoModel)?.GetInsideDocument();
+            if(insideDocument == null)
+                throw new InvalidOperationException("Unable to get inside document for IActionMongoModel");
+                
+            propValue = insideDocument;
+            var actionMongoStringBuilder = DecompileActionMongoModel(propValue, new StringBuilder(), prop.Name);
+            stringBuilder.AppendLine(actionMongoStringBuilder.ToString());
+            return;
+        }
+        
         var propName = string.IsNullOrEmpty(proposedPropertyName) ? "." : "" + prop.Name;
         if (useHintAttribute && promptHint != null && promptHint.Value.Any())
             propName = string.Join(" ", promptHint.Value);
