@@ -2,6 +2,7 @@
 
 using Aco228.AIGen;
 using Aco228.AIGen.ChatGPT;
+using Aco228.AIGen.Grok;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;
 using Aco228.Common;
@@ -14,7 +15,7 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterAIGenServices();
     builder.RegisterChatGptServices();
     builder.RegisterClaudeServices();
-    // builder.RegisterGrokServices();
+    builder.RegisterGrokServices();
     // builder.RegisterDeepSeekServices();
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
@@ -22,7 +23,7 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
 var textgen = serviceProvider.GetService<ITextGenManager>()!;
 var response = await textgen.GetResponse(new()
 {
-    Type = TextGenProvider.Claude,
+    Type = TextGenProvider.Grok,
     Level = ModelLevel.Low,
     User = "How are you today?",
 });

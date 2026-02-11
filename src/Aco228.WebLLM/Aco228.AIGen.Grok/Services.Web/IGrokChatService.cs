@@ -1,6 +1,5 @@
 ﻿using Aco228.AIGen.Grok.Code;
-using Aco228.AIGen.Grok.Models.Req;
-using Aco228.AIGen.Grok.Models.Res;
+using Aco228.AIGen.Grok.Models.Text;
 using Aco228.WService;
 
 namespace Aco228.AIGen.Grok.Services.Web;

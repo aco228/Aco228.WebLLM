@@ -4,5 +4,7 @@ public enum ModelLevel
 {
     Low = 1,
     Mid = 5,
-    Pro = 10, 
+    Pro = 10,
+    
+    Code = 20
 }

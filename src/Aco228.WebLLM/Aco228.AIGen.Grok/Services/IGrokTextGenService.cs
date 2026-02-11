@@ -1,6 +1,6 @@
 ﻿using System.Text;
 using Aco228.AIGen.Grok.Constants;
-using Aco228.AIGen.Grok.Models.Req;
+using Aco228.AIGen.Grok.Models.Text;
 using Aco228.AIGen.Grok.Services.Web;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;
@@ -11,8 +11,8 @@ public interface IGrokTextGenService : ITextGen { }
 
 public class GrokTextGenService : TextGenBase, IGrokTextGenService
 {
-    public override TextGenProvider Provider => TextGenProvider.Grok;
     private readonly IGrokChatService _service;
+    public override TextGenProvider Provider => TextGenProvider.Grok;
 
     public GrokTextGenService(IGrokChatService service)
     {
@@ -24,48 +24,34 @@ public class GrokTextGenService : TextGenBase, IGrokTextGenService
         AddModels(GrokModelList.Models);
     }
 
-    public override Task<string> Generate(TextGenerationRequest request)
+    protected override async Task<TextGenResponse> ExecuteRequest(TextGenRequest request)
     {
-        throw new NotImplementedException();
+        var result = new TextGenResponse();
+        
+        var apiRequest = CreateRequest(request);
+        var apiResponse = await _service.GetResponse(apiRequest);
+        result.InputTokens = apiResponse.usage.prompt_tokens;
+        result.OutputTokens = apiResponse.usage.completion_tokens;
+
+        var txtResponse = new StringBuilder();
+        foreach (var apiResponseChoice in apiResponse.choices)
+            txtResponse.Append(apiResponseChoice.message.content);
+
+        result.Response = txtResponse.ToString();
+        return result;
     }
 
-    public override Task<string> Generate(string prompt)
+    private MessageRequest CreateRequest(TextGenRequest request)
     {
-        var request = new MessageRequest()
-            .UseModel(TakeNextModel())
-            .AddMessage(ModelRole.user, prompt);
+        var result = new MessageRequest()
+        {
+            model = request.Model.ModelApiName,
+        };
         
-        return GetResponse(request);
-    }
+        result.AddInput("user", request.User, request.ImageUrls);
+        if(!string.IsNullOrEmpty(request.System))
+            result.AddInput("system", request.System);
 
-    public override Task<string> Generate(string system, string prompt)
-    {
-        var request = new MessageRequest()
-            .UseModel(TakeNextModel())
-            .AddMessage(ModelRole.system, system)
-            .AddMessage(ModelRole.user, prompt);
-        
-        return GetResponse(request);
-    }
-
-    public override Task<string> Generate(string model, string system, string prompt)
-    {
-        var request = new MessageRequest()
-            .UseModel(model)
-            .AddMessage(ModelRole.system, system)
-            .AddMessage(ModelRole.user, prompt);
-        
-        return GetResponse(request);
-    }
-
-    private async Task<string> GetResponse(MessageRequest request)
-    {
-        var apiResponse = await _service.GetResponse(request);
-
-        var sb = new StringBuilder();
-        foreach (var choiceDto in apiResponse.choices)
-            sb.Append(choiceDto.message?.content);
-        
-        return sb.ToString();
+        return result;
     }
 }

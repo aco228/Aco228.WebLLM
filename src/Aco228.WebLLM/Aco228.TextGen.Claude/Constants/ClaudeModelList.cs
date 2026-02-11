@@ -1,4 +1,5 @@
 ﻿using Aco228.AIGen.Models;
+using Aco228.TextGen.Claude.Models;
 
 namespace Aco228.TextGen.Claude.Constants;
 
@@ -10,8 +11,8 @@ internal static class ClaudeModelList
         {
             Provider = TextGenProvider.Claude,
             Level = ModelLevel.Pro,
-            Name = "Claude Opus 4.5",
-            ModelApiName = "claude-opus-4-6",
+            Name = "Claude Opus 4.6",
+            ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeOpus4_6),
             InputPricePerMillion = 5,
             OutputPricePerMillion = 25
         },
@@ -21,7 +22,7 @@ internal static class ClaudeModelList
             Provider = TextGenProvider.Claude,
             Level = ModelLevel.Mid,
             Name = "Claude Sonnet 4.5",
-            ModelApiName = "claude-sonnet-4-5-20250929",
+            ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeSonnet4_5),
             InputPricePerMillion = 3.00,
             OutputPricePerMillion = 15.00
         },
@@ -31,7 +32,7 @@ internal static class ClaudeModelList
             Provider = TextGenProvider.Claude,
             Level = ModelLevel.Low,
             Name = "Claude Haiku 4.5",
-            ModelApiName = "claude-haiku-4-5-20251001",
+            ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeHaiku4_5),
             InputPricePerMillion = 1,
             OutputPricePerMillion = 5,
         },
