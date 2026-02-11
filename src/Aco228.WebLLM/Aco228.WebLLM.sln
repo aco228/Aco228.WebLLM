@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.TextGen.DeepSeek", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.GoogleServices", "..\..\..\Aco228.GoogleServices\src\Aco228.GoogleServices\Aco228.GoogleServices.csproj", "{5065AC3C-3C0B-48BD-A1CF-7BC8F45256F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.PoyoAI", "Aco228.AIGen.PoyoAI\Aco228.AIGen.PoyoAI.csproj", "{1980FD3B-6F80-4096-9D90-78AFCB913C82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +76,10 @@ Global
 		{5065AC3C-3C0B-48BD-A1CF-7BC8F45256F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5065AC3C-3C0B-48BD-A1CF-7BC8F45256F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5065AC3C-3C0B-48BD-A1CF-7BC8F45256F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1980FD3B-6F80-4096-9D90-78AFCB913C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1980FD3B-6F80-4096-9D90-78AFCB913C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1980FD3B-6F80-4096-9D90-78AFCB913C82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1980FD3B-6F80-4096-9D90-78AFCB913C82}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0D31617E-9C11-4E7E-91EF-7ED815810D09} = {B502F0BB-4BBA-48B4-BE7F-46645619286F}
