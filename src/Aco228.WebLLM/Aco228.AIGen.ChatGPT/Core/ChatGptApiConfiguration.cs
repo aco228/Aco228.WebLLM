@@ -17,10 +17,10 @@ public class ChatGptApiConfiguration : ApiServiceConf
         ApiKey = apiKey;
     }
     
-    public override void Prepare(HttpClient httpClient)
+    public override HttpClient Prepare(HttpClient httpClient)
     {
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
-        // AddDefaultHeader("OpenAI-Beta", $"assistants=v1");
+        return httpClient;
     }
 
     public override void OnBeforeRequest(WebApiMethodType methodType, ref string url, ref HttpContent? httpContent, string? httpContentString)

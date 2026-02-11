@@ -12,9 +12,10 @@ public class ClaudeApiConfiguration : ApiServiceConf
         ApiKey = Environment.GetEnvironmentVariable("CLAUDE_API_KEY") ?? throw new InvalidOperationException("ClaudeAIApiKey is not set");
     }
 
-    public override void Prepare(HttpClient httpClient)
+    public override HttpClient Prepare(HttpClient httpClient)
     {
         httpClient.DefaultRequestHeaders.Add("x-api-key", ApiKey);
         httpClient.DefaultRequestHeaders.Add("anthropic-version", "2023-06-01");
+        return httpClient;
     }
 }

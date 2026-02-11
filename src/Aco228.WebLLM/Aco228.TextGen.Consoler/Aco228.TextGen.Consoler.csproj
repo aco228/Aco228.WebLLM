@@ -10,6 +10,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\Aco228.WService\src\Aco228.WService\Aco228.WService\Aco228.WService.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.ChatGPT\Aco228.AIGen.ChatGPT.csproj" />
+      <ProjectReference Include="..\Aco228.AIGen.Gemini\Aco228.AIGen.Gemini.csproj" />
       <ProjectReference Include="..\Aco228.AIGen\Aco228.AIGen.csproj" />
       <ProjectReference Include="..\Aco228.TextGen.Claude\Aco228.TextGen.Claude.csproj" />
       <ProjectReference Include="..\Aco228.TextGen.DeepSeek\Aco228.TextGen.DeepSeek.csproj" />
@@ -28,6 +29,9 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
       <None Update="Promts\adThemeGenerator.v1.prompt">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+      <None Update="arbo-487008-38359e7d2b41.json">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </None>
     </ItemGroup>

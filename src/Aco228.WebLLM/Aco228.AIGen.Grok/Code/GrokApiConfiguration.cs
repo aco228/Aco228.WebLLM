@@ -12,9 +12,10 @@ public class GrokApiConfiguration : ApiServiceConf
         ApiKey = Environment.GetEnvironmentVariable("GROK_API_KEY") ?? throw new InvalidOperationException("GrokApiKey is not set");
     }
 
-    public override void Prepare(HttpClient httpClient)
+    public override HttpClient Prepare(HttpClient httpClient)
     {
         httpClient.DefaultRequestHeaders.Add("Authorization", "Bearer " + ApiKey);
         httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+        return httpClient;
     }
 }

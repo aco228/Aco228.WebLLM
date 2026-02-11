@@ -12,14 +12,9 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\Aco228.Common\src\Aco228.Common\Aco228.Common.csproj" />
+      <ProjectReference Include="..\..\..\..\Aco228.GoogleServices\src\Aco228.GoogleServices\Aco228.GoogleServices.csproj" />
       <ProjectReference Include="..\..\..\..\Aco228.WService\src\Aco228.WService\Aco228.WService\Aco228.WService.csproj" />
       <ProjectReference Include="..\Aco228.AIGen\Aco228.AIGen.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Models\" />
-      <Folder Include="Services.Web\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>
