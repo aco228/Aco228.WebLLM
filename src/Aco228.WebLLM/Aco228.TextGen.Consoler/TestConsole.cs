@@ -6,6 +6,7 @@ using Aco228.AIGen.Gemini;
 using Aco228.AIGen.Gemini.Models.Gemini;
 using Aco228.AIGen.Gemini.Services.Web.Gemini;
 using Aco228.AIGen.Grok;
+using Aco228.AIGen.Grok.Services.Web;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.PoyoAI;
 using Aco228.AIGen.PoyoAI.Models;
@@ -35,26 +36,13 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
-var tst = ServiceProviderHelper.Construct<Tests>();
-await tst.CheckAll("FP9RFJQU9Z5R6Z1B", "LATBXC52PJPTOL1W", "1EV15UQZK2XM9AL9", "LU5ZF9KCCNOVSQK4", "GEGSEZIPVZ7WOG7W");
-await tst.GenerateForAll("Shark is having a rap concert, and is being attacked by a angry puma");
+var cls = JsonToClassConverter.ConvertJsonToClass("ImageResponse",
+    @"{""data"":[{""url"":""https://imgen.x.ai/xai-imgen/xai-tmp-imgen-9eb3761a-e38f-4a4b-8355-e0183c6d0d98.jpeg"",""revised_prompt"":""""}]}");
 
-var poyo = serviceProvider.GetService<IPoyoImageGen>()!;
-var poyoTask = await poyo.GetResponse("GHMJV6PFPM7UKKYQ");
-
-var poyoTaskId = await poyo.GenerateAndGetTaskId(
-    PoyoModelType.Flux2Pro,
-    "Shark is having a rap concert, and is being attacked by a angry puma",
-    ImageSize.Square);
-
-Console.WriteLine($"Flux2Pro: {poyoTaskId}");
-
-var textgen = serviceProvider.GetService<ITextGenManager>()!;
-var response = await textgen.GetResponse(new()
+var grokImgApi = serviceProvider.GetService<IGrokImageApiService>()!;
+var res = await grokImgApi.GenerateImage(new()
 {
-    Type = TextGenProvider.Gemini,
-    Level = ModelLevel.Low,
-    User = "How are you today?",
+    prompt = "A shark is having a rap concert, and is being attacked by a angry puma",
 });
 
 int brk = 0;
