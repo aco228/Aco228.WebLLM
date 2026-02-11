@@ -2,7 +2,7 @@
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;
 using Aco228.TextGen.Claude.Constants;
-using Aco228.TextGen.Claude.Models.Web.Request;
+using Aco228.TextGen.Claude.Models.Web.Text;
 using Aco228.TextGen.Claude.Services.Web;
 
 namespace Aco228.TextGen.Claude.Services;
@@ -11,8 +11,8 @@ public interface IClaudeTextGenService : ITextGen { }
 
 public class ClaudeTextGenService : TextGenBase, IClaudeTextGenService
 {
-    public override TextGenProvider Provider => TextGenProvider.Claude;
     private readonly IClaudeChatApiService _service;
+    public override TextGenProvider Provider => TextGenProvider.Claude;
 
     public ClaudeTextGenService(IClaudeChatApiService service)
     {
@@ -24,48 +24,34 @@ public class ClaudeTextGenService : TextGenBase, IClaudeTextGenService
         AddModels(ClaudeModelList.Models);
     }
 
-    public override Task<string> Generate(TextGenerationRequest request)
+    protected override async Task<TextGenResponse> ExecuteRequest(TextGenRequest request)
     {
-        throw new NotImplementedException();
-    }
+        var result = new TextGenResponse();
+        var apiRequest = CreateRequest(request);
 
-    public override Task<string> Generate(string prompt)
-    {
-        var request = new MessageRequest()
-            .UseModel(TakeNextModel())
-            .AddMessage(ModelRole.user, prompt);
+        var txtResponse = new StringBuilder();
+        var apiResponse = await _service.GetResponse(apiRequest);
+        result.InputTokens = apiResponse.usage.input_tokens;
+        result.OutputTokens = apiResponse.usage.output_tokens;
         
-        return GetResponse(request);
-    }
-
-    public override Task<string> Generate(string system, string prompt)
-    {
-        var request = new MessageRequest()
-            .UseModel(TakeNextModel())
-            .AddMessage(ModelRole.assistant, system)
-            .AddMessage(ModelRole.user, prompt);
-        
-        return GetResponse(request);
-    }
-
-    public override Task<string> Generate(string model, string system, string prompt)
-    {
-        var request = new MessageRequest()
-            .UseModel(model)
-            .AddMessage(ModelRole.assistant, system)
-            .AddMessage(ModelRole.user, prompt);
-        
-        return GetResponse(request);
-    }
-
-    private async Task<string> GetResponse(MessageRequest request)
-    {
-        var apiResponse = await _service.GetResponse(request);
-
-        var sb = new StringBuilder();
         foreach (var contentDto in apiResponse.content)
-            sb.Append(contentDto.text);
+            txtResponse.Append(contentDto.text);
+
+        result.Response = txtResponse.ToString();
+        return result;
+    }
+
+    private MessageRequest CreateRequest(TextGenRequest request)
+    {
+        var apiRequest = new MessageRequest()
+        {
+            model = request.Model.ModelApiName,
+        };
         
-        return sb.ToString();
+        apiRequest.AddInput("user", request.User, request.ImageUrls);
+        if(!string.IsNullOrEmpty(request.System))
+            apiRequest.AddInput("system", request.System);
+        
+        return apiRequest;
     }
 }

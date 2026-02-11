@@ -1,6 +1,5 @@
 ﻿using Aco228.TextGen.Claude.Code;
-using Aco228.TextGen.Claude.Models.Web.Request;
-using Aco228.TextGen.Claude.Models.Web.Response;
+using Aco228.TextGen.Claude.Models.Web.Text;
 using Aco228.WService;
 
 namespace Aco228.TextGen.Claude.Services.Web;

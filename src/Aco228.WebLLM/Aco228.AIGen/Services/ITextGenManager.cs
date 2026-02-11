@@ -24,8 +24,11 @@ public class TextGenManager : ITextGenManager
 
     public async Task<TextGenResponse> GetResponse(TextGenerationRequest request)
     {
-        ITextGen? textGen = GetTextGeneratorFromRequest(request);
-        ModelDefinition? modelDefinition = GetModelDefinitionFromRequest(request, textGen);
+        if(string.IsNullOrEmpty(request.User) && string.IsNullOrEmpty(request.System))
+            throw new Exception("User or system prompt is required");
+        
+        ITextGen textGen = GetTextGeneratorFromRequest(request);
+        ModelDefinition modelDefinition = GetModelDefinitionFromRequest(request, textGen);
         
         if(modelDefinition == null || textGen == null)
             throw new Exception("No suitable model found");
@@ -51,22 +54,25 @@ public class TextGenManager : ITextGenManager
         return textGenResponse;
     }
 
-    private ModelDefinition? GetModelDefinitionFromRequest(TextGenerationRequest request, ITextGen? textGen)
+    private ModelDefinition GetModelDefinitionFromRequest(TextGenerationRequest request, ITextGen textGen)
     {
         ModelDefinition? modelDefinition;
         if(!string.IsNullOrEmpty(request.ModelName))
             modelDefinition = ModelDefinitions.FirstOrDefault(x =>  x.ModelApiName == request.ModelName && x.Provider == textGen.Provider);
         else if (request.Model != null)
             modelDefinition = request.Model;
+        else if(request.Level != null)
+            modelDefinition = textGen.Models.TakeRandom(x => x.Level == request.Level);
         else
             modelDefinition = textGen.Models.TakeRandom(x => x.Level is ModelLevel.Low or ModelLevel.Mid);
         
         if (modelDefinition == null)
             throw new Exception("No model available");
+        
         return modelDefinition;
     }
 
-    private ITextGen? GetTextGeneratorFromRequest(TextGenerationRequest request)
+    private ITextGen GetTextGeneratorFromRequest(TextGenerationRequest request)
     {
         ITextGen? textGen = null;
         if (request.Model != null || request.Type != null)
@@ -85,6 +91,7 @@ public class TextGenManager : ITextGenManager
         
         if(textGen == null) 
             throw new  Exception("No text gen available");
+        
         return textGen;
     }
 

@@ -1,4 +1,4 @@
-﻿namespace Aco228.TextGen.Claude.Models.Web.Response;
+﻿namespace Aco228.TextGen.Claude.Models.Web.Text;
 
 public class MessageResponse
 {
