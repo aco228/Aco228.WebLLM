@@ -1,4 +1,5 @@
 ﻿using Aco228.Common;
+using Aco228.GoogleServices.Models;
 using Aco228.GoogleServices.Services;
 using Aco228.WService.Base;
 
@@ -10,11 +11,9 @@ public class GeminiApiConfiguration : ApiServiceConf
     private readonly string ProjectId = null;
     public override string BaseUrl => $"https://aiplatform.googleapis.com/v1/projects/{ProjectId}/locations/europe-west1/publishers/google/models/";
 
-    public GeminiApiConfiguration()
+    public GeminiApiConfiguration(GoogleSetupOptions options)
     {
-        ProjectId = Environment.GetEnvironmentVariable("GOOGLE_PROJECT_ID") 
-                    ?? throw new InvalidOperationException("GeminiProjectId is not set");
-
+        ProjectId = options.ProjectId;
         _googleHttpClient = ServiceProviderHelper.GetService<IGoogleClientProvider>()!.GetGoogleHttpClient();
     }
 
