@@ -2,15 +2,15 @@
 using Aco228.AIGen.Grok.Models.Images;
 using Aco228.AIGen.Grok.Services.Web;
 using Aco228.AIGen.Models;
+using Aco228.AIGen.Services;
 
 namespace Aco228.AIGen.Grok.Services;
 
-public interface IGrokImageGen
+public interface IGrokImageGen : IImgGen
 {
-    Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt);
 }
 
-public class GrokImageGen : IGrokImageGen
+public class GrokImageGen : ImgGen, IGrokImageGen
 {
     private readonly IGrokImageApiService _service;
 
@@ -20,7 +20,7 @@ public class GrokImageGen : IGrokImageGen
     }
 
 
-    public async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
+    public override async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
     {
         string sizeString = prompt.ImageSize switch
         {

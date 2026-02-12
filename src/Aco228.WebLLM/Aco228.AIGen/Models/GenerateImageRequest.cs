@@ -3,7 +3,8 @@
 public class GenerateImageRequest
 {
     public required string Prompt { get; set; }
-    public string? Model { get; set; }
+    public ImageGenType? Type { get; set; }
+    public ImageGenProvider? Provider { get; set; }
     public int Count { get; set; } = 1;
     public ImageSize ImageSize { get; set; } = ImageSize.Square;
 }

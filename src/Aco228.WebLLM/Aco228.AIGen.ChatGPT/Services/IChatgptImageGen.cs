@@ -1,17 +1,18 @@
 ﻿using Aco228.AIGen.ChatGPT.Models.Web.Images;
 using Aco228.AIGen.ChatGPT.Services.Web;
+using Aco228.AIGen.Services;
 using Aco228.Common.Helpers;
 using Aco228.Common.LocalStorage;
 using Aco228.Common.Models;
+using GenerateImageResponse = Aco228.AIGen.Models.GenerateImageResponse;
 
 namespace Aco228.AIGen.ChatGPT.Services;
 
-public interface IChatgptImageGen : ITransient
+public interface IChatgptImageGen : IImgGen
 {
-    Task<List<FileInfo>> GenerateImage(string prompt, int count = 1);
 }
 
-public class ChatgptImageGen : IChatgptImageGen
+public class ChatgptImageGen : ImgGen, IChatgptImageGen
 {
     private readonly IChatgptImageApiService _apiService;
 
@@ -40,5 +41,10 @@ public class ChatgptImageGen : IChatgptImageGen
         }
 
         return result;
+    }
+
+    public override Task<List<GenerateImageResponse>> Generate(AIGen.Models.GenerateImageRequest prompt)
+    {
+        throw new NotImplementedException();
     }
 }

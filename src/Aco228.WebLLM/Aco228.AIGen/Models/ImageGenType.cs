@@ -3,20 +3,21 @@
 public enum ImageGenType
 {
     // openai
-    gpt4o = 1,
     gpt1 = 2,
-    gpt_image_1mini = 3,
+    gpt1_5 = 3,
+    gpt_image_1mini = 4,
+    chatgpt_image_latest = 5,
     
-    grok_imagine_1 = 4,
+    grok_imagine_1 = 6,
     
     
-    poyo_gpt4o = 5,
-    poyo_gpt1_5 = 6,
-    poyo_nano_banana = 7,
-    poyo_mano_banana2 = 8,
-    poyo_flux2Pro = 9,
-    poyo_flux2Flex = 10,
-    poyo_seadream4_5 = 11,
-    poyo_z_image = 12,
-    poyo_grok = 13,
+    poyo_gpt4o = 7,
+    poyo_gpt1_5 = 8,
+    poyo_nano_banana = 9,
+    poyo_mano_banana2 = 10,
+    poyo_flux2Pro = 11,
+    poyo_flux2Flex = 12,
+    poyo_seadream4_5 = 13,
+    poyo_z_image = 14,
+    poyo_grok = 15,
 }
