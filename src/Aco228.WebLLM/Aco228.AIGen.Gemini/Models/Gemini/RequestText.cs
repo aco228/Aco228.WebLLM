@@ -5,11 +5,24 @@ namespace Aco228.AIGen.Gemini.Models.Gemini;
 public class RequestText
 {
     public List<RequestTextContent> contents { get; set; } = new();
+    public RequestSystemContent? system_instruction { get; set; } = new();
 
-    public RequestText AddContent(string role, string text, List<string>? imageFiles = null)
+
+    public RequestText AddSystemInstruction(string? text)
     {
+        if (string.IsNullOrWhiteSpace(text))
+            return this;
         
-        var content = new RequestTextContent() { role = role };
+        if(system_instruction == null)
+            system_instruction = new(){ parts = new() };
+        
+        system_instruction.parts.Add(new(){ text = text });
+        return this;
+    }
+    
+    public RequestText AddContent(string text, List<string>? imageFiles = null)
+    {
+        var content = new RequestTextContent() { role = "user" };
         var parts = new List<RequestTextContentPart>();
         
         parts.Add(new(){ text = text });
@@ -29,6 +42,11 @@ public class RequestText
         contents.Add(content);
         return this;
     }
+}
+
+public class RequestSystemContent
+{
+    public List<RequestTextContentPart> parts { get; set; } = new();
 }
 
 public class RequestTextContent

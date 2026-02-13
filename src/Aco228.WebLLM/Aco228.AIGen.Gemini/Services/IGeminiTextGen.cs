@@ -53,10 +53,8 @@ public class GeminiTextGen : TextGenBase, IGeminiTextGen
     private RequestText CreateRequest(TextGenRequest request)
     {
         var result = new RequestText();
-        if(!string.IsNullOrEmpty(request.System))
-            result.AddContent("system", request.System);
-        
-        result.AddContent("user", request.User, request.ImageUrls);
+        result.AddSystemInstruction(request.System);
+        result.AddContent(request.User, request.ImageUrls);
         return result;
     }
     
