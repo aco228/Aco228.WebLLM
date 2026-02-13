@@ -17,8 +17,11 @@ public static class ServiceExtensions
 
         services.RegisterPostBuildAction((pr) =>
         {
-            var manager = pr.GetService<ITextGenManager>()!;
+            var manager = pr.GetService<ITextGenManager>()! as TextGenManager;
             manager.Register<IGrokTextGenService>(TextGenProvider.Grok, GrokModelList.Models);
+            
+            var imageManager = pr.GetService<IImgGenManager>()! as ImgGenManager;
+            imageManager.RegisterGenerator<IGrokImageGen>(ImageGenProvider.Grok, GrokImageModelList.Models);
         });
     }
 }

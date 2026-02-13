@@ -13,7 +13,6 @@ public interface ITextGenManager : ISingleton
     Task<string> GetText(TextGenerationRequest request);
     Task<TextGenResponse> GetResponse(TextGenerationRequest request);
     ModelDefinition GetModelDefinition(Enum modelType);
-    void Register<T>(TextGenProvider provider, List<ModelDefinition> models) where T : ITextGen;
 }
 
 public class TextGenManager : ITextGenManager

@@ -3,7 +3,7 @@ using Aco228.AIGen.PoyoAI.Models;
 
 namespace Aco228.AIGen.PoyoAI.Constants;
 
-public static class PoyoImages
+internal static class PoyoImages
 {
     public static List<ModelImageDefinition> Models => new()
     {

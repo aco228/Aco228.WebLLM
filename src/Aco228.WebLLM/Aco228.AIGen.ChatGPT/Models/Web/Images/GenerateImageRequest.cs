@@ -9,8 +9,9 @@ public class GenerateImageRequest
     
     [JsonPropertyName("background")]
     public string background { get; set; } = "opaque";
-    public string moderation { get; set; } = "auto";
+    // public string moderation { get; set; } = "auto";
     public string output_format { get; set; } = "png";
+    public string quality { get; set; } = "medium";
     
     [JsonPropertyName("n")]
     public int Count { get; set; } = 1;

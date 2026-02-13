@@ -4,7 +4,13 @@ namespace Aco228.AIGen.Grok.Models;
 
 public enum GrokImageModelType
 {
+    [ModelType("grok-imagine-image-pro")]
+    GrokImagineImagePro,
+    
     [ModelType("grok-imagine-image")]
-    GrokImagine,
+    GrokImagineImage,
+    
+    [ModelType("grok-2-image-1212")]
+    Grok2Image,
     
 }

@@ -17,7 +17,7 @@ public static class ServiceExtensions
 
         services.RegisterPostBuildAction((pr) =>
         {
-            var manager = pr.GetService<ITextGenManager>()!;
+            var manager = pr.GetService<ITextGenManager>()! as TextGenManager;
             manager.Register<IClaudeTextGenService>(TextGenProvider.Claude, ClaudeModelList.Models);
         });
     }

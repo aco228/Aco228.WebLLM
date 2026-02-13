@@ -47,16 +47,4 @@ internal static class GrokModelList
             OutputPricePerMillion = 0.50
         },
     };
-
-    public static List<ModelImageDefinition> Images => new()
-    {
-        new()
-        {
-            Level = ModelLevel.Pro,
-            ModelApiName = ModelTypeHelper.GetModelApiName(GrokImageModelType.GrokImagine),
-            Name = GrokImageModelType.GrokImagine.ToString(),
-            Provider = ImageGenProvider.Grok,
-            PricePerRequest = 0.02,
-        }
-    };
 }

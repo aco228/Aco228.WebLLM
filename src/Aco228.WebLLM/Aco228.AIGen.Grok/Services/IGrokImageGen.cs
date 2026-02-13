@@ -3,6 +3,7 @@ using Aco228.AIGen.Grok.Models.Images;
 using Aco228.AIGen.Grok.Services.Web;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;
+using Aco228.Common.Extensions;
 
 namespace Aco228.AIGen.Grok.Services;
 
@@ -19,22 +20,19 @@ public class GrokImageGen : ImgGen, IGrokImageGen
         _service = service;
     }
 
-
     public override async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
     {
-        string sizeString = prompt.ImageSize switch
-        {
-            ImageSize.Square => "1:1",
-            ImageSize.Portrait => "16:9",
-            ImageSize.Landscape => "9:16",
-            _ => throw new ArgumentOutOfRangeException(nameof(prompt.ImageSize), prompt.ImageSize, null)
-        };
+        var modelType = prompt.ModelName.ToEnumNull<GrokImageModelType>();
+        if (modelType == null)
+            throw new ArgumentException("Invalid model name");
+        
+        var stringSize = prompt.ImageSize.ToDefaultAspectRatio();
         
         var request = new ImageRequest()
         {
             prompt = prompt.Prompt,
-            model = prompt.Model ?? ModelTypeHelper.GetModelApiName(GrokImageModelType.GrokImagine),
-            aspect_ratio = sizeString,
+            model = ModelTypeHelper.GetModelApiName(modelType.Value),
+            aspect_ratio = stringSize,
             n = prompt.Count,
         };
 

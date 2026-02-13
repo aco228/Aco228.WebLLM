@@ -16,7 +16,7 @@ public static class ServiceExtensions
 
         services.RegisterPostBuildAction((pr) =>
         {
-            var manager = pr.GetService<ITextGenManager>()!;
+            var manager = pr.GetService<ITextGenManager>()! as TextGenManager;
             manager.Register<IGeminiTextGen>(TextGenProvider.Gemini, Constants.GeminiModelList.Models);
         });
     }

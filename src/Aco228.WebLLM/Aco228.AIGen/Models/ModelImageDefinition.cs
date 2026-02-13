@@ -8,4 +8,11 @@ public class ModelImageDefinition
     public string ModelApiName { get; set; }
     
     public double PricePerRequest { get; set; }
+
+    public ModelImageDefinition() {}
+
+    public ModelImageDefinition(ImageGenProvider provider) : this()
+    {
+        Provider = provider;
+    }
 }

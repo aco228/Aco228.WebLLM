@@ -2,15 +2,15 @@
 using Aco228.AIGen.PoyoAI.Api;
 using Aco228.AIGen.PoyoAI.Models;
 using Aco228.AIGen.PoyoAI.Models.Images;
+using Aco228.AIGen.Services;
 using Aco228.Common.Extensions;
 
 namespace Aco228.AIGen.PoyoAI.Services;
 
-public interface IPoyoImageGen
+public interface IPoyoImageGen : IImgGen
 {
-    Task<string> GenerateAndGetTaskId(PoyoModelType model, string prompt, ImageSize size = ImageSize.Square);
-    Task<ImageResponse> GetResponse(string taskId);
-    Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt);
+    // Task<string> GenerateAndGetTaskId(PoyoModelType model, string prompt, ImageSize size = ImageSize.Square);
+    // Task<ImageResponse> GetResponse(string taskId);
 }
 
 public class PoyoImageGen : IPoyoImageGen
@@ -22,49 +22,30 @@ public class PoyoImageGen : IPoyoImageGen
         _apiService = apiService;
     }
     
-    public async Task<string> GenerateAndGetTaskId(PoyoModelType model, string prompt, ImageSize size = ImageSize.Square)
+    public async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
     {
-        string sizeString = size switch
-        {
-            ImageSize.Square => "1:1",
-            ImageSize.Portrait => "16:9",
-            ImageSize.Landscape => "9:16",
-            _ => throw new ArgumentOutOfRangeException(nameof(size), size, null)
-        };
-        
+        var modelType = prompt.ModelName.ToEnumNull<PoyoModelType>();
+        if (modelType == null)
+            throw new ArgumentException("Invalid model name");
+
+        var size = prompt.ImageSize.ToDefaultAspectRatio();
         var request = new ImageRequest()
         {
-            model = ModelTypeHelper.GetModelApiName(model),
+            model = ModelTypeHelper.GetModelApiName(modelType.Value),
             input = new()
             {
-                prompt = prompt,
-                size = sizeString,
+                prompt = prompt.Prompt,
+                size = size,
             }
         };
         var response = await _apiService.GenerateImage(request);
-        return response.data.task_id;
-    }
-
-    public Task<ImageResponse> GetResponse(string taskId)
-        => _apiService.GetStatus(taskId);
-
-    public async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
-    {
-        var modelType = string.IsNullOrEmpty(prompt.Model)
-            ? PoyoModelType.Flux2Flex
-            : prompt.Model!.ToEnum(PoyoModelType.Flux2Flex);
-        
-        var result = new List<GenerateImageResponse>();
-        for (int i = 0; i < prompt.Count; i++)
+        return new()
         {
-            var taskId = await GenerateAndGetTaskId(modelType, prompt.Prompt, prompt.ImageSize);
-            result.Add(new()
+            new()
             {
                 Provider = ImageGenProvider.Poyo,
-                TaskId = taskId
-            });
-        }
-
-        return result;
-    }
+                TaskId = response.data.task_id,
+            }
+        };
+    }   
 }
