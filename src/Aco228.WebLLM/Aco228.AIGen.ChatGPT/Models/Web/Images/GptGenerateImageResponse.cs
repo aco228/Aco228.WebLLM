@@ -2,7 +2,7 @@
 
 namespace Aco228.AIGen.ChatGPT.Models.Web.Images;
 
-public class GenerateImageResponse
+public class GptGenerateImageResponse
 {
     public ulong created { get; set; }
     public List<GenerateImageResponseData> data { get; set; }

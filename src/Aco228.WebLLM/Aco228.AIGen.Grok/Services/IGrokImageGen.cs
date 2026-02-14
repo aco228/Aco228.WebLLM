@@ -8,11 +8,11 @@ using Aco228.Common.Models;
 
 namespace Aco228.AIGen.Grok.Services;
 
-public interface IGrokImageGen : IImgGen, ITransient
+public interface IGrokImageGen : IImageGen, ITransient
 {
 }
 
-public class GrokImageGen : ImgGen, IGrokImageGen
+public class GrokImageGen : ImageGen, IGrokImageGen
 {
     private readonly IGrokImageApiService _service;
 

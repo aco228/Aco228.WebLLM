@@ -8,22 +8,22 @@ using Aco228.Common.Models;
 
 namespace Aco228.AIGen.PoyoAI.Services;
 
-public interface IPoyoImageGen : IImgGen, ITransient
+public interface IPoyoImageGen : IImageGen, ITransient
 {
     // Task<string> GenerateAndGetTaskId(PoyoModelType model, string prompt, ImageSize size = ImageSize.Square);
     // Task<ImageResponse> GetResponse(string taskId);
 }
 
-public class PoyoImageGen : IPoyoImageGen
+public class PoyoImageGen : ImageGen, IPoyoImageGen
 {
     private readonly IPoyoApiService _apiService;
 
     public PoyoImageGen(IPoyoApiService apiService)
     {
         _apiService = apiService;
-    }
-    
-    public async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
+    } 
+
+    public override async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
     {
         var modelType = Constants.PoyoImages.Models.FirstOrDefault(x => x.ModelApiName == prompt.ModelName);
         if (modelType == null)
@@ -49,5 +49,23 @@ public class PoyoImageGen : IPoyoImageGen
                 TaskId = response.data.task_id,
             }
         };
-    }   
+    }
+
+    public override async Task<GenerateImageResponse?> GetResultFor(string taskId)
+    {
+        var result = await _apiService.GetStatus(taskId);
+        if (result.data?.files?.Any() == false)
+            return null;
+
+        var file = result?.data?.files?.FirstOrDefault();
+        if (file == null)
+            return null;
+
+        return new()
+        {
+            ImageUrl = file.file_url,
+            Provider = ImageGenProvider.Poyo,
+            Size = ImageSize.Unknown,
+        };
+    }
 }

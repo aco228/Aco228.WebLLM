@@ -11,11 +11,11 @@ using GenerateImageResponse = Aco228.AIGen.Models.GenerateImageResponse;
 
 namespace Aco228.AIGen.ChatGPT.Services;
 
-public interface IChatgptImageGen : IImgGen, ITransient
+public interface IChatgptImageGen : IImageGen, ITransient
 {
 }
 
-public class ChatgptImageGen : ImgGen, IChatgptImageGen
+public class ChatgptImageGen : ImageGen, IChatgptImageGen
 {
     private readonly IChatgptImageApiService _apiService;
 

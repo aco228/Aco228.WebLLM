@@ -17,7 +17,7 @@ public static class ServiceExtensions
 
         services.RegisterPostBuildAction((pr) =>
         {
-            var imageManager = pr.GetService<IImgGenManager>()! as ImgGenManager;
+            var imageManager = pr.GetService<IImageGenManager>()! as ImageGenManager;
             imageManager.RegisterGenerator<IPoyoImageGen>(ImageGenProvider.Poyo, PoyoImages.Models);
         });
     }

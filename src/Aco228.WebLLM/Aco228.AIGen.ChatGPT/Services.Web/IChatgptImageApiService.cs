@@ -12,5 +12,5 @@ namespace Aco228.AIGen.ChatGPT.Services.Web;
 public interface IChatgptImageApiService : IChatGptApiServiceBase
 {
     [ApiPost("v1/images/generations")]
-    Task<GenerateImageResponse> GenerateImage(GenerateImageRequest request);
+    Task<GptGenerateImageResponse> GenerateImage(GenerateImageRequest request);
 }

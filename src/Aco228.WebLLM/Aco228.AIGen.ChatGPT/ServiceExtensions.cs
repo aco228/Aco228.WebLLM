@@ -21,7 +21,7 @@ public static class ServiceExtensions
             var manager = managerInterface as TextGenManager;
             manager.Register<IChatGptTextGen>(TextGenProvider.ChatGPT, ChatGptModelList.Models);
 
-            var imageManager = serviceProvider.GetService<IImgGenManager>()! as ImgGenManager;
+            var imageManager = serviceProvider.GetService<IImageGenManager>()! as ImageGenManager;
             imageManager.RegisterGenerator<IChatgptImageGen>(ImageGenProvider.OpenAI, ChatGptImageModelList.Models);
         });
     }

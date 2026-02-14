@@ -7,7 +7,7 @@ using Aco228.Common.Models;
 
 namespace Aco228.AIGen.Services;
 
-public interface IImgGenManager : ISingleton
+public interface IImageGenManager : ISingleton
 {
     List<ImageGenProvider> Providers { get; }
     List<ModelImageDefinition> ModelDefinitions { get; }
@@ -15,12 +15,13 @@ public interface IImgGenManager : ISingleton
     ModelImageDefinition? GetModelDefinition(Enum apiName);
     ManagedList<ModelImageDefinition> FilterSuitableModels(List<ImageGenProvider> providers, List<string> modelNames);
     Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt);
+    Task<GenerateImageResponse?> GetResultFor(ImageGenProvider provider, string taskId);
 }
 
-public class ImgGenManager : IImgGenManager
+public class ImageGenManager : IImageGenManager
 {
     private ConcurrentList<ModelImageDefinition> _models = new();
-    private ConcurrentDictionary<ImageGenProvider, IImgGen> _generators = new();
+    private ConcurrentDictionary<ImageGenProvider, IImageGen> _generators = new();
     public List<ImageGenProvider> Providers => _models.Select(x => x.Provider).Distinct().ToList();
     public List<ModelImageDefinition> ModelDefinitions => _models.ToList();
     public List<string> Models => _models.Select(x => x.ModelApiName).ToList();
@@ -32,9 +33,9 @@ public class ImgGenManager : IImgGenManager
     }
     
     public void RegisterGenerator<T>(ImageGenProvider provider, List<ModelImageDefinition> models)
-        where T : IImgGen
+        where T : IImageGen
     {
-        var generator = ServiceProviderHelper.GetServiceByType(typeof(T)) as IImgGen;
+        var generator = ServiceProviderHelper.GetServiceByType(typeof(T)) as IImageGen;
         if(generator == null)
             throw new Exception("Generator not found");
         
@@ -69,5 +70,14 @@ public class ImgGenManager : IImgGenManager
             throw new Exception("No generator available for model " + modelDefinition.ModelApiName);
         
         return await generator.Generate(prompt);       
+    }
+
+    public async Task<GenerateImageResponse?> GetResultFor(ImageGenProvider provider, string taskId)
+    {
+        if(!_generators.TryGetValue(provider, out var generator))
+            throw new Exception("No generator available for model " + provider.ToString());
+        
+        var result = await generator.GetResultFor(taskId);
+        return result;
     }
 }
