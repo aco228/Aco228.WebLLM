@@ -44,10 +44,12 @@ public class ImgGenManager : IImgGenManager
     
     public ManagedList<ModelImageDefinition> FilterSuitableModels(List<ImageGenProvider> providers, List<string> modelNames)
     {
-        return _models
-            .Where(x => providers.Contains(x.Provider))
-            .Where(x => modelNames.Contains(x.ModelApiName))
-            .ToManagedList();
+        if(modelNames.Any())
+            return _models.Where(x => modelNames.Contains(x.Name)).ToManagedList();
+        if(providers.Any())
+            return _models.Where(x => providers.Contains(x.Provider)).ToManagedList();
+        
+        return new();
     }
 
     public async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
