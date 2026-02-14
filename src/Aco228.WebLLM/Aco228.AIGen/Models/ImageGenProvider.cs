@@ -2,6 +2,7 @@
 
 public enum ImageGenProvider
 {
+    Unknown = 0,
     OpenAI = 1,
     Poyo = 2,
     Grok = 3,

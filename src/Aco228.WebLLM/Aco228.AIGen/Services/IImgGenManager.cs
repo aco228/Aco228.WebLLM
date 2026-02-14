@@ -35,6 +35,9 @@ public class ImgGenManager : IImgGenManager
         where T : IImgGen
     {
         var generator = ServiceProviderHelper.GetServiceByType(typeof(T)) as IImgGen;
+        if(generator == null)
+            throw new Exception("Generator not found");
+        
         _generators.TryAdd(provider, generator);
         _models.AddRange(models);
     }
@@ -60,7 +63,9 @@ public class ImgGenManager : IImgGenManager
         if(modelDefinition == null)
             throw new Exception("No suitable model found");
         
-        var generator = _generators[modelDefinition.Provider];
+        if(!_generators.TryGetValue(modelDefinition.Provider, out var generator))
+            throw new Exception("No generator available for model " + modelDefinition.ModelApiName);
+        
         return await generator.Generate(prompt);       
     }
 }

@@ -2,14 +2,16 @@
 
 public enum ImageSize
 {
+    Unknown = 0,
+    
     // 1:1
-    Square,
+    Square = 1,
     
     // 16:9, 3:2
-    Portrait,
+    Portrait = 2,
     
     // 9:16, 2:3
-    Landscape,
+    Landscape = 3,
 }
 
 public static class ImageSizeExtensions

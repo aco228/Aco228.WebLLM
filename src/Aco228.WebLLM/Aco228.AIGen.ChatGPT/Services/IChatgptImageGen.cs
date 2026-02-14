@@ -5,12 +5,13 @@ using Aco228.AIGen.Services;
 using Aco228.Common.Extensions;
 using Aco228.Common.Helpers;
 using Aco228.Common.LocalStorage;
+using Aco228.Common.Models;
 using GenerateImageRequest = Aco228.AIGen.ChatGPT.Models.Web.Images.GenerateImageRequest;
 using GenerateImageResponse = Aco228.AIGen.Models.GenerateImageResponse;
 
 namespace Aco228.AIGen.ChatGPT.Services;
 
-public interface IChatgptImageGen : IImgGen
+public interface IChatgptImageGen : IImgGen, ITransient
 {
 }
 
@@ -25,7 +26,7 @@ public class ChatgptImageGen : ImgGen, IChatgptImageGen
     
     public override async Task<List<GenerateImageResponse>> Generate(AIGen.Models.GenerateImageRequest prompt)
     {
-        var modelType = prompt.ModelName.ToEnumNull<ChatGptImageModelType>();
+        var modelType = Constants.ChatGptImageModelList.Models.FirstOrDefault(x => x.ModelApiName == prompt.ModelName);
         if(modelType == null)
             throw new ArgumentException("Invalid model name");
 
@@ -41,7 +42,7 @@ public class ChatgptImageGen : ImgGen, IChatgptImageGen
         {
             prompt = prompt.Prompt,
             Count = prompt.Count,
-            model = ModelTypeHelper.GetModelApiName(modelType.Value),
+            model = modelType.ModelApiName,
             size = prompt.ImageSize.ToDefaultSizeString(),
             quality = qualityString,
         };
@@ -56,6 +57,7 @@ public class ChatgptImageGen : ImgGen, IChatgptImageGen
             await File.WriteAllBytesAsync(imagePath, Convert.FromBase64String(imageData.b64_json));
             result.Add(new()
             {
+                Size = prompt.ImageSize,
                 Provider = ImageGenProvider.OpenAI,
                 LocalFilePath = imagePath
             });

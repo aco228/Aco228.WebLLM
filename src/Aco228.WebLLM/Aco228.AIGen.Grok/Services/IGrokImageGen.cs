@@ -4,10 +4,11 @@ using Aco228.AIGen.Grok.Services.Web;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;
 using Aco228.Common.Extensions;
+using Aco228.Common.Models;
 
 namespace Aco228.AIGen.Grok.Services;
 
-public interface IGrokImageGen : IImgGen
+public interface IGrokImageGen : IImgGen, ITransient
 {
 }
 
@@ -22,7 +23,7 @@ public class GrokImageGen : ImgGen, IGrokImageGen
 
     public override async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)
     {
-        var modelType = prompt.ModelName.ToEnumNull<GrokImageModelType>();
+        var modelType = Constants.GrokImageModelList.Models.FirstOrDefault(x => x.ModelApiName == prompt.ModelName);
         if (modelType == null)
             throw new ArgumentException("Invalid model name");
         
@@ -31,7 +32,7 @@ public class GrokImageGen : ImgGen, IGrokImageGen
         var request = new ImageRequest()
         {
             prompt = prompt.Prompt,
-            model = ModelTypeHelper.GetModelApiName(modelType.Value),
+            model = modelType.ModelApiName,
             aspect_ratio = stringSize,
             n = prompt.Count,
         };
@@ -43,6 +44,7 @@ public class GrokImageGen : ImgGen, IGrokImageGen
         {
             result.Add(new()
             {
+                Size = prompt.ImageSize,
                 Provider = ImageGenProvider.Grok,
                 ImageUrl = res.url
             });
