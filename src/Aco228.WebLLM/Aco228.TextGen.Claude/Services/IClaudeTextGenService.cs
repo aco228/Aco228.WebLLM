@@ -49,8 +49,8 @@ public class ClaudeTextGenService : TextGenBase, IClaudeTextGenService
         };
         
         apiRequest.AddInput("user", request.User, request.ImageUrls);
-        if(!string.IsNullOrEmpty(request.System))
-            apiRequest.AddInput("system", request.System);
+        if (!string.IsNullOrEmpty(request.System))
+            apiRequest.system = request.System;
         
         return apiRequest;
     }

@@ -5,6 +5,7 @@ public class MessageRequest
 {
     public string model { get; set; }
     public uint max_tokens { get; set; } = 8000;
+    public string? system { get; set; }
     
     public List<RequestMessage> messages { get; set; } = new();
     

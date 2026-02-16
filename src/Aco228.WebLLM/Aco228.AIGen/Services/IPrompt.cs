@@ -53,11 +53,14 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     
     public async Task<TRes?> Execute(TReq request)
     {
-        var llmModel = (ModelDefinition ?? TextGenManager.ModelDefinitions)
-            .Where(x => ModelLevel == null || x.Level == ModelLevel)
-            .Where(x => TextGenProviders?.Contains(x.Provider) ?? true)
-            .Shuffle().First();
+        var llmModels = (ModelDefinition ?? TextGenManager.ModelDefinitions)
+            .Where(x => ModelLevel == null || x?.Level == ModelLevel)
+            .Where(x => TextGenProviders?.Contains(x.Provider) ?? true);
         
+        if(!llmModels.Any())
+            throw new Exception("No suitable LLM model found");
+        
+        var llmModel = llmModels.Shuffle().First();
         var (systemPrompt, userText) = await GetPromptData(request);
 
         var textGenerationRequest = new TextGenerationRequest()
