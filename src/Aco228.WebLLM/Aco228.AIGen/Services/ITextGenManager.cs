@@ -1,7 +1,6 @@
 ﻿using Aco228.AIGen.Models;
 using Aco228.Common;
 using Aco228.Common.Infrastructure;
-using Aco228.Common.Infrastructure.LiteDb;
 using Aco228.Common.Models;
 
 namespace Aco228.AIGen.Services;
@@ -47,8 +46,8 @@ public class TextGenManager : ITextGenManager
         textGenResponse.InputCost = (textGenResponse.InputTokens / 1_000_000.0) * modelDefinition.InputPricePerMillion;
         textGenResponse.OuputCost = (textGenResponse.OutputTokens / 1_000_000.0) * modelDefinition.OutputPricePerMillion;
 
-        using var liteFile = new LiteFile<TextGenResponse>("textGen");
-        liteFile.Insert(textGenResponse);
+        // using var liteFile = new LiteFile<TextGenResponse>("textGen");
+        // liteFile.Insert(textGenResponse);
         
         return textGenResponse;
     }
