@@ -9,7 +9,7 @@ public class GeminiApiConfiguration : ApiServiceConf
 {
     private HttpClient _googleHttpClient;
     private readonly string ProjectId = null;
-    private string Region = "europe-west1";
+    private string Region = "global";
     public override string BaseUrl => $"https://aiplatform.googleapis.com/v1/projects/{ProjectId}/locations/{Region}/publishers/google/models/";
 
     public GeminiApiConfiguration(GoogleSetupOptions options)
