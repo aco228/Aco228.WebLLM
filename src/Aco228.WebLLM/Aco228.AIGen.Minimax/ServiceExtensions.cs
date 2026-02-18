@@ -20,6 +20,9 @@ public static class ServiceExtensions
                 var managerInterface = provider.GetService<ITextGenManager>()!;
                 var manager = managerInterface as TextGenManager;
                 manager.Register<IMinimaxTextGen>(TextGenProvider.OpenRouter, Constants.MinimaxTextModels.Models);
+                
+                var imageManager = provider.GetService<IImageGenManager>()! as ImageGenManager;
+                imageManager.RegisterGenerator<IMinimaxImageGen>(ImageGenProvider.Minimax, Constants.MinimaxImageModels.Models);
             });
         });
 }

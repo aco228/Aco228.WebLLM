@@ -47,6 +47,7 @@ public class PoyoImageGen : ImageGen, IPoyoImageGen
                 Provider = ImageGenProvider.Poyo,
                 Size = prompt.ImageSize,
                 TaskId = response.data.task_id,
+                ModelName = modelType.ModelApiName,
             }
         };
     }
@@ -60,12 +61,13 @@ public class PoyoImageGen : ImageGen, IPoyoImageGen
         var file = result?.data?.files?.FirstOrDefault();
         if (file == null)
             return null;
-
+        
         return new()
         {
             ImageUrl = file.file_url,
             Provider = ImageGenProvider.Poyo,
             Size = ImageSize.Unknown,
+            ModelName = string.Empty,
         };
     }
 }

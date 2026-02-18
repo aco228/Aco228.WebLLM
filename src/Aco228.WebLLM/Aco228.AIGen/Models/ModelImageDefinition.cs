@@ -3,7 +3,8 @@
 public class ModelImageDefinition
 {
     public ImageGenProvider Provider { get; set; }
-    public PriceLevel Level { get; set; }
+    public PriceLevel PriceLevel { get; set; }
+    public ModelTier Tier { get; set; }
     public string Name { get; set; }
     public string ModelApiName { get; set; }
     

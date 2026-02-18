@@ -46,7 +46,8 @@ public class GrokImageGen : ImageGen, IGrokImageGen
             {
                 Size = prompt.ImageSize,
                 Provider = ImageGenProvider.Grok,
-                ImageUrl = res.url
+                ImageUrl = res.url,
+                ModelName = modelType.ModelApiName,
             });
         }
 

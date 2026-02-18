@@ -7,4 +7,5 @@ public enum ImageGenProvider
     Poyo = 2,
     Grok = 3,
     Gemini = 4,
+    Minimax = 5,
 }

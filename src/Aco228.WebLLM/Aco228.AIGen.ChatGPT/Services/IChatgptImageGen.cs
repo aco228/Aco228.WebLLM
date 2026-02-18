@@ -59,7 +59,8 @@ public class ChatgptImageGen : ImageGen, IChatgptImageGen
             {
                 Size = prompt.ImageSize,
                 Provider = ImageGenProvider.OpenAI,
-                LocalFilePath = imagePath
+                LocalFilePath = imagePath,
+                ModelName = modelType.ModelApiName,
             });
         }
 

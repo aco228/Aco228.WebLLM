@@ -50,6 +50,14 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
+var imageService = serviceProvider.GetService<IImageGenManager>()!;
+var imgres = await imageService.Generate(new()
+{
+    ImageSize = ImageSize.Square,
+    Prompt = "Wild puma is angry and is attacking a shark that is currently having a hiphop concert",
+    Provider = ImageGenProvider.Minimax,
+    Count = 1,
+});
 
 var service = serviceProvider.GetService<ITextGenManager>()!;
 var res = await service.GetResponse(new()
