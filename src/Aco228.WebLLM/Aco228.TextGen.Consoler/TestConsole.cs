@@ -1,16 +1,20 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Aco228.AIGen;
+using Aco228.AIGen.BlackForestLabs;
 using Aco228.AIGen.ChatGPT;
 using Aco228.AIGen.Gemini;
 using Aco228.AIGen.Gemini.Models.Gemini;
 using Aco228.AIGen.Gemini.Services.Web.Gemini;
 using Aco228.AIGen.Grok;
 using Aco228.AIGen.Grok.Services.Web;
+using Aco228.AIGen.Ideogram;
+using Aco228.AIGen.Minimax;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.PoyoAI;
 using Aco228.AIGen.PoyoAI.Models;
 using Aco228.AIGen.PoyoAI.Services;
+using Aco228.AIGen.Recraft;
 using Aco228.AIGen.Services;
 using Aco228.Common;
 using Aco228.GoogleServices;
@@ -24,7 +28,7 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
 {
     builder.RegisterGoogleServices(new()
     {
-       ServiceAccountCredentialsName = "arbo-487008-38359e7d2b41"
+        ProjectId = "arbo-487008-38359e7d2b41",
     });
     builder.RegisterPoyoAIServices();
     builder.RegisterAIGenServices();
@@ -32,6 +36,10 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterClaudeServices();
     builder.RegisterGrokServices();
     builder.RegisterGeminiServices();
+    builder.RegisterMinimaxServices();
+    builder.RegisterBlackForestLabsServices();
+    builder.RegisterRecraftServices();
+    builder.RegisterIdeogramServices();
     // builder.RegisterDeepSeekServices();
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
