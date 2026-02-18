@@ -23,17 +23,19 @@ public static class GenerateOpenRouterModelList
         var modelDefinitions = new List<ModelDefinition>();
         foreach (var apiModel in apiModels.data)
         {
-            var modelDefinition = new ModelDefinition()
+            var modelDefinition = new ModelDefinition
             {
                 Provider = TextGenProvider.OpenRouter,
                 ModelApiName = apiModel.id,
                 Description = apiModel.description,
                 Name = apiModel.name,
-                ContextWindow = (uint)apiModel.context_length,
+                ContextWindow = (uint) apiModel.context_length,
                 IsVisionSupported = apiModel.architecture.input_modalities.Contains("image"),
                 IsImageOutputSupported = apiModel.architecture.output_modalities.Contains("image"),
                 InputPricePerMillion = apiModel.pricing.GetPromptPrice() * 1_000_000,
                 OutputPricePerMillion = apiModel.pricing.GetOutputPrice() * 1_000_000,
+                PriceLevel = PriceLevel.Low,
+                Tier = ModelTier.Low,
             };
             var avgCost =  modelDefinition.OutputPricePerMillion;
             modelDefinition.PriceLevel = avgCost switch

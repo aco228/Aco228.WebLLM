@@ -3,16 +3,16 @@
 
 public class ModelDefinition
 {
-    public TextGenProvider Provider { get; set; }
-    public PriceLevel PriceLevel { get; set; }
-    public ModelTier Tier { get; set; }
-    public string Name { get; set; }
-    public string ModelApiName { get; set; }
+    public required TextGenProvider Provider { get; set; }
+    public required PriceLevel PriceLevel { get; set; }
+    public required ModelTier Tier { get; set; }
+    public required string Name { get; set; }
+    public required string ModelApiName { get; set; }
     public string? Description { get; set; }
     public uint ContextWindow { get; set; }
-    public bool IsVisionSupported { get; set; }
-    public bool IsImageOutputSupported { get; set; }
+    public required bool IsVisionSupported { get; set; }
+    public required bool IsImageOutputSupported { get; set; }
     
-    public double InputPricePerMillion { get; set; }
-    public double OutputPricePerMillion { get; set; }
+    public required double InputPricePerMillion { get; set; }
+    public required double OutputPricePerMillion { get; set; }
 }

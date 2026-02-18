@@ -14,7 +14,10 @@ internal static class ClaudeModelList
             Name = "Claude Opus 4.6",
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeOpus4_6),
             InputPricePerMillion = 5,
-            OutputPricePerMillion = 25
+            OutputPricePerMillion = 25,
+            Tier = ModelTier.High,
+            IsVisionSupported = true,
+            IsImageOutputSupported = false
         },
 
         new ModelDefinition
@@ -24,7 +27,10 @@ internal static class ClaudeModelList
             Name = "Claude Sonnet 4.5",
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeSonnet4_5),
             InputPricePerMillion = 3.00,
-            OutputPricePerMillion = 15.00
+            OutputPricePerMillion = 15.00,
+            Tier = ModelTier.High,
+            IsVisionSupported = true,
+            IsImageOutputSupported = false
         },
 
         new ModelDefinition
@@ -35,6 +41,9 @@ internal static class ClaudeModelList
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeHaiku4_5),
             InputPricePerMillion = 1,
             OutputPricePerMillion = 5,
+            Tier = ModelTier.High,
+            IsVisionSupported = true,
+            IsImageOutputSupported = false
         },
     };
 }
