@@ -10,7 +10,7 @@ internal static class GrokModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Grok,
-            Level = ModelLevel.Pro,
+            PriceLevel = PriceLevel.High,
             Name = "Grok 4Pro",
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokModelType.Grok4Pro),
             InputPricePerMillion = 3.00,
@@ -20,7 +20,7 @@ internal static class GrokModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Grok,
-            Level = ModelLevel.Mid,
+            PriceLevel = PriceLevel.Low,
             Name = "Grok 4.1 Fast NonReasoning",
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokModelType.Grok4_1FastNonReasoning),
             InputPricePerMillion = 0.20,
@@ -30,7 +30,7 @@ internal static class GrokModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Grok,
-            Level = ModelLevel.Code,
+            PriceLevel = PriceLevel.Low,
             Name = "Grok CodeFast",
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokModelType.GrokCodeFast1),
             InputPricePerMillion = 0.20,
@@ -40,7 +40,7 @@ internal static class GrokModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Grok,
-            Level = ModelLevel.Low,
+            PriceLevel = PriceLevel.Low,
             Name = "Grok 3 Mini",
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokModelType.Grok3Mini),
             InputPricePerMillion = 0.30,

@@ -60,9 +60,9 @@ public class TextGenManager : ITextGenManager
         else if (request.Model != null)
             modelDefinition = request.Model;
         else if(request.Level != null)
-            modelDefinition = textGen.Models.TakeRandom(x => x.Level == request.Level);
+            modelDefinition = textGen.Models.TakeRandom(x => x.PriceLevel == request.Level);
         else
-            modelDefinition = textGen.Models.TakeRandom(x => x.Level is ModelLevel.Low or ModelLevel.Mid);
+            modelDefinition = textGen.Models.TakeRandom(x => x.PriceLevel is PriceLevel.Low or PriceLevel.Mid);
         
         if (modelDefinition == null)
             throw new Exception("No model available");

@@ -3,7 +3,7 @@
 public class TextGenerationRequest
 {
     public TextGenProvider? Type { get; set; }
-    public ModelLevel? Level { get; set; }
+    public PriceLevel? Level { get; set; }
     public string? ModelName { get; set; }
     public ModelDefinition? Model { get; set; }
     public string User { get; set; }

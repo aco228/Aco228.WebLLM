@@ -9,7 +9,7 @@ internal static class PoyoImages
     {
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.gpt4o.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.gpt4o),
@@ -17,7 +17,7 @@ internal static class PoyoImages
         },
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.gpt1_5.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.gpt1_5),
@@ -25,7 +25,7 @@ internal static class PoyoImages
         },
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.GrokImage.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.GrokImage),
@@ -33,7 +33,7 @@ internal static class PoyoImages
         },
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.ZImage.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.ZImage),
@@ -41,7 +41,7 @@ internal static class PoyoImages
         },
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.Seadream4_5.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.Seadream4_5),
@@ -49,7 +49,7 @@ internal static class PoyoImages
         },
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.Flux2Pro.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.Flux2Pro),
@@ -57,7 +57,7 @@ internal static class PoyoImages
         },
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.Flux2Flex.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.Flux2Flex),
@@ -65,7 +65,7 @@ internal static class PoyoImages
         },
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.NanoBanana2.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.NanoBanana2),
@@ -73,7 +73,7 @@ internal static class PoyoImages
         },
         new()
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Provider = ImageGenProvider.Poyo,
             Name = PoyoModelType.NanoBanana.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(PoyoModelType.NanoBanana),

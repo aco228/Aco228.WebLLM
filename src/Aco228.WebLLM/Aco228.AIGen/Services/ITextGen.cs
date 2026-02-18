@@ -37,5 +37,5 @@ public abstract class TextGenBase : ITextGen
     }
     
     protected virtual ModelDefinition TakeNextModel() 
-        => Models.Where(x => x.Level is ModelLevel.Low or ModelLevel.Mid).Shuffle().First();
+        => Models.Where(x => x.PriceLevel is PriceLevel.Low or PriceLevel.Mid).Shuffle().First();
 }

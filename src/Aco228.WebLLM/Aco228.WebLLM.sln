@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.Minimax", "Aco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.BlackForestLabs", "Aco228.AIGen.BlackForestLabs\Aco228.AIGen.BlackForestLabs.csproj", "{D938F143-41B6-48EF-803F-D9AC8ECD189A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.OpenRouter", "Aco228.AIGen.OpenRouter\Aco228.AIGen.OpenRouter.csproj", "{06AFF92A-615D-4AFB-B082-48C83BE7872E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,10 @@ Global
 		{D938F143-41B6-48EF-803F-D9AC8ECD189A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D938F143-41B6-48EF-803F-D9AC8ECD189A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D938F143-41B6-48EF-803F-D9AC8ECD189A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06AFF92A-615D-4AFB-B082-48C83BE7872E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06AFF92A-615D-4AFB-B082-48C83BE7872E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06AFF92A-615D-4AFB-B082-48C83BE7872E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06AFF92A-615D-4AFB-B082-48C83BE7872E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0D31617E-9C11-4E7E-91EF-7ED815810D09} = {B502F0BB-4BBA-48B4-BE7F-46645619286F}

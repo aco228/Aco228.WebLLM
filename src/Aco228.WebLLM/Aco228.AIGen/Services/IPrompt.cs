@@ -19,7 +19,7 @@ public interface IPrompt<TReq, TRes> : IPromptBase
 
 public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : class
 {
-    protected virtual ModelLevel? ModelLevel => null;
+    protected virtual PriceLevel? ModelLevel => null;
     protected virtual ManagedList<TextGenProvider>? TextGenProviders => null;
     protected virtual ManagedList<ModelDefinition>? ModelDefinition => null;
     protected virtual List<PromptSection> Sections { get; } = new();
@@ -54,7 +54,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     public async Task<TRes?> Execute(TReq request)
     {
         var llmModels = (ModelDefinition ?? TextGenManager.ModelDefinitions)
-            .Where(x => ModelLevel == null || x?.Level == ModelLevel)
+            .Where(x => ModelLevel == null || x?.PriceLevel == ModelLevel)
             .Where(x => TextGenProviders?.Contains(x.Provider) ?? true);
         
         if(!llmModels.Any())

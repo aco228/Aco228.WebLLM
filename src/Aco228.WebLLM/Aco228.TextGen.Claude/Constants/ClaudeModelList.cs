@@ -10,7 +10,7 @@ internal static class ClaudeModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Claude,
-            Level = ModelLevel.Pro,
+            PriceLevel = PriceLevel.High,
             Name = "Claude Opus 4.6",
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeOpus4_6),
             InputPricePerMillion = 5,
@@ -20,7 +20,7 @@ internal static class ClaudeModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Claude,
-            Level = ModelLevel.Mid,
+            PriceLevel = PriceLevel.Mid,
             Name = "Claude Sonnet 4.5",
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeSonnet4_5),
             InputPricePerMillion = 3.00,
@@ -30,7 +30,7 @@ internal static class ClaudeModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Claude,
-            Level = ModelLevel.Low,
+            PriceLevel = PriceLevel.Low,
             Name = "Claude Haiku 4.5",
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeHaiku4_5),
             InputPricePerMillion = 1,

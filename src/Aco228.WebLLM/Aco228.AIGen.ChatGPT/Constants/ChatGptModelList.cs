@@ -10,7 +10,7 @@ internal static class ChatGptModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.ChatGPT,
-            Level = ModelLevel.Pro,
+            PriceLevel = PriceLevel.High,
             Name = ChatGptModelType.GPT5_2.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5_2),
             InputPricePerMillion = 1.75,
@@ -20,7 +20,7 @@ internal static class ChatGptModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.ChatGPT,
-            Level = ModelLevel.Mid,
+            PriceLevel = PriceLevel.Mid,
             Name = ChatGptModelType.GPT5_1.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5_1),
             InputPricePerMillion = 1.25,
@@ -30,7 +30,7 @@ internal static class ChatGptModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.ChatGPT,
-            Level = ModelLevel.Mid,
+            PriceLevel = PriceLevel.Mid,
             Name = ChatGptModelType.GPT5.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5),
             InputPricePerMillion = 1.25,
@@ -40,7 +40,7 @@ internal static class ChatGptModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.ChatGPT,
-            Level = ModelLevel.Low,
+            PriceLevel = PriceLevel.Low,
             Name = ChatGptModelType.GPT5_MINI.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5_MINI),
             InputPricePerMillion = 0.25,
@@ -50,7 +50,7 @@ internal static class ChatGptModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.ChatGPT,
-            Level = ModelLevel.Low,
+            PriceLevel = PriceLevel.Low,
             Name = ChatGptModelType.GPT5_NANO.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptModelType.GPT5_NANO),
             InputPricePerMillion = 0.05,

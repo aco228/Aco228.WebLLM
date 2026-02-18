@@ -7,4 +7,5 @@ public enum TextGenProvider
     Gemini = 3,
     Grok = 4,
     DeepSeek = 5,
+    OpenRouter = 6,
 }

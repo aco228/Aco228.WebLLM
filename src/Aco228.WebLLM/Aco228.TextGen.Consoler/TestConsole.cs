@@ -11,6 +11,9 @@ using Aco228.AIGen.Grok.Services.Web;
 using Aco228.AIGen.Ideogram;
 using Aco228.AIGen.Minimax;
 using Aco228.AIGen.Models;
+using Aco228.AIGen.OpenRouter;
+using Aco228.AIGen.OpenRouter.Infrastructure;
+using Aco228.AIGen.OpenRouter.Services.Web;
 using Aco228.AIGen.PoyoAI;
 using Aco228.AIGen.PoyoAI.Models;
 using Aco228.AIGen.PoyoAI.Services;
@@ -22,6 +25,7 @@ using Aco228.TextGen.Claude;
 using Aco228.TextGen.Consoler;
 using Aco228.WService;
 using Aco228.WService.Infrastructure;
+using Google.Apis.Util;
 using Microsoft.Extensions.DependencyInjection;
 
 var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program), builder =>
@@ -29,6 +33,7 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterGoogleServices(new()
     {
         ProjectId = "arbo-487008-38359e7d2b41",
+        ServiceAccountCredentialsPath = @"C:\Users\Lenovo\Documents\CKArbo\app\google\credentials.json",
     });
     builder.RegisterPoyoAIServices();
     builder.RegisterAIGenServices();
@@ -40,12 +45,17 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterBlackForestLabsServices();
     builder.RegisterRecraftServices();
     builder.RegisterIdeogramServices();
+    builder.RegisterOpenRouterServices();
     // builder.RegisterDeepSeekServices();
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
-var cls = JsonToClassConverter.ConvertJsonToClass("ImageResponse",
-    @"{""data"":[{""url"":""https://imgen.x.ai/xai-imgen/xai-tmp-imgen-9eb3761a-e38f-4a4b-8355-e0183c6d0d98.jpeg"",""revised_prompt"":""""}]}");
+await GenerateOpenRouterModelList.Generate();
+var service = serviceProvider.GetService<IOpenRouterModelsApiService>()!;
+var open = await service.GetModels();
+
+var ids = open.data.Select(x => x.id).ToList();
+var idsString = string.Join(Environment.NewLine, ids);
 
 var grokImgApi = serviceProvider.GetService<IGrokImageApiService>()!;
 var res = await grokImgApi.GenerateImage(new()

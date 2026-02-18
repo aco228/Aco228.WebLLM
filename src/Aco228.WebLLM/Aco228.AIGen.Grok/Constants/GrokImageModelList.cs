@@ -9,21 +9,21 @@ internal static class GrokImageModelList
     {
         new(ImageGenProvider.Grok)
         {
-            Level = ModelLevel.Pro,
+            Level = PriceLevel.High,
             Name = GrokImageModelType.GrokImagineImagePro.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokImageModelType.GrokImagineImagePro),
             PricePerRequest = 0.07,
         },
         new(ImageGenProvider.Grok)
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Name = GrokImageModelType.Grok2Image.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokImageModelType.Grok2Image),
             PricePerRequest = 0.07,
         },
         new(ImageGenProvider.Grok)
         {
-            Level = ModelLevel.Low,
+            Level = PriceLevel.Low,
             Name = GrokImageModelType.GrokImagineImage.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokImageModelType.GrokImagineImage),
             PricePerRequest = 0.02,

@@ -1,10 +1,8 @@
 ﻿namespace Aco228.AIGen.Models;
 
-public enum ModelLevel
+public enum ModelTier
 {
     Low = 1,
     Mid = 5,
-    Pro = 10,
-    
-    Code = 20
+    High = 10,
 }

@@ -14,6 +14,7 @@
       <ProjectReference Include="..\Aco228.AIGen.Gemini\Aco228.AIGen.Gemini.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.Ideogram\Aco228.AIGen.Ideogram.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.Minimax\Aco228.AIGen.Minimax.csproj" />
+      <ProjectReference Include="..\Aco228.AIGen.OpenRouter\Aco228.AIGen.OpenRouter.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.PoyoAI\Aco228.AIGen.PoyoAI.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.Recraft\Aco228.AIGen.Recraft.csproj" />
       <ProjectReference Include="..\Aco228.AIGen\Aco228.AIGen.csproj" />

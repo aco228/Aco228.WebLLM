@@ -10,7 +10,7 @@ internal static class GeminiModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Gemini,
-            Level = ModelLevel.Pro,
+            PriceLevel = PriceLevel.High,
             Name = GeminiModelType.Gemini3ProPreview.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.Gemini3ProPreview),
             InputPricePerMillion = 2,
@@ -20,7 +20,7 @@ internal static class GeminiModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Gemini,
-            Level = ModelLevel.Mid,
+            PriceLevel = PriceLevel.Mid,
             Name = GeminiModelType.Gemini3FlashPreview.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.Gemini3FlashPreview),
             InputPricePerMillion = 0.5,
@@ -30,7 +30,7 @@ internal static class GeminiModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Gemini,
-            Level = ModelLevel.Low,
+            PriceLevel = PriceLevel.Low,
             Name = GeminiModelType.Gemini2_5Flash.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.Gemini2_5Flash),
             InputPricePerMillion = 0.5,
@@ -40,7 +40,7 @@ internal static class GeminiModelList
         new ModelDefinition
         {
             Provider = TextGenProvider.Gemini,
-            Level = ModelLevel.Low,
+            PriceLevel = PriceLevel.Low,
             Name = GeminiModelType.Gemini2_5FlashLite.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.Gemini2_5FlashLite),
             InputPricePerMillion = 0.5,

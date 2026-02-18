@@ -9,7 +9,7 @@ internal static class ChatGptImageModelList
     {
         new(ImageGenProvider.OpenAI)
         {
-            Level = ModelLevel.Pro,
+            Level = PriceLevel.High,
             Name = ChatGptImageModelType.gpt_image_1_5.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptImageModelType.gpt_image_1_5),
             PricePerRequest = 0.05,
@@ -17,7 +17,7 @@ internal static class ChatGptImageModelList
         
         new(ImageGenProvider.OpenAI)
         {
-            Level = ModelLevel.Mid,
+            Level = PriceLevel.Mid,
             Name = ChatGptImageModelType.gpt_image_1.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptImageModelType.gpt_image_1),
             PricePerRequest = 0.04,
@@ -25,7 +25,7 @@ internal static class ChatGptImageModelList
         
         new(ImageGenProvider.OpenAI)
         {
-            Level = ModelLevel.Low,
+            Level = PriceLevel.Low,
             Name = ChatGptImageModelType.gpt_image_1_mini.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptImageModelType.gpt_image_1_mini),
             PricePerRequest = 0.01,
@@ -33,7 +33,7 @@ internal static class ChatGptImageModelList
         
         new(ImageGenProvider.OpenAI)
         {
-            Level = ModelLevel.Low,
+            Level = PriceLevel.Low,
             Name = ChatGptImageModelType.gpt_model_latest.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptImageModelType.gpt_model_latest),
             PricePerRequest = 0.03,
