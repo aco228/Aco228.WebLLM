@@ -50,17 +50,13 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
-await GenerateOpenRouterModelList.Generate();
-var service = serviceProvider.GetService<IOpenRouterModelsApiService>()!;
-var open = await service.GetModels();
-
-var ids = open.data.Select(x => x.id).ToList();
-var idsString = string.Join(Environment.NewLine, ids);
-
-var grokImgApi = serviceProvider.GetService<IGrokImageApiService>()!;
-var res = await grokImgApi.GenerateImage(new()
+var service = serviceProvider.GetService<ITextGenManager>()!;
+var res = await service.GetResponse(new()
 {
-    prompt = "A shark is having a rap concert, and is being attacked by a angry puma",
+    PriceLevel = PriceLevel.Low,
+    TierLevel = ModelTier.Low,
+    Provider = TextGenProvider.OpenRouter,
+    User = "How are you?"
 });
 
 int brk = 0;

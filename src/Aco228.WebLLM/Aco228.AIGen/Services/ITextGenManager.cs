@@ -11,7 +11,7 @@ public interface ITextGenManager : ISingleton
     List<TextGenProvider> Providers { get; }
     Task<string> GetText(TextGenerationRequest request);
     Task<TextGenResponse> GetResponse(TextGenerationRequest request);
-    ModelDefinition GetModelDefinition(Enum modelType);
+    ModelDefinition? GetModelDefinition(Enum modelType);
 }
 
 public class TextGenManager : ITextGenManager
@@ -54,15 +54,13 @@ public class TextGenManager : ITextGenManager
 
     private ModelDefinition GetModelDefinitionFromRequest(TextGenerationRequest request, ITextGen textGen)
     {
-        ModelDefinition? modelDefinition;
-        if(!string.IsNullOrEmpty(request.ModelName))
-            modelDefinition = ModelDefinitions.FirstOrDefault(x =>  x.ModelApiName == request.ModelName && x.Provider == textGen.Provider);
-        else if (request.Model != null)
-            modelDefinition = request.Model;
-        else if(request.Level != null)
-            modelDefinition = textGen.Models.TakeRandom(x => x.PriceLevel == request.Level);
-        else
-            modelDefinition = textGen.Models.TakeRandom(x => x.PriceLevel is PriceLevel.Low or PriceLevel.Mid);
+        var modelDefinition = ModelDefinitions
+            .Where(x => x.Provider == textGen.Provider)
+            .Where(x => string.IsNullOrEmpty(request.ModelName) || x.ModelApiName.Equals(request.ModelName))
+            .Where(x => request.PriceLevel is null || x.PriceLevel == request.PriceLevel)
+            .Where(x => request.TierLevel is null || x.Tier == request.TierLevel)
+            .Shuffle()
+            .FirstOrDefault();
         
         if (modelDefinition == null)
             throw new Exception("No model available");
@@ -72,28 +70,22 @@ public class TextGenManager : ITextGenManager
 
     private ITextGen GetTextGeneratorFromRequest(TextGenerationRequest request)
     {
-        ITextGen? textGen = null;
-        if (request.Model != null || request.Type != null)
-        {
-            if (request.Model != null)
-                textGen = _textGens.FirstOrDefault(x => x.Provider == request.Model.Provider && x.Models.Any(y => y.ModelApiName == request.Model.ModelApiName));
-            else if (request.Type != null)
-                textGen = _textGens.FirstOrDefault(x => x.Provider == request.Type);
-            
-            if(textGen == null)
-                throw new Exception("No text gen available for model " + request.Model?.ModelApiName);
-        }
+        ITextGen? textGen = _textGens
+            .Where(x => request.Provider == null || x.Provider == request.Provider)
+            .Where(x => request.Model == null || x.Models.Any(y => y.ModelApiName == request.ModelName))
+            .Shuffle()
+            .FirstOrDefault();
         
         if(textGen == null)
             textGen = _textGens.Take();
         
         if(textGen == null) 
-            throw new  Exception("No text gen available");
+            throw new Exception("No text gen available");
         
         return textGen;
     }
 
-    public ModelDefinition GetModelDefinition(Enum modelType)
+    public ModelDefinition? GetModelDefinition(Enum modelType)
     {
         var modelName = ModelTypeHelper.GetModelApiName(modelType);
         return _textGens.SelectMany(x => x.Models).FirstOrDefault(x => x.ModelApiName == modelName);
@@ -108,6 +100,10 @@ public class TextGenManager : ITextGenManager
     public void Register<T>(TextGenProvider provider, List<ModelDefinition> models) where T : ITextGen
     {
         var service = ServiceProviderHelper.GetServiceByType(typeof(T)) as ITextGen;
+        if (service == null)
+        {
+            return;
+        }
         _textGens.Add(service!);
         ModelDefinitions.AddRange(models);
     }

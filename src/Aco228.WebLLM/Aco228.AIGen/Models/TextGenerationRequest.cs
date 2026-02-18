@@ -2,8 +2,9 @@
 
 public class TextGenerationRequest
 {
-    public TextGenProvider? Type { get; set; }
-    public PriceLevel? Level { get; set; }
+    public TextGenProvider? Provider { get; set; }
+    public PriceLevel? PriceLevel { get; set; }
+    public ModelTier? TierLevel { get; set; }
     public string? ModelName { get; set; }
     public ModelDefinition? Model { get; set; }
     public string User { get; set; }
@@ -22,9 +23,9 @@ public class TextGenerationRequest
         User = user;
     }
 
-    public TextGenerationRequest(TextGenProvider type, string system, string user) : this(system, user)
+    public TextGenerationRequest(TextGenProvider provider, string system, string user) : this(system, user)
     {
-        Type = type;
+        Provider = provider;
     }
     
 }
