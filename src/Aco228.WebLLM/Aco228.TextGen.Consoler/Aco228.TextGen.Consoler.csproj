@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\..\..\Aco228.WService\src\Aco228.WService\Aco228.WService\Aco228.WService.csproj" />
+      <ProjectReference Include="..\Aco228.AIGen.AtlasCloud\Aco228.AIGen.AtlasCloud.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.BlackForestLabs\Aco228.AIGen.BlackForestLabs.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.ChatGPT\Aco228.AIGen.ChatGPT.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.Gemini\Aco228.AIGen.Gemini.csproj" />

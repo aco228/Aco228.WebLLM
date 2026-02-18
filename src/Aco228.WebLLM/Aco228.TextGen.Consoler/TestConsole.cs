@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Aco228.AIGen;
+using Aco228.AIGen.AtlasCloud;
+using Aco228.AIGen.AtlasCloud.Services.Web;
 using Aco228.AIGen.BlackForestLabs;
 using Aco228.AIGen.BlackForestLabs.Services.Web;
 using Aco228.AIGen.ChatGPT;
@@ -47,18 +49,20 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterRecraftServices();
     builder.RegisterIdeogramServices();
     builder.RegisterOpenRouterServices();
+    builder.RegisterAtlasCloudServices();
     // builder.RegisterDeepSeekServices();
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
+var atlas = serviceProvider.GetService<IAtlasCloudImageApiService>()!;
+var rea  = await atlas.GetResult("b000f4d6b9104f199e220b1c3909eed9");
 
 var imageService = serviceProvider.GetService<IImageGenManager>()!;
 var imgres = await imageService.Generate(new()
 {
     ImageSize = ImageSize.Square,
     Prompt = "Wild puma is angry and is attacking a shark that is currently having a hiphop concert",
-    Provider = ImageGenProvider.Recraft,
-    ModelName = "recraftv4_pro",
+    Provider = ImageGenProvider.AtlasCloud,
     Count = 1,
 });
 

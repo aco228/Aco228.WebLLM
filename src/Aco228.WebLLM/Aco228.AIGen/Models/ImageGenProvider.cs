@@ -11,4 +11,5 @@ public enum ImageGenProvider
     Ideogram = 6,
     BlackForestLabs = 7,
     Recraft = 8,
+    AtlasCloud = 9,
 }
