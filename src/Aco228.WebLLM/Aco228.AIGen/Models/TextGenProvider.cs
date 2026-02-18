@@ -8,4 +8,5 @@ public enum TextGenProvider
     Grok = 4,
     DeepSeek = 5,
     OpenRouter = 6,
+    Minimax = 7,
 }

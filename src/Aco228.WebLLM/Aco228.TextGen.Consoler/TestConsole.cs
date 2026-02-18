@@ -50,12 +50,12 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
+
 var service = serviceProvider.GetService<ITextGenManager>()!;
 var res = await service.GetResponse(new()
 {
     PriceLevel = PriceLevel.Low,
-    TierLevel = ModelTier.Low,
-    Provider = TextGenProvider.OpenRouter,
+    Provider = TextGenProvider.Minimax,
     User = "How are you?"
 });
 
