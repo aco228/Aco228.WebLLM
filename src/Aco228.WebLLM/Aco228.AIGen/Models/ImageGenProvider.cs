@@ -10,4 +10,5 @@ public enum ImageGenProvider
     Minimax = 5,
     Ideogram = 6,
     BlackForestLabs = 7,
+    Recraft = 8,
 }

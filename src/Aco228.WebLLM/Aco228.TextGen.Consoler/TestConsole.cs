@@ -53,13 +53,12 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
 
 
 var imageService = serviceProvider.GetService<IImageGenManager>()!;
-var resa = await imageService.GetResultFor(ImageGenProvider.BlackForestLabs, "541d045f-b358-4397-90ce-7af202ee98a2"); 
-
 var imgres = await imageService.Generate(new()
 {
     ImageSize = ImageSize.Square,
     Prompt = "Wild puma is angry and is attacking a shark that is currently having a hiphop concert",
-    Provider = ImageGenProvider.BlackForestLabs,
+    Provider = ImageGenProvider.Recraft,
+    ModelName = "recraftv4_pro",
     Count = 1,
 });
 
