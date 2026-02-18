@@ -8,4 +8,5 @@ public enum ImageGenProvider
     Grok = 3,
     Gemini = 4,
     Minimax = 5,
+    Ideogram = 6,
 }

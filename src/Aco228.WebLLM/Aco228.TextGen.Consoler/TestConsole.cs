@@ -55,7 +55,7 @@ var imgres = await imageService.Generate(new()
 {
     ImageSize = ImageSize.Square,
     Prompt = "Wild puma is angry and is attacking a shark that is currently having a hiphop concert",
-    Provider = ImageGenProvider.Minimax,
+    Provider = ImageGenProvider.Ideogram,
     Count = 1,
 });
 
