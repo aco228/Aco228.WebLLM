@@ -9,4 +9,5 @@ public enum ImageGenProvider
     Gemini = 4,
     Minimax = 5,
     Ideogram = 6,
+    BlackForestLabs = 7,
 }

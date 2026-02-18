@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\..\..\Aco228.WService\src\Aco228.WService\Aco228.WService\Aco228.WService.csproj" />
       <ProjectReference Include="..\Aco228.AIGen\Aco228.AIGen.csproj" />
     </ItemGroup>
 

@@ -2,6 +2,7 @@
 
 using Aco228.AIGen;
 using Aco228.AIGen.BlackForestLabs;
+using Aco228.AIGen.BlackForestLabs.Services.Web;
 using Aco228.AIGen.ChatGPT;
 using Aco228.AIGen.Gemini;
 using Aco228.AIGen.Gemini.Models.Gemini;
@@ -50,12 +51,15 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
+
 var imageService = serviceProvider.GetService<IImageGenManager>()!;
+var resa = await imageService.GetResultFor(ImageGenProvider.BlackForestLabs, "541d045f-b358-4397-90ce-7af202ee98a2"); 
+
 var imgres = await imageService.Generate(new()
 {
     ImageSize = ImageSize.Square,
     Prompt = "Wild puma is angry and is attacking a shark that is currently having a hiphop concert",
-    Provider = ImageGenProvider.Ideogram,
+    Provider = ImageGenProvider.BlackForestLabs,
     Count = 1,
 });
 
