@@ -52,7 +52,7 @@ public class PoyoImageGen : ImageGen, IPoyoImageGen
         };
     }
 
-    public override async Task<GenerateImageResponse?> GetResultFor(string taskId)
+    public override async Task<GenerateImageResponse?> GetResultForInternal(string taskId)
     {
         var result = await _apiService.GetStatus(taskId);
         if (result.data?.files?.Any() == false)

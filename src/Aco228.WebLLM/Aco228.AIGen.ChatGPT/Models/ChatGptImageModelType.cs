@@ -19,6 +19,4 @@ public enum ChatGptImageModelType
     [ModelType("gpt-image-1-mini")]
     gpt_image_1_mini,
     
-    [ModelType("chatgpt-image-latest")]
-    gpt_model_latest,
 }

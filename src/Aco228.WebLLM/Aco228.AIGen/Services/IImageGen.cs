@@ -12,6 +12,19 @@ public abstract class ImageGen : IImageGen
 {
     public abstract Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt);
     
-    public virtual Task<GenerateImageResponse?> GetResultFor(string taskId)
+    
+    public async Task<GenerateImageResponse?> GetResultFor(string taskId)
+    {
+        try
+        {
+            return await GetResultForInternal(taskId);
+        }
+        catch (Exception e)
+        {
+            return null;
+        }
+    }
+
+    public virtual Task<GenerateImageResponse?> GetResultForInternal(string taskId)
         => Task.FromResult<GenerateImageResponse?>(null);
 }

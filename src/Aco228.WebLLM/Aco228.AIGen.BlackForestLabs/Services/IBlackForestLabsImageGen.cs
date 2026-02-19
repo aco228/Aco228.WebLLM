@@ -49,7 +49,7 @@ public class BlackForestLabsImageGen : ImageGen, IBlackForestLabsImageGen
         return result;
     }
 
-    public override async Task<GenerateImageResponse?> GetResultFor(string taskId)
+    public override async Task<GenerateImageResponse?> GetResultForInternal(string taskId)
     {
         var response = await _apiService.GetResult(taskId);
         var url = response?.result?.sample;
