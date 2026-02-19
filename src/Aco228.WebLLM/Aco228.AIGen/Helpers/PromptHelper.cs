@@ -15,6 +15,9 @@ public static class PromptHelper
     public static T Get<T>() where T : IPromptBase
         => ServiceProviderHelper.Construct<T>();
     
+    public static IPromptBase? GetByType(Type type) 
+        => ServiceProviderHelper.ConstructByType(type) as IPromptBase;
+    
     
     internal static TRes? DeserializeResponse<TRes>(string llmResponse)
     {
