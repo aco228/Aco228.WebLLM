@@ -19,7 +19,7 @@ public interface IPrompt<TReq, TRes> : IPromptBase
 
 public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : class
 {
-    protected virtual PriceLevel? PriceLevel => null;
+    protected virtual PriceLevel PriceLevel => Models.PriceLevel.Low;
     protected virtual ManagedList<TextGenProvider>? TextGenProviders => null;
     protected virtual ManagedList<ModelDefinition>? ModelDefinition => null;
     protected virtual List<PromptSection> Sections { get; } = new();
