@@ -6,12 +6,13 @@ public interface IImageGen
 {
     Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt);
     Task<GenerateImageResponse?> GetResultFor(string taskId);
+    HttpClient GetHttpClient();
 }
 
 public abstract class ImageGen : IImageGen
 {
     public abstract Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt);
-    
+    public abstract HttpClient GetHttpClient();
     
     public async Task<GenerateImageResponse?> GetResultFor(string taskId)
     {
@@ -24,6 +25,7 @@ public abstract class ImageGen : IImageGen
             return null;
         }
     }
+
 
     public virtual Task<GenerateImageResponse?> GetResultForInternal(string taskId)
         => Task.FromResult<GenerateImageResponse?>(null);

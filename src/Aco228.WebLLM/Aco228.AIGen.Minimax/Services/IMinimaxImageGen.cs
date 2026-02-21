@@ -50,4 +50,7 @@ public class MinimaxImageGen : ImageGen, IMinimaxImageGen
 
         return result;
     }
+
+    public override HttpClient GetHttpClient()
+        => _apiService.HttpClient;
 }

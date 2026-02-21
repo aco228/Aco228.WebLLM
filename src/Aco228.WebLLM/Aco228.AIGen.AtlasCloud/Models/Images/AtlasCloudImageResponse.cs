@@ -21,7 +21,7 @@ public class DataDTO
 {
     public string id { get; set; }
     public string model { get; set; }
-    public List<string> outputs { get; set; }
+    public List<string>? outputs { get; set; }
     public UrlsDTO urls { get; set; }
     public object has_nsfw_contents { get; set; }
     public string status { get; set; } // completed, processing

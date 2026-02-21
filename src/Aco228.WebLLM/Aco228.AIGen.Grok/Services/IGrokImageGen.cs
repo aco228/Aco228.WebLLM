@@ -53,4 +53,7 @@ public class GrokImageGen : ImageGen, IGrokImageGen
 
         return result;
     }
+
+    public override HttpClient GetHttpClient()
+        => _service.HttpClient;
 }

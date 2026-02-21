@@ -1,4 +1,5 @@
-﻿using Aco228.AIGen.BlackForestLabs.Models.Images;
+﻿using System.Text.Json;
+using Aco228.AIGen.BlackForestLabs.Models.Images;
 using Aco228.AIGen.BlackForestLabs.Services.Web;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;
@@ -43,15 +44,20 @@ public class BlackForestLabsImageGen : ImageGen, IBlackForestLabsImageGen
             Provider = ImageGenProvider.BlackForestLabs,
             ModelName = modelType.ModelApiName,
             Size = prompt.ImageSize,
-            TaskId = response.id,
+            TaskId = response.polling_url,
         });
 
         return result;
     }
 
+    public override HttpClient GetHttpClient()
+        => _apiService.HttpClient;
+
     public override async Task<GenerateImageResponse?> GetResultForInternal(string taskId)
     {
-        var response = await _apiService.GetResult(taskId);
+        var responseString = await GetHttpClient().GetStringAsync(taskId);
+        var response = JsonSerializer.Deserialize<BlackForestLabsResultResponse>(responseString);
+        
         var url = response?.result?.sample;
         if (string.IsNullOrEmpty(url))
             return null;

@@ -15,7 +15,8 @@ public class AtlasCLoudImageGen : ImageGen, IAtlasCloudImageGen
 {
     private readonly IAtlasCloudImageApiService _apiService;
 
-    public AtlasCLoudImageGen(IAtlasCloudImageApiService apiService)
+    public AtlasCLoudImageGen(
+        IAtlasCloudImageApiService apiService)
     {
         _apiService = apiService;
     }
@@ -36,7 +37,7 @@ public class AtlasCLoudImageGen : ImageGen, IAtlasCloudImageGen
         var response = await _apiService.Get(request);
         var result = new List<GenerateImageResponse>();
         
-        if (response.data.status == "completed")
+        if(!(response.data.outputs is null))
         {
             foreach (var outputUrl in response.data.outputs)
                 result.Add(new()
@@ -46,8 +47,10 @@ public class AtlasCLoudImageGen : ImageGen, IAtlasCloudImageGen
                     Size = prompt.ImageSize,
                     ImageUrl = outputUrl,
                 });
+            return result;
         }
-        else if (response.data.status is "processing" or "created")
+
+        for (int i = 0; i < prompt.Count; i++)
         {
             result.Add(new()
             {
@@ -57,9 +60,12 @@ public class AtlasCLoudImageGen : ImageGen, IAtlasCloudImageGen
                 TaskId = response.data.id,
             });
         }
-        
+
         return result;
     }
+
+    public override HttpClient GetHttpClient()
+        => _apiService.HttpClient;
 
     public override async Task<GenerateImageResponse?> GetResultForInternal(string taskId)
     {

@@ -12,6 +12,7 @@ public interface IImageGenManager : ISingleton
     List<ImageGenProvider> Providers { get; }
     List<ModelImageDefinition> ModelDefinitions { get; }
     List<string> Models { get; }
+    HttpClient GetHttpClientFrom(ImageGenProvider provider);
     ModelImageDefinition? GetModelDefinition(Enum apiName);
     ManagedList<ModelImageDefinition> FilterModelsBySpecification(ImageGenerateSpecifications specifications);
     Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt);
@@ -25,7 +26,12 @@ public class ImageGenManager : IImageGenManager
     public List<ImageGenProvider> Providers => _models.Select(x => x.Provider).Distinct().ToList();
     public List<ModelImageDefinition> ModelDefinitions => _models.ToList();
     public List<string> Models => _models.Select(x => x.ModelApiName).ToList();
-    
+
+    public HttpClient GetHttpClientFrom(ImageGenProvider provider)
+    {
+        return _generators[provider].GetHttpClient();
+    }
+
     public ModelImageDefinition? GetModelDefinition(Enum apiName)
     {
         var modelname = ModelTypeHelper.GetModelApiName(apiName);

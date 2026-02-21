@@ -52,6 +52,9 @@ public class PoyoImageGen : ImageGen, IPoyoImageGen
         };
     }
 
+    public override HttpClient GetHttpClient()
+        => _apiService.HttpClient;
+
     public override async Task<GenerateImageResponse?> GetResultForInternal(string taskId)
     {
         var result = await _apiService.GetStatus(taskId);

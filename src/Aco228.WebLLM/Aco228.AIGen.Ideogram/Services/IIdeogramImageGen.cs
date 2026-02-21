@@ -54,4 +54,7 @@ public class IdeogramImageGen : ImageGen, IIdeogramImageGen
 
         return result;
     }
+
+    public override HttpClient GetHttpClient()
+        => _apiService.HttpClient;   
 }

@@ -48,4 +48,7 @@ public class RecraftImageGen : ImageGen, IRecraftImageGen
 
         return result;
     }
+
+    public override HttpClient GetHttpClient()
+        => _apiService.HttpClient;
 }
