@@ -34,6 +34,10 @@ public class MinimaxTexGen : TextGenBase, IMinimaxTextGen
         var apiRequest = PrepareRequest(request);
         
         var apiResponse = await _apiService.GetResponse(apiRequest);
+        if (apiResponse == null)
+        {
+            return null;
+        }
         response.InputTokens = apiResponse.usage.prompt_tokens;
         response.OutputTokens = apiResponse.usage.completion_tokens;
 

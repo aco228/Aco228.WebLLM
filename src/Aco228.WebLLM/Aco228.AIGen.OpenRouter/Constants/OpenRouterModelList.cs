@@ -4711,22 +4711,6 @@ internal static class OpenRouterModelList
         new ModelDefinition()
         {
             Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "nousresearch/hermes-3-llama-3.1-405b:free",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Nous: Hermes 3 405B Instruct (free)",
-            ContextWindow = 131072,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0,
-            OutputPricePerMillion = 0,
-            Description =
-                "Hermes 3 is a generalist language model with many improvements over Hermes 2, including advanced agentic capabilities, much better roleplaying, reasoning, multi-turn conversation, long context coherence, and improvements across the board.Hermes 3 405B is a frontier-level, full-parameter finetune of the Llama-3.1 405B foundation model, focused on aligning LLMs to the user, with powerful steering capabilities and control given to the end user.The Hermes 3 series builds and expands on the Hermes 2 set of capabilities, including more powerful and reliable function calling and structured output capabilities, generalist assistant capabilities, and improved code generation skills.Hermes 3 is competitive, if not superior, to Llama-3.1 Instruct models at general capabilities, with varying strengths and weaknesses attributable between the two.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
             ModelApiName = "nousresearch/hermes-3-llama-3.1-405b",
             PriceLevel = PriceLevel.Low,
             Tier = ModelTier.Low,

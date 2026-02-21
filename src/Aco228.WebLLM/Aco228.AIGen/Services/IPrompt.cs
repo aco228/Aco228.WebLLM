@@ -6,6 +6,7 @@ using Aco228.AIGen.Infrastructure.PromptSerializer;
 using Aco228.AIGen.Infrastructure.PromptSerializer.Helpers;
 using Aco228.AIGen.Models;
 using Aco228.Common.Attributes;
+using Aco228.Common.Extensions;
 using Aco228.Common.Infrastructure;
 
 namespace Aco228.AIGen.Services;
@@ -55,26 +56,38 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     {
         var llmModels = (ModelDefinition ?? TextGenManager.ModelDefinitions)
             .Where(x => PriceLevel == null || x?.PriceLevel == PriceLevel)
-            .Where(x => TextGenProviders?.Contains(x.Provider) ?? true);
+            .Where(x => TextGenProviders?.Contains(x.Provider) ?? true)
+            .ToManagedList();
         
         if(!llmModels.Any())
             throw new Exception("No suitable LLM model found");
-        
-        var llmModel = llmModels.Shuffle().First();
-        var (systemPrompt, userText) = await GetPromptData(request);
 
-        var textGenerationRequest = new TextGenerationRequest()
+        for (int i = 0; i < 5; i++)
         {
-            Model = llmModel,
-            User = userText,
-            System = systemPrompt,
-            ImageUrls = GetImageUrls(request),
-        };
+            try
+            {
+                var llmModel = llmModels.Shuffle().First();
+                var (systemPrompt, userText) = await GetPromptData(request);
+
+                var textGenerationRequest = new TextGenerationRequest()
+                {
+                    Model = llmModel,
+                    User = userText,
+                    System = systemPrompt,
+                    ImageUrls = GetImageUrls(request),
+                };
         
-        var textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);
-        var result = PromptHelper.DeserializeResponse<TRes>(textGenResponse.Response);
+                var textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);
+                var result = PromptHelper.DeserializeResponse<TRes>(textGenResponse.Response);
         
-        return result;
+                return result;
+            }
+            catch(Exception ex)
+            {
+                await Task.Delay(100);
+            }
+        }
+        throw new Exception("Failed to generate response");
     }
     
     private List<string> GetImageUrls(TReq request)

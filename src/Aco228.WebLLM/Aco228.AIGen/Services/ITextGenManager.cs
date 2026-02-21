@@ -1,5 +1,6 @@
 ﻿using Aco228.AIGen.Models;
 using Aco228.Common;
+using Aco228.Common.Extensions;
 using Aco228.Common.Infrastructure;
 using Aco228.Common.Models;
 
@@ -26,33 +27,43 @@ public class TextGenManager : ITextGenManager
             throw new Exception("User or system prompt is required");
         
         ITextGen textGen = GetTextGeneratorFromRequest(request);
-        ModelDefinition modelDefinition = GetModelDefinitionFromRequest(request, textGen);
-        
-        if(modelDefinition == null || textGen == null)
-            throw new Exception("No suitable model found");
+        var modelDefinitions = GetModelDefinitionFromRequest(request, textGen);
 
-        var textGenRequest = new TextGenRequest()
+        for (int i = 0; i < 5; i++)
         {
-            Model = modelDefinition,
-            User = request.User,
-            System = request.System,
-            ImageUrls = request.ImageUrls,
-        };
-        
-        var textGenResponse = await textGen.Generate(textGenRequest);
-        if (string.IsNullOrEmpty(textGenResponse.Response))
-            throw new Exception("No response from text gen");
-        
-        textGenResponse.InputCost = (textGenResponse.InputTokens / 1_000_000.0) * modelDefinition.InputPricePerMillion;
-        textGenResponse.OuputCost = (textGenResponse.OutputTokens / 1_000_000.0) * modelDefinition.OutputPricePerMillion;
+            try
+            {
+                var modelDefinition = modelDefinitions.Take();
+                var textGenRequest = new TextGenRequest()
+                {
+                    Model = modelDefinition,
+                    User = request.User,
+                    System = request.System,
+                    ImageUrls = request.ImageUrls,
+                };
 
-        // using var liteFile = new LiteFile<TextGenResponse>("textGen");
-        // liteFile.Insert(textGenResponse);
-        
-        return textGenResponse;
+                var textGenResponse = await textGen.Generate(textGenRequest);
+                if (textGenResponse == null || string.IsNullOrEmpty(textGenResponse.Response))
+                    throw new Exception("No response from text gen");
+
+                textGenResponse.InputCost = (textGenResponse.InputTokens / 1_000_000.0) * modelDefinition.InputPricePerMillion;
+                textGenResponse.OuputCost = (textGenResponse.OutputTokens / 1_000_000.0) * modelDefinition.OutputPricePerMillion;
+
+                // using var liteFile = new LiteFile<TextGenResponse>("textGen");
+                // liteFile.Insert(textGenResponse);
+
+                return textGenResponse;
+            }
+            catch (Exception ex)
+            {
+                await Task.Delay(100);
+            }
+        }
+
+        return null;
     }
 
-    private ModelDefinition GetModelDefinitionFromRequest(TextGenerationRequest request, ITextGen textGen)
+    private ManagedList<ModelDefinition> GetModelDefinitionFromRequest(TextGenerationRequest request, ITextGen textGen)
     {
         var modelDefinition = ModelDefinitions
             .Where(x => x.Provider == textGen.Provider)
@@ -60,9 +71,9 @@ public class TextGenManager : ITextGenManager
             .Where(x => request.PriceLevel is null || x.PriceLevel == request.PriceLevel)
             .Where(x => request.TierLevel is null || x.Tier == request.TierLevel)
             .Shuffle()
-            .FirstOrDefault();
+            .ToManagedList();
         
-        if (modelDefinition == null)
+        if (modelDefinition == null || modelDefinition.Any() == false)
             throw new Exception("No model available");
         
         return modelDefinition;
