@@ -70,7 +70,8 @@ public class AtlasCLoudImageGen : ImageGen, IAtlasCloudImageGen
     public override async Task<GenerateImageResponse?> GetResultForInternal(string taskId)
     {
         var response = await _apiService.GetResult(taskId);
-        if (response.data.status != "completed")
+
+        if (response.data.outputs is null)
             return null;
 
         var result = new GenerateImageResponse()

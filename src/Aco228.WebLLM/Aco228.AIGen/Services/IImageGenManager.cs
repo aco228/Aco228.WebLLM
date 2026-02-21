@@ -53,10 +53,9 @@ public class ImageGenManager : IImageGenManager
     {
         var models = _models
             .Where(x => x.PriceLevel == specifications.ModelPriceLevel)
-            .Where(x => specifications.Providers.Any() == false || specifications.Providers.Contains(x.Provider))
-            .ToManagedList();
+            .Where(x => specifications.Providers.Any() == false || specifications.Providers.Contains(x.Provider));
 
-        return models;
+        return models.Shuffle().ToManagedList();
     }
 
     public async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)

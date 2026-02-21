@@ -6,66 +6,6 @@ internal static class AtlasCloudImageModels
 {
     public static List<ModelImageDefinition> Models = new()
     {
-        // FLUX Schnell
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.Low, Tier = ModelTier.Low,
-            Name = "Flux Schnell", ModelApiName = "black-forest-labs/flux-schnell", PricePerRequest = 0.003
-        },
-
-        // FLUX Dev
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.Low, Tier = ModelTier.Mid,
-            Name = "Flux Dev", ModelApiName = "black-forest-labs/flux-dev", PricePerRequest = 0.012
-        },
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.Low, Tier = ModelTier.Low,
-            Name = "Flux Dev Ultra Fast", ModelApiName = "black-forest-labs/flux-dev-ultra-fast",
-            PricePerRequest = 0.005
-        },
-
-        // FLUX 1.1 Pro
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.Mid, Tier = ModelTier.High,
-            Name = "Flux 1.1 Pro", ModelApiName = "black-forest-labs/flux-1.1-pro", PricePerRequest = 0.04
-        },
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.Mid, Tier = ModelTier.High,
-            Name = "Flux 1.1 Pro Ultra", ModelApiName = "black-forest-labs/flux-1.1-pro-ultra", PricePerRequest = 0.06
-        },
-
-        // FLUX Kontext T2I only variants
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.Mid, Tier = ModelTier.High,
-            Name = "Flux Kontext Pro T2I", ModelApiName = "black-forest-labs/flux-kontext-pro/text-to-image",
-            PricePerRequest = 0.04
-        },
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.High, Tier = ModelTier.High,
-            Name = "Flux Kontext Max T2I", ModelApiName = "black-forest-labs/flux-kontext-max/text-to-image",
-            PricePerRequest = 0.08
-        },
-
-        // FLUX 2 series (T2I only)
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.Low, Tier = ModelTier.Mid,
-            Name = "FLUX.2 Dev T2I", ModelApiName = "black-forest-labs/flux-2-dev/text-to-image",
-            PricePerRequest = 0.012
-        },
-        new ModelImageDefinition
-        {
-            Provider = ImageGenProvider.AtlasCloud, PriceLevel = PriceLevel.Mid, Tier = ModelTier.High,
-            Name = "FLUX.2 Pro T2I", ModelApiName = "black-forest-labs/flux-2-pro/text-to-image",
-            PricePerRequest = 0.03
-        },
-
         // Seedream (ByteDance)
         new ModelImageDefinition
         {
