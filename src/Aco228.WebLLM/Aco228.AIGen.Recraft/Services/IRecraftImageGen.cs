@@ -40,7 +40,7 @@ public class RecraftImageGen : ImageGen, IRecraftImageGen
         foreach (var dataDto in response.data)
             result.Add(new()
             {
-                Provider = ImageGenProvider.BlackForestLabs,
+                Provider = ImageGenProvider.Recraft,
                 ModelName = modelType.ModelApiName,
                 Size = prompt.ImageSize,
                 ImageUrl = dataDto.url,

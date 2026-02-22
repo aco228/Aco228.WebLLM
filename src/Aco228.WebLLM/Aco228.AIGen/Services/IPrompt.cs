@@ -64,7 +64,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
         if(!llmModels.Any())
             throw new Exception("No suitable LLM model found");
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             try
             {
