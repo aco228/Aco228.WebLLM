@@ -86,7 +86,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
             }
             catch(Exception ex)
             {
-                await Task.Delay(100);
+                await Task.Delay(100); // TODO: make better reporting for LLM's not doing their job
             }
         }
         throw new Exception("Failed to generate response");
