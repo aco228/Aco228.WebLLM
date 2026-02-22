@@ -42,10 +42,10 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
             .Append(Environment.NewLine)
             .Append(SerializePromptRequestHelper.SerializeToString(request));
         
-        return new(await ModifySystemPrompt(systemPrompt.ToString()), userPrompt.ToString());
+        return new(await ModifySystemPrompt(systemPrompt.ToString(), request), userPrompt.ToString());
     }
     
-    protected virtual Task<string> ModifySystemPrompt(string systemPrompt) => Task.FromResult(systemPrompt);
+    protected virtual Task<string> ModifySystemPrompt(string systemPrompt, TReq request) => Task.FromResult(systemPrompt);
     
     public async Task<string> GetPromptText(TReq request)
     {
