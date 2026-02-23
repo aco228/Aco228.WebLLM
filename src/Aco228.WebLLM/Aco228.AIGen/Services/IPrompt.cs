@@ -66,23 +66,23 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
 
         for (int i = 0; i < 6; i++)
         {
+            var llmModel = llmModels.Shuffle().First();
+            var (systemPrompt, userText) = await GetPromptData(request);
+
+            var textGenerationRequest = new TextGenerationRequest()
+            {
+                Model = llmModel,
+                User = userText,
+                System = systemPrompt,
+                ImageUrls = GetImageUrls(request),
+            };
+            
+            TextGenResponse? textGenResponse = null;
+            
             try
             {
-                var llmModel = llmModels.Shuffle().First();
-                var (systemPrompt, userText) = await GetPromptData(request);
-
-                var textGenerationRequest = new TextGenerationRequest()
-                {
-                    Model = llmModel,
-                    User = userText,
-                    System = systemPrompt,
-                    ImageUrls = GetImageUrls(request),
-                };
-        
-                var textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);
-                var result = PromptHelper.DeserializeResponse<TRes>(textGenResponse.Response);
-        
-                return result;
+                textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);
+                return PromptHelper.DeserializeResponse<TRes>(textGenResponse.Response);
             }
             catch(Exception ex)
             {

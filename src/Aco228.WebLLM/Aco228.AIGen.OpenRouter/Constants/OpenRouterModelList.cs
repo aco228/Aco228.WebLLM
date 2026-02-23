@@ -201,22 +201,6 @@ internal static class OpenRouterModelList
         new ModelDefinition()
         {
             Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "arcee-ai/trinity-large-preview:free",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Arcee AI: Trinity Large Preview (free)",
-            ContextWindow = 131000,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0,
-            OutputPricePerMillion = 0,
-            Description =
-                "Trinity-Large-Preview is a frontier-scale open-weight language model from Arcee, built as a 400B-parameter sparse Mixture-of-Experts with 13B active parameters per token using 4-of-256 expert routing. It excels in creative writing, storytelling, role-play, chat scenarios, and real-time voice assistance, better than your average reasoning model usually can. But we’re also introducing some of our newer agentic performance. It was trained to navigate well in agent harnesses like OpenCode, Cline, and Kilo Code, and to handle complex toolchains and long, constraint-filled prompts. The architecture natively supports very long context windows up to 512k tokens, with the Preview API currently served at 128k context using 8-bit quantization for practical deployment. Trinity-Large-Preview reflects Arcee’s efficiency-first design philosophy, offering a production-oriented frontier model with open weights and permissive licensing suitable for real-world applications and experimentation.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
             ModelApiName = "moonshotai/kimi-k2.5",
             PriceLevel = PriceLevel.Mid,
             Tier = ModelTier.Mid,
@@ -4067,22 +4051,6 @@ internal static class OpenRouterModelList
             OutputPricePerMillion = 1,
             Description =
                 "Sonar is lightweight, affordable, fast, and simple to use — now featuring citations and the ability to customize sources. It is designed for companies seeking to integrate lightweight question-and-answer features optimized for speed.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "deepseek/deepseek-r1-distill-llama-70b",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "DeepSeek: R1 Distill Llama 70B",
-            ContextWindow = 131072,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.7,
-            OutputPricePerMillion = 0.7999999999999999,
-            Description =
-                "DeepSeek R1 Distill Llama 70B is a distilled large language model based on [Llama-3.3-70B-Instruct](/meta-llama/llama-3.3-70b-instruct), using outputs from [DeepSeek R1](/deepseek/deepseek-r1). The model combines advanced distillation techniques to achieve high performance across multiple benchmarks, including:- AIME 2024 pass@1: 70.0- MATH-500 pass@1: 94.5- CodeForces Rating: 1633The model leverages fine-tuning from DeepSeek R1's outputs, enabling competitive performance comparable to larger frontier models.",
         },
 
         new ModelDefinition()
