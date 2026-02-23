@@ -25,11 +25,13 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     protected virtual ManagedList<ModelDefinition>? ModelDefinition => null;
     protected virtual List<PromptSection> Sections { get; } = new();
     protected virtual bool UsePremiumModels => false;
+    
+    [InjectService] public ITextGenManager TextGenManager { get; set; }
 
     protected virtual string UserPrompt { get; } = "";
-    protected abstract string PromptName { get; } 
+    protected abstract string PromptName { get; }
 
-    [InjectService] public ITextGenManager TextGenManager { get; set; }
+    public TextGenProvider LastProviderUsed { get; private set; } = TextGenProvider.Unknown;
 
     private async Task<Tuple<string, string>> GetPromptData(TReq request)
     {
@@ -82,6 +84,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
             try
             {
                 textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);
+                LastProviderUsed = textGenResponse.Type;
                 return PromptHelper.DeserializeResponse<TRes>(textGenResponse.Response);
             }
             catch(Exception ex)

@@ -2,6 +2,7 @@
 
 public enum TextGenProvider
 {
+    Unknown = 0,
     ChatGPT = 1,
     Claude = 2,
     Gemini = 3,
