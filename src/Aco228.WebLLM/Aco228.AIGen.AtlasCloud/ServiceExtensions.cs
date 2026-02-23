@@ -13,6 +13,8 @@ public static class ServiceExtensions
     public static void RegisterAtlasCloudServices(this IServiceCollection services)
         => typeof(ServiceExtensions).RegisterIfNot(() =>
         {
+            return;
+            
             services.RegisterApiServices(typeof(ServiceExtensions).Assembly);
             services.RegisterServicesFromAssembly(typeof(ServiceExtensions).Assembly);
             
