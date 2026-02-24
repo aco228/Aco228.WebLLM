@@ -70,6 +70,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
         {
             var llmModel = llmModels.Shuffle().First();
             var (systemPrompt, userText) = await GetPromptData(request);
+            Console.WriteLine($"Using LLM models: {llmModel.Provider}.{llmModel.ModelApiName}");
 
             var textGenerationRequest = new TextGenerationRequest()
             {
@@ -84,7 +85,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
             try
             {
                 textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);
-                LastProviderUsed = textGenResponse.Type;
+                LastProviderUsed = llmModel.Provider;
                 return PromptHelper.DeserializeResponse<TRes>(textGenResponse.Response);
             }
             catch(Exception ex)

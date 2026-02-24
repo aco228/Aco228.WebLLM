@@ -137,22 +137,6 @@ internal static class OpenRouterModelList
         new ModelDefinition()
         {
             Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "qwen/qwen3-coder-next",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Qwen: Qwen3 Coder Next",
-            ContextWindow = 262144,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.12,
-            OutputPricePerMillion = 0.75,
-            Description =
-                "Qwen3-Coder-Next is an open-weight causal language model optimized for coding agents and local development workflows. It uses a sparse MoE design with 80B total parameters and only 3B activated per token, delivering performance comparable to models with 10 to 20x higher active compute, which makes it well suited for cost-sensitive, always-on agent deployment.The model is trained with a strong agentic focus and performs reliably on long-horizon coding tasks, complex tool usage, and recovery from execution failures. With a native 256k context window, it integrates cleanly into real-world CLI and IDE environments and adapts well to common agent scaffolds used by modern coding tools. The model operates exclusively in non-thinking mode and does not emit <think> blocks, simplifying integration for production coding agents.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
             ModelApiName = "openrouter/free",
             PriceLevel = PriceLevel.Low,
             Tier = ModelTier.Low,
@@ -1064,22 +1048,6 @@ internal static class OpenRouterModelList
         new ModelDefinition()
         {
             Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "kwaipilot/kat-coder-pro",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Kwaipilot: KAT-Coder-Pro V1",
-            ContextWindow = 256000,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.207,
-            OutputPricePerMillion = 0.828,
-            Description =
-                "KAT-Coder-Pro V1 is KwaiKAT's most advanced agentic coding model in the KAT-Coder series. Designed specifically for agentic coding tasks, it excels in real-world software engineering scenarios, achieving 73.4% solve rate on the SWE-Bench Verified benchmark. The model has been optimized for tool-use capability, multi-turn interaction, instruction following, generalization, and comprehensive capabilities through a multi-stage training process, including mid-training, supervised fine-tuning (SFT), reinforcement fine-tuning (RFT), and scalable agentic RL.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
             ModelApiName = "moonshotai/kimi-k2-thinking",
             PriceLevel = PriceLevel.Low,
             Tier = ModelTier.Low,
@@ -1636,71 +1604,6 @@ internal static class OpenRouterModelList
             Description =
                 "Qwen3-Max is an updated release built on the Qwen3 series, offering major improvements in reasoning, instruction following, multilingual support, and long-tail knowledge coverage compared to the January 2025 version. It delivers higher accuracy in math, coding, logic, and science tasks, follows complex instructions in Chinese and English more reliably, reduces hallucinations, and produces higher-quality responses for open-ended Q&A, writing, and conversation. The model supports over 100 languages with stronger translation and commonsense reasoning, and is optimized for retrieval-augmented generation (RAG) and tool calling, though it does not include a dedicated “thinking” mode.",
         },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "qwen/qwen3-coder-plus",
-            PriceLevel = PriceLevel.Mid,
-            Tier = ModelTier.Mid,
-            Name = "Qwen: Qwen3 Coder Plus",
-            ContextWindow = 1000000,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 1,
-            OutputPricePerMillion = 5,
-            Description =
-                "Qwen3 Coder Plus is Alibaba's proprietary version of the Open Source Qwen3 Coder 480B A35B. It is a powerful coding agent model specializing in autonomous programming via tool calling and environment interaction, combining coding proficiency with versatile general-purpose abilities.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "openai/gpt-5-codex",
-            PriceLevel = PriceLevel.High,
-            Tier = ModelTier.High,
-            Name = "OpenAI: GPT-5 Codex",
-            ContextWindow = 400000,
-            IsVisionSupported = true,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 1.25,
-            OutputPricePerMillion = 10,
-            Description =
-                "GPT-5-Codex is a specialized version of GPT-5 optimized for software engineering and coding workflows. It is designed for both interactive development sessions and long, independent execution of complex engineering tasks. The model supports building projects from scratch, feature development, debugging, large-scale refactoring, and code review. Compared to GPT-5, Codex is more steerable, adheres closely to developer instructions, and produces cleaner, higher-quality code outputs. Reasoning effort can be adjusted with the `reasoning.effort` parameter. Read the [docs here](https://openrouter.ai/docs/use-cases/reasoning-tokens#reasoning-effort-level)Codex integrates into developer environments including the CLI, IDE extensions, GitHub, and cloud tasks. It adapts reasoning effort dynamically—providing fast responses for small tasks while sustaining extended multi-hour runs for large projects. The model is trained to perform structured code reviews, catching critical flaws by reasoning over dependencies and validating behavior against tests. It also supports multimodal inputs such as images or screenshots for UI development and integrates tool use for search, dependency installation, and environment setup. Codex is intended specifically for agentic coding applications.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "deepseek/deepseek-v3.1-terminus:exacto",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "DeepSeek: DeepSeek V3.1 Terminus (exacto)",
-            ContextWindow = 163840,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.21,
-            OutputPricePerMillion = 0.7899999999999999,
-            Description =
-                "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's performance in coding and search agents. It is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes. It extends the DeepSeek-V3 base with a two-phase long-context training process, reaching up to 128K tokens, and uses FP8 microscaling for efficient inference. Users can control the reasoning behaviour with the `reasoning` `enabled` boolean. [Learn more in our docs](https://openrouter.ai/docs/use-cases/reasoning-tokens#enable-reasoning-with-default-config)The model improves tool use, code generation, and reasoning efficiency, achieving performance comparable to DeepSeek-R1 on difficult benchmarks while responding more quickly. It supports structured tool calling, code agents, and search agents, making it suitable for research, coding, and agentic workflows. ",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "deepseek/deepseek-v3.1-terminus",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "DeepSeek: DeepSeek V3.1 Terminus",
-            ContextWindow = 163840,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.21,
-            OutputPricePerMillion = 0.7899999999999999,
-            Description =
-                "DeepSeek-V3.1 Terminus is an update to [DeepSeek V3.1](/deepseek/deepseek-chat-v3.1) that maintains the model's original capabilities while addressing issues reported by users, including language consistency and agent capabilities, further optimizing the model's performance in coding and search agents. It is a large hybrid reasoning model (671B parameters, 37B active) that supports both thinking and non-thinking modes. It extends the DeepSeek-V3 base with a two-phase long-context training process, reaching up to 128K tokens, and uses FP8 microscaling for efficient inference. Users can control the reasoning behaviour with the `reasoning` `enabled` boolean. [Learn more in our docs](https://openrouter.ai/docs/use-cases/reasoning-tokens#enable-reasoning-with-default-config)The model improves tool use, code generation, and reasoning efficiency, achieving performance comparable to DeepSeek-R1 on difficult benchmarks while responding more quickly. It supports structured tool calling, code agents, and search agents, making it suitable for research, coding, and agentic workflows. ",
-        },
-
         new ModelDefinition()
         {
             Provider = TextGenProvider.OpenRouter,
@@ -2280,22 +2183,6 @@ internal static class OpenRouterModelList
         new ModelDefinition()
         {
             Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "qwen/qwen3-coder-30b-a3b-instruct",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Qwen: Qwen3 Coder 30B A3B Instruct",
-            ContextWindow = 160000,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.07,
-            OutputPricePerMillion = 0.27,
-            Description =
-                "Qwen3-Coder-30B-A3B-Instruct is a 30.5B parameter Mixture-of-Experts (MoE) model with 128 experts (8 active per forward pass), designed for advanced code generation, repository-scale understanding, and agentic tool use. Built on the Qwen3 architecture, it supports a native context length of 256K tokens (extendable to 1M with Yarn) and performs strongly in tasks involving function calls, browser use, and structured code completion.This model is optimized for instruction-following without “thinking mode”, and integrates well with OpenAI-compatible tool-use formats. ",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
             ModelApiName = "qwen/qwen3-30b-a3b-instruct-2507",
             PriceLevel = PriceLevel.Low,
             Tier = ModelTier.Low,
@@ -2387,70 +2274,6 @@ internal static class OpenRouterModelList
             OutputPricePerMillion = 0.09999999999999999,
             Description =
                 "GLM 4 32B is a cost-effective foundation language model.It can efficiently perform complex tasks and has significantly enhanced capabilities in tool use, online search, and code-related intelligent tasks.It is made by the same lab behind the thudm models.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "qwen/qwen3-coder:free",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Qwen: Qwen3 Coder 480B A35B (free)",
-            ContextWindow = 262000,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0,
-            OutputPricePerMillion = 0,
-            Description =
-                "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over repositories. The model features 480 billion total parameters, with 35 billion active per forward pass (8 out of 160 experts).Pricing for the Alibaba endpoints varies by context length. Once a request is greater than 128k input tokens, the higher pricing is used.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "qwen/qwen3-coder",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Qwen: Qwen3 Coder 480B A35B",
-            ContextWindow = 262144,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.22,
-            OutputPricePerMillion = 1,
-            Description =
-                "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over repositories. The model features 480 billion total parameters, with 35 billion active per forward pass (8 out of 160 experts).Pricing for the Alibaba endpoints varies by context length. Once a request is greater than 128k input tokens, the higher pricing is used.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "qwen/qwen3-coder:exacto",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Qwen: Qwen3 Coder 480B A35B (exacto)",
-            ContextWindow = 262144,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.22,
-            OutputPricePerMillion = 1.7999999999999998,
-            Description =
-                "Qwen3-Coder-480B-A35B-Instruct is a Mixture-of-Experts (MoE) code generation model developed by the Qwen team. It is optimized for agentic coding tasks such as function calling, tool use, and long-context reasoning over repositories. The model features 480 billion total parameters, with 35 billion active per forward pass (8 out of 160 experts).Pricing for the Alibaba endpoints varies by context length. Once a request is greater than 128k input tokens, the higher pricing is used.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "bytedance/ui-tars-1.5-7b",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "ByteDance: UI-TARS 7B ",
-            ContextWindow = 128000,
-            IsVisionSupported = true,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.09999999999999999,
-            OutputPricePerMillion = 0.19999999999999998,
-            Description =
-                "UI-TARS-1.5 is a multimodal vision-language agent optimized for GUI-based environments, including desktop interfaces, web browsers, mobile systems, and games. Built by ByteDance, it builds upon the UI-TARS framework with reinforcement learning-based reasoning, enabling robust action planning and execution across virtual interfaces.This model achieves state-of-the-art results on a range of interactive and grounding benchmarks, including OSworld, WebVoyager, AndroidWorld, and ScreenSpot. It also demonstrates perfect task completion across diverse Poki games and outperforms prior models in Minecraft agent tasks. UI-TARS-1.5 supports thought decomposition during inference and shows strong scaling across variants, with the 1.5 version notably exceeding the performance of earlier 72B and 7B checkpoints.",
         },
 
         new ModelDefinition()
@@ -3011,54 +2834,6 @@ internal static class OpenRouterModelList
             OutputPricePerMillion = 1.2,
             Description =
                 "Virtuoso‑Large is Arcee's top‑tier general‑purpose LLM at 72 B parameters, tuned to tackle cross‑domain reasoning, creative writing and enterprise QA. Unlike many 70 B peers, it retains the 128 k context inherited from Qwen 2.5, letting it ingest books, codebases or financial filings wholesale. Training blended DeepSeek R1 distillation, multi‑epoch supervised fine‑tuning and a final DPO/RLHF alignment stage, yielding strong performance on BIG‑Bench‑Hard, GSM‑8K and long‑context Needle‑In‑Haystack tests. Enterprises use Virtuoso‑Large as the fallback brain in Conductor pipelines when other SLMs flag low confidence. Despite its size, aggressive KV‑cache optimizations keep first‑token latency in the low‑second range on 8× H100 nodes, making it a practical production‑grade powerhouse.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "arcee-ai/coder-large",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Arcee AI: Coder Large",
-            ContextWindow = 32768,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.5,
-            OutputPricePerMillion = 0.7999999999999999,
-            Description =
-                "Coder‑Large is a 32 B‑parameter offspring of Qwen 2.5‑Instruct that has been further trained on permissively‑licensed GitHub, CodeSearchNet and synthetic bug‑fix corpora. It supports a 32k context window, enabling multi‑file refactoring or long diff review in a single call, and understands 30‑plus programming languages with special attention to TypeScript, Go and Terraform. Internal benchmarks show 5–8 pt gains over CodeLlama‑34 B‑Python on HumanEval and competitive BugFix scores thanks to a reinforcement pass that rewards compilable output. The model emits structured explanations alongside code blocks by default, making it suitable for educational tooling as well as production copilot scenarios. Cost‑wise, Together AI prices it well below proprietary incumbents, so teams can scale interactive coding without runaway spend. ",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "inception/mercury-coder",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Inception: Mercury Coder",
-            ContextWindow = 128000,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.25,
-            OutputPricePerMillion = 1,
-            Description =
-                "Mercury Coder is the first diffusion large language model (dLLM). Applying a breakthrough discrete diffusion approach, the model runs 5-10x faster than even speed optimized models like Claude 3.5 Haiku and GPT-4o Mini while matching their performance. Mercury Coder's speed means that developers can stay in the flow while coding, enjoying rapid chat-based iteration and responsive code completion suggestions. On Copilot Arena, Mercury Coder ranks 1st in speed and ties for 2nd in quality. Read more in the [blog post here](https://www.inceptionlabs.ai/blog/introducing-mercury).",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "qwen/qwen3-4b:free",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Qwen: Qwen3 4B (free)",
-            ContextWindow = 40960,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0,
-            OutputPricePerMillion = 0,
-            Description =
-                "Qwen3-4B is a 4 billion parameter dense language model from the Qwen3 series, designed to support both general-purpose and reasoning-intensive tasks. It introduces a dual-mode architecture—thinking and non-thinking—allowing dynamic switching between high-precision logical reasoning and efficient dialogue generation. This makes it well-suited for multi-turn chat, instruction following, and complex agent workflows.",
         },
 
         new ModelDefinition()
@@ -4322,22 +4097,6 @@ internal static class OpenRouterModelList
             OutputPricePerMillion = 6,
             Description =
                 "Pixtral Large is a 124B parameter, open-weight, multimodal model built on top of [Mistral Large 2](/mistralai/mistral-large-2411). The model is able to understand documents, charts and natural images.The model is available under the Mistral Research License (MRL) for research and educational use, and the Mistral Commercial License for experimentation, testing, and production for commercial purposes.",
-        },
-
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "qwen/qwen-2.5-coder-32b-instruct",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.Low,
-            Name = "Qwen2.5 Coder 32B Instruct",
-            ContextWindow = 32768,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.19999999999999998,
-            OutputPricePerMillion = 0.19999999999999998,
-            Description =
-                "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen). Qwen2.5-Coder brings the following improvements upon CodeQwen1.5:- Significantly improvements in **code generation**, **code reasoning** and **code fixing**. - A more comprehensive foundation for real-world applications such as **Code Agents**. Not only enhancing coding capabilities but also maintaining its strengths in mathematics and general competencies.To read more about its evaluation results, check out [Qwen 2.5 Coder's blog](https://qwenlm.github.io/blog/qwen2.5-coder-family/).",
         },
 
         new ModelDefinition()
