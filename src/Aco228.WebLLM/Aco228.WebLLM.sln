@@ -38,6 +38,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.OpenRouter", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.AtlasCloud", "Aco228.AIGen.AtlasCloud\Aco228.AIGen.AtlasCloud.csproj", "{D120FEEF-4A70-4ABE-930D-08F4F3CC7793}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.DeepAI", "Aco228.AIGen.DeepAI\Aco228.AIGen.DeepAI.csproj", "{A0A33300-87C8-4B2D-9788-C05551FF4D4A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -116,6 +118,10 @@ Global
 		{D120FEEF-4A70-4ABE-930D-08F4F3CC7793}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D120FEEF-4A70-4ABE-930D-08F4F3CC7793}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D120FEEF-4A70-4ABE-930D-08F4F3CC7793}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0A33300-87C8-4B2D-9788-C05551FF4D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0A33300-87C8-4B2D-9788-C05551FF4D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0A33300-87C8-4B2D-9788-C05551FF4D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0A33300-87C8-4B2D-9788-C05551FF4D4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0D31617E-9C11-4E7E-91EF-7ED815810D09} = {B502F0BB-4BBA-48B4-BE7F-46645619286F}

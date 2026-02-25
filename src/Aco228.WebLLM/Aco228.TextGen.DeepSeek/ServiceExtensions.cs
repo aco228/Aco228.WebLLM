@@ -1,8 +1,4 @@
-﻿using Aco228.AIGen.Models;
-using Aco228.AIGen.Services;
-using Aco228.Common.Extensions;
-using Aco228.TextGen.DeepSeek.Constants;
-using Aco228.TextGen.DeepSeek.Services;
+﻿using Aco228.Common.Extensions;
 using Aco228.WService;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,8 +13,6 @@ public static class ServiceExtensions
 
         services.RegisterPostBuildAction((pr) =>
         {
-            var manager = pr.GetService<ITextGenManager>()!;
-            manager.Register<IDeepseekTextGenService>(TextGenProvider.DeepSeek, DeepSeekModelList.Models);
         });
     }
 }
