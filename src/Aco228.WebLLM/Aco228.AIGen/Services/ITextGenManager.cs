@@ -113,6 +113,7 @@ public class TextGenManager : ITextGenManager
         var service = ServiceProviderHelper.GetServiceByType(typeof(T)) as ITextGen;
         if (service == null)
         {
+            Console.WriteLine($">>>> ERROR: Text generator `{provider}` not found");
             return;
         }
         _textGens.Add(service!);

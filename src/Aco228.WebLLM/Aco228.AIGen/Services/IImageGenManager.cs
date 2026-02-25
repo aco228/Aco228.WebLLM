@@ -42,8 +42,12 @@ public class ImageGenManager : IImageGenManager
         where T : IImageGen
     {
         var generator = ServiceProviderHelper.GetServiceByType(typeof(T)) as IImageGen;
-        if(generator == null)
-            throw new Exception("Generator not found");
+        if (generator == null)
+        {
+            Console.WriteLine($">>>> ERROR: Image generator `{provider}` not found");
+            return;
+            
+        }
         
         _generators.TryAdd(provider, generator);
         _models.AddRange(models);
