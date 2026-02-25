@@ -7,19 +7,17 @@ namespace Aco228.AIGen.Gemini.Code;
 
 public class GeminiApiConfiguration : ApiServiceConf
 {
-    private HttpClient _googleHttpClient;
-    private readonly string ProjectId = null;
-    private string Region = "global";
-    public override string BaseUrl => $"https://aiplatform.googleapis.com/v1/projects/{ProjectId}/locations/{Region}/publishers/google/models/";
+    public override string BaseUrl => $"https://generativelanguage.googleapis.com/v1beta/models/";
+    private static string ApiKey { get; set; }
 
-    public GeminiApiConfiguration(GoogleSetupOptions options)
+    public GeminiApiConfiguration()
     {
-        ProjectId = options.ProjectId;
-        _googleHttpClient = ServiceProviderHelper.GetService<IGoogleClientProvider>()!.GetGoogleHttpClient();
+        ApiKey = Environment.GetEnvironmentVariable("GOOGLE_AI_STUDIO_API_KEY") ?? throw new InvalidOperationException("GeminiApiKey is not set");
     }
 
     public override HttpClient Prepare(HttpClient httpClient)
     {
-        return _googleHttpClient;
+        httpClient.DefaultRequestHeaders.Add("x-goog-api-key", ApiKey);
+        return httpClient;
     }
 }

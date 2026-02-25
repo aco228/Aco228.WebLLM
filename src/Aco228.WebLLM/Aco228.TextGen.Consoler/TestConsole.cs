@@ -58,21 +58,15 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
-
-var deepResClass = JsonToClassConverter.ConvertJsonToClass("DeepAiCreateImageResponse", @"{
-    ""id"": ""cfd0dd91-50e9-450f-9029-db15f897ccac"",
-    ""output_url"": ""https://api.deepai.org/job-view-file/cfd0dd91-50e9-450f-9029-db15f897ccac/outputs/output.jpg"",
-    ""share_url"": ""https://images.deepai.org/art-image/9c14552194314af6887ce13414fdd920/angry-puma-is-attacking-a-shark-that-is-currently-hav.jpg"",
-    ""backend_request_id"": ""911a6403-3d77-4b1f-8077-ed27477dd497""
-}");
-
-var deepAiReq = new DeepAiCreateImageRequest()
+var service = serviceProvider.GetService<ITextGenManager>()!;
+var res = await service.GetResponse(new()
 {
-    text = "angry puma is attacking a shark that is currently having a hiphop concert",
-};
-var deepService = serviceProvider.GetService<IDeepAiImageGeneratorApiService>()!;
-var deepRes = await deepService.GenerateImageString(deepAiReq);
+    PriceLevel = PriceLevel.Low,
+    Provider = TextGenProvider.GoogleAiStudio,
+    User = "How are you?"
+});
 
+int brk = 0;
 
 var atlas = serviceProvider.GetService<IAtlasCloudImageApiService>()!;
 var rea  = await atlas.GetResult("b000f4d6b9104f199e220b1c3909eed9");
@@ -86,13 +80,5 @@ var imgres = await imageService.Generate(new()
     Count = 1,
 });
 
-var service = serviceProvider.GetService<ITextGenManager>()!;
-var res = await service.GetResponse(new()
-{
-    PriceLevel = PriceLevel.Low,
-    Provider = TextGenProvider.Minimax,
-    User = "How are you?"
-});
 
-int brk = 0;
 Console.WriteLine("Hello, World! + ");

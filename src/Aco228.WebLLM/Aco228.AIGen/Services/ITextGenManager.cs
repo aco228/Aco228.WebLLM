@@ -56,6 +56,9 @@ public class TextGenManager : ITextGenManager
             }
             catch (Exception ex)
             {
+                if (modelDefinitions.Count == 1)
+                    break;
+                
                 await Task.Delay(100);
             }
         }

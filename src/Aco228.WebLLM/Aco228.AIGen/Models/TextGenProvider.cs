@@ -10,4 +10,5 @@ public enum TextGenProvider
     DeepSeek = 5,
     OpenRouter = 6,
     Minimax = 7,
+    GoogleAiStudio = 8,
 }
