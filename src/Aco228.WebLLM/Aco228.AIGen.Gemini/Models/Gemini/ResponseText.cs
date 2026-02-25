@@ -11,7 +11,14 @@ public class ResponseText
 
 public class PartDTO
 {
-    public string text { get; set; }
+    public string? text { get; set; }
+    public PartInlineData? inlineData { get; set; }
+}
+
+public class PartInlineData
+{
+    public string mimeType { get; set; }
+    public string data { get; set; }
 }
 
 public class ContentDTO

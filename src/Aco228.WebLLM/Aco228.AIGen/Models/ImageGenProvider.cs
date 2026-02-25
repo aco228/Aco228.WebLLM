@@ -12,4 +12,5 @@ public enum ImageGenProvider
     BlackForestLabs = 7,
     Recraft = 8,
     AtlasCloud = 9,
+    GoogleAiStudio = 10,
 }

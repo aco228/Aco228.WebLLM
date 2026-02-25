@@ -7,7 +7,6 @@ public class RequestText
     public List<RequestTextContent> contents { get; set; } = new();
     public RequestSystemContent? system_instruction { get; set; } = new();
 
-
     public RequestText AddSystemInstruction(string? text)
     {
         if (string.IsNullOrWhiteSpace(text))

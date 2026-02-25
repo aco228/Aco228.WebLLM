@@ -11,6 +11,8 @@ using Aco228.AIGen.DeepAI.Models.Web.CreateImage;
 using Aco228.AIGen.DeepAI.Services.Web;
 using Aco228.AIGen.Gemini;
 using Aco228.AIGen.Gemini.Models.Gemini;
+using Aco228.AIGen.Gemini.Models.GoogleAiStudio.Images;
+using Aco228.AIGen.Gemini.Services.Web;
 using Aco228.AIGen.Gemini.Services.Web.Gemini;
 using Aco228.AIGen.Grok;
 using Aco228.AIGen.Grok.Services.Web;
@@ -58,6 +60,17 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
+
+var imageService = serviceProvider.GetService<IImageGenManager>()!;
+var imgres = await imageService.Generate(new()
+{
+    ImageSize = ImageSize.Square,
+    Prompt = "Wild puma is angry and is attacking a shark that is currently having a hiphop concert",
+    Provider = ImageGenProvider.GoogleAiStudio,
+    Count = 1,
+});
+
+
 var service = serviceProvider.GetService<ITextGenManager>()!;
 var res = await service.GetResponse(new()
 {
@@ -71,14 +84,7 @@ int brk = 0;
 var atlas = serviceProvider.GetService<IAtlasCloudImageApiService>()!;
 var rea  = await atlas.GetResult("b000f4d6b9104f199e220b1c3909eed9");
 
-var imageService = serviceProvider.GetService<IImageGenManager>()!;
-var imgres = await imageService.Generate(new()
-{
-    ImageSize = ImageSize.Square,
-    Prompt = "Wild puma is angry and is attacking a shark that is currently having a hiphop concert",
-    Provider = ImageGenProvider.AtlasCloud,
-    Count = 1,
-});
+
 
 
 Console.WriteLine("Hello, World! + ");
