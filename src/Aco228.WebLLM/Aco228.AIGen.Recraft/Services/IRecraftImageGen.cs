@@ -31,7 +31,7 @@ public class RecraftImageGen : ImageGen, IRecraftImageGen
         {
             prompt = prompt.Prompt,
             model = modelType.ModelApiName,
-            size = prompt.ImageSize.ToDefaultAspectRatio(),
+            size = prompt.ImageSize.ToDefaultSizeString(),
             n = prompt.Count,
         };
 

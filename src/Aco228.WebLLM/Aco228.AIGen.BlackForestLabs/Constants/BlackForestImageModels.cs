@@ -1,4 +1,5 @@
-﻿using Aco228.AIGen.Models;
+﻿using Aco228.AIGen.BlackForestLabs.Models;
+using Aco228.AIGen.Models;
 
 namespace Aco228.AIGen.BlackForestLabs.Constants;
 
@@ -11,8 +12,8 @@ internal static class BlackForestImageModels
             Provider = ImageGenProvider.BlackForestLabs,
             PriceLevel = PriceLevel.Low,
             Tier = ModelTier.High,
-            Name = "FLUX.2 Klein 4B",
-            ModelApiName = "flux-2-klein-4b",
+            Name = FluxImageModelType.FluxKlein4b.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(FluxImageModelType.FluxKlein4b),
             PricePerRequest = 0.014
         },
         new ModelImageDefinition
@@ -21,7 +22,7 @@ internal static class BlackForestImageModels
             PriceLevel = PriceLevel.Low,
             Tier = ModelTier.High,
             Name = "FLUX.2 Klein 9B",
-            ModelApiName = "flux-2-klein-9b",
+            ModelApiName = ModelTypeHelper.GetModelApiName(FluxImageModelType.FluxKlein9b),
             PricePerRequest = 0.015
         },
         new ModelImageDefinition
@@ -30,7 +31,7 @@ internal static class BlackForestImageModels
             PriceLevel = PriceLevel.Mid,
             Tier = ModelTier.Mid,
             Name = "FLUX.2 Pro",
-            ModelApiName = "flux-2-pro",
+            ModelApiName = ModelTypeHelper.GetModelApiName(FluxImageModelType.Flux2Pro),
             PricePerRequest = 0.03
         },
         new ModelImageDefinition
@@ -39,8 +40,8 @@ internal static class BlackForestImageModels
             PriceLevel = PriceLevel.High,
             Tier = ModelTier.High,
             Name = "FLUX.2 Max",
-            ModelApiName = "flux-2-max",
-            PricePerRequest = 0.05
+            ModelApiName = ModelTypeHelper.GetModelApiName(FluxImageModelType.Flux2Max),
+            PricePerRequest = 0.07
         },
         new ModelImageDefinition
         {
@@ -48,7 +49,7 @@ internal static class BlackForestImageModels
             PriceLevel = PriceLevel.High,
             Tier = ModelTier.High,
             Name = "FLUX.2 Flex",
-            ModelApiName = "flux-2-flex",
+            ModelApiName = ModelTypeHelper.GetModelApiName(FluxImageModelType.Flux2Flex),
             PricePerRequest = 0.05
         },
         

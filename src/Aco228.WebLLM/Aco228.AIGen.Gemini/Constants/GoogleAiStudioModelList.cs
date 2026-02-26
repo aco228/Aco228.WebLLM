@@ -9,7 +9,7 @@ internal static class GoogleAiStudioModelList
     {
         new ModelDefinition
         {
-            Provider = TextGenProvider.GoogleAiStudio,
+            Provider = TextGenProvider.NanoBanana,
             PriceLevel = PriceLevel.High,
             Name = GoogleAiStudioModelType.Gemini3_1Pro.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioModelType.Gemini3_1Pro),
@@ -21,7 +21,7 @@ internal static class GoogleAiStudioModelList
         },
         new ModelDefinition
         {
-            Provider = TextGenProvider.GoogleAiStudio,
+            Provider = TextGenProvider.NanoBanana,
             PriceLevel = PriceLevel.High,
             Name = GoogleAiStudioModelType.Gemini3Pro.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioModelType.Gemini3Pro),
@@ -33,7 +33,7 @@ internal static class GoogleAiStudioModelList
         },
         new ModelDefinition
         {
-            Provider = TextGenProvider.GoogleAiStudio,
+            Provider = TextGenProvider.NanoBanana,
             PriceLevel = PriceLevel.Low,
             Name = GoogleAiStudioModelType.Gemini3FlashPreview.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioModelType.Gemini3FlashPreview),

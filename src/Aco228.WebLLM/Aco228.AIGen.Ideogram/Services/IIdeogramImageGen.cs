@@ -45,7 +45,7 @@ public class IdeogramImageGen : ImageGen, IIdeogramImageGen
         using var form = new MultipartFormDataContent();
         form.Add(new StringContent(prompt.Prompt), "prompt");
         form.Add(new StringContent(prompt.ImageSize.ToDefaultAspectRatio().Replace(":", "x")), "aspect_ratio");
-        form.Add(new StringContent("OFF"), "magic_prompt");
+        form.Add(new StringContent("ON"), "magic_prompt");
         form.Add(new StringContent(renderingSpeed), "rendering_speed");
         form.Add(new StringContent("AUTO"), "style_type");
         form.Add(new StringContent(prompt.Count.ToString()), "num_images");

@@ -9,17 +9,17 @@ using Aco228.Common.Models;
 
 namespace Aco228.AIGen.Gemini.Services;
 
-public interface IGoogleAiStudioImageGen : IImageGen, ITransient
+public interface INanoBananaImageGen : IImageGen, ITransient
 {
     
 }
 
-public class GoogleAiStudioImageGen : ImageGen, IGoogleAiStudioImageGen
+public class NanoBananaImageGen : ImageGen, INanoBananaImageGen
 {
     private readonly IGoogleAiStudioApiService _apiService;
-    public TextGenProvider Provider  => TextGenProvider.GoogleAiStudio;
+    public TextGenProvider Provider  => TextGenProvider.NanoBanana;
 
-    public GoogleAiStudioImageGen(
+    public NanoBananaImageGen(
         IGoogleAiStudioApiService apiService)
     {
         _apiService = apiService;

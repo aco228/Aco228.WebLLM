@@ -15,7 +15,7 @@ public interface IGoogleAiStudioTextGen : ITextGen
 public class GoogleAiStudioTextGen : TextGenBase, IGoogleAiStudioTextGen
 {
     private readonly IGoogleAiStudioApiService _service;
-    public override TextGenProvider Provider => TextGenProvider.GoogleAiStudio;
+    public override TextGenProvider Provider => TextGenProvider.NanoBanana;
 
     public GoogleAiStudioTextGen(IGoogleAiStudioApiService service)
     {

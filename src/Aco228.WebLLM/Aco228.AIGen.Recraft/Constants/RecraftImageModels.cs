@@ -1,4 +1,5 @@
 ﻿using Aco228.AIGen.Models;
+using Aco228.AIGen.Recraft.Models;
 
 namespace Aco228.AIGen.Recraft.Constants;
 
@@ -13,7 +14,7 @@ internal static class RecraftImageModels
             PriceLevel = PriceLevel.Mid,
             Tier = ModelTier.High,
             Name = "Recraft V3",
-            ModelApiName = "recraftv3",
+            ModelApiName = ModelTypeHelper.GetModelApiName(RecraftModelType.RecraftV3),
             PricePerRequest = 0.04
         },
         
@@ -23,7 +24,7 @@ internal static class RecraftImageModels
             PriceLevel = PriceLevel.Mid,
             Tier = ModelTier.High,
             Name = "Recraft V4",
-            ModelApiName = "recraftv4",       // ⚠️ unconfirmed - verify against recraft.ai/docs
+            ModelApiName = ModelTypeHelper.GetModelApiName(RecraftModelType.RecraftV4),
             PricePerRequest = 0.04
         },
         
@@ -33,7 +34,7 @@ internal static class RecraftImageModels
             PriceLevel = PriceLevel.High,
             Tier = ModelTier.High,
             Name = "Recraft V4 Pro",
-            ModelApiName = "recraftv4_pro",    // ⚠️ unconfirmed
+            ModelApiName = ModelTypeHelper.GetModelApiName(RecraftModelType.RecraftV4Pro),
             PricePerRequest = 0.25
         },
         
