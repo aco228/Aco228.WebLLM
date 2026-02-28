@@ -57,6 +57,9 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     
     public async Task<TRes?> Execute(TReq request)
     {
+        ModelDefinition?.ShuffleAgain();
+        TextGenProviders?.ShuffleAgain();
+        
         var llmModels = ModelDefinition ?? TextGenManager.ModelDefinitions
             .Where(x => !UsePremiumModels && x.PriceLevel != PriceLevel.High)
             .Where(x => PriceLevel == null || x?.PriceLevel == PriceLevel)
