@@ -22,12 +22,4 @@ public class ChatGptApiConfiguration : ApiServiceConf
         httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {ApiKey}");
         return httpClient;
     }
-
-    public override void OnBeforeRequest(WebApiMethodType methodType, ref string url, ref HttpContent? httpContent, string? httpContentString)
-    {
-    }
-
-    public override void OnResponseReceived(WebApiMethodType methodType, string url, HttpContent? httpContent, string? httpContentString, HttpResponseMessage response, string stringResponse)
-    {
-    }
 }
