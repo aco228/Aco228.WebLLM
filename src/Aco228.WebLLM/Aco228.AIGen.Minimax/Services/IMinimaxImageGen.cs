@@ -1,4 +1,5 @@
-﻿using Aco228.AIGen.Minimax.Models.Web.Image;
+﻿using System.Reflection.Metadata;
+using Aco228.AIGen.Minimax.Models.Web.Image;
 using Aco228.AIGen.Minimax.Services.Web;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.Services;
@@ -24,7 +25,7 @@ public class MinimaxImageGen : ImageGen, IMinimaxImageGen
     {
         var modelType = Constants.MinimaxImageModels.Models.FirstOrDefault(x => x.ModelApiName == prompt.ModelName);
         if (modelType == null)
-            throw new ArgumentException($"Invalid model name");
+            modelType = Constants.MinimaxImageModels.Models.First();
 
         var request = new MinimaxImageRequest()
         {
