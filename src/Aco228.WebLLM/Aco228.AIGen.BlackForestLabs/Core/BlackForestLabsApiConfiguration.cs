@@ -1,4 +1,5 @@
-﻿using Aco228.WService.Base;
+﻿using Aco228.Common.Services;
+using Aco228.WService.Base;
 
 namespace Aco228.AIGen.BlackForestLabs.Core;
 
@@ -7,9 +8,9 @@ public class BlackForestLabsApiConfiguration : ApiServiceConf
     public override string BaseUrl => "https://api.bfl.ai/v1/";
     private static string ApiKey { get; set; }
 
-    public BlackForestLabsApiConfiguration()
+    public BlackForestLabsApiConfiguration(ISecretProvider sp)
     {
-        ApiKey = Environment.GetEnvironmentVariable("BLACK_FOREST_LABS_API_KEY") ?? throw new InvalidOperationException("BlackForestLabsApiKey is not set");
+        ApiKey = sp.Get("BLACK_FOREST_LABS_API_KEY") ?? throw new InvalidOperationException("BlackForestLabsApiKey is not set");
     }
 
     public override HttpClient Prepare(HttpClient httpClient)

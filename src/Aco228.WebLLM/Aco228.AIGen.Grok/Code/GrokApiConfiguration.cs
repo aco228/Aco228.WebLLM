@@ -1,4 +1,5 @@
-﻿using Aco228.WService.Base;
+﻿using Aco228.Common.Services;
+using Aco228.WService.Base;
 
 namespace Aco228.AIGen.Grok.Code;
 
@@ -7,9 +8,9 @@ public class GrokApiConfiguration : ApiServiceConf
     public override string BaseUrl => "https://api.x.ai/v1/";
     private static string ApiKey { get; set; }
 
-    public GrokApiConfiguration()
+    public GrokApiConfiguration(ISecretProvider sp)
     {
-        ApiKey = Environment.GetEnvironmentVariable("GROK_API_KEY") ?? throw new InvalidOperationException("GrokApiKey is not set");
+        ApiKey = sp.Get("GROK_API_KEY") ?? throw new InvalidOperationException("GrokApiKey is not set");
     }
 
     public override HttpClient Prepare(HttpClient httpClient)
