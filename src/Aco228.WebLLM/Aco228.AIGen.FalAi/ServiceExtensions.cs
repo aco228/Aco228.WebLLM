@@ -13,6 +13,7 @@ public static class ServiceExtensions
     public static void RegisterFalAiServices(this IServiceCollection services)
         => typeof(ServiceExtensions).RegisterIfNot(() =>
         {
+            services.RegisterServicesFromAssembly(typeof(ServiceExtensions).Assembly);
             services.RegisterApiServices(typeof(ServiceExtensions).Assembly);
             
             services.RegisterPostBuildAction((pr) =>
