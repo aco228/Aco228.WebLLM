@@ -21,6 +21,8 @@ using Aco228.AIGen.Gemini.Services.Web.Gemini;
 using Aco228.AIGen.Grok;
 using Aco228.AIGen.Grok.Services.Web;
 using Aco228.AIGen.Ideogram;
+using Aco228.AIGen.KlingAI;
+using Aco228.AIGen.KlingAI.Services.Api;
 using Aco228.AIGen.Minimax;
 using Aco228.AIGen.Models;
 using Aco228.AIGen.OpenRouter;
@@ -61,21 +63,20 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterAtlasCloudServices();
     builder.RegisterDeepAiServices();
     builder.RegisterFalAiServices();
+    builder.RegisterKlingAIServices();
     // builder.RegisterDeepSeekServices();
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
-var cls = JsonToClassConverter.ConvertJsonToClass("FalAiImageResponse",
-    @"{""images"":[{""url"":""https://v3b.fal.media/files/b/0a90ef88/qywCveqM57BdZOXNQc4H7_0bc1c690279f4117829119c75fea35b2.png"",""content_type"":""image/png"",""file_name"":""0bc1c690279f4117829119c75fea35b2.png"",""file_size"":3539356,""width"":null,""height"":null}],""seed"":1547064457}");
 
-var falService = serviceProvider.GetService<IFalAiTextToImageApiService>()!;
-var falRes = await falService.RequestImage("bytedance/seedream/v5/lite/text-to-image", new()
+var falService = serviceProvider.GetService<IKlingAiVideoGenerationApiService>()!;
+var vid = await falService.GetStatus("9c0d2066-9c23-44a3-b6b3-06242a8a2e7f");
+
+var reskling = await falService.Generate(new()
 {
-    prompt = "A cute puppy playing in the grass",
-    image_size = FalImageSize.square.ToString(),
-    num_images = 1,
+    prompt = "A cute little rabbit wearing glasses, sitting at a table, reading a newspaper, with a cup of cappuccino on the table",
+    duration = 5,
 });
-
 
 var imageService = serviceProvider.GetService<IImageGenManager>()!;
 var imgres = await imageService.Generate(new()

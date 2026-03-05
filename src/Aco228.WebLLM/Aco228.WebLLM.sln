@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.DeepAI", "Aco2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.FalAi", "Aco228.AIGen.FalAi\Aco228.AIGen.FalAi.csproj", "{50C46D44-5BB9-4A8C-9B13-069FF2B64EE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aco228.AIGen.KlingAI", "Aco228.AIGen.KlingAI\Aco228.AIGen.KlingAI.csproj", "{0EDB740C-B4D8-4B3C-847C-3295DC1ADDDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -128,6 +130,10 @@ Global
 		{50C46D44-5BB9-4A8C-9B13-069FF2B64EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50C46D44-5BB9-4A8C-9B13-069FF2B64EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50C46D44-5BB9-4A8C-9B13-069FF2B64EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EDB740C-B4D8-4B3C-847C-3295DC1ADDDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EDB740C-B4D8-4B3C-847C-3295DC1ADDDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EDB740C-B4D8-4B3C-847C-3295DC1ADDDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EDB740C-B4D8-4B3C-847C-3295DC1ADDDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0D31617E-9C11-4E7E-91EF-7ED815810D09} = {B502F0BB-4BBA-48B4-BE7F-46645619286F}
