@@ -5,14 +5,14 @@ using Aco228.WService.Base;
 
 namespace Aco228.AIGen.Gemini.Code;
 
-public class GoogleAiStudioConfiguration : ApiServiceConf
+public class GoogleVertexApiConfiguration : ApiServiceConf
 {
     private HttpClient _googleHttpClient;
     private readonly string ProjectId = null;
     private string Region = "global";
     public override string BaseUrl => $"https://aiplatform.googleapis.com/v1/projects/{ProjectId}/locations/{Region}/publishers/google/models/";
 
-    public GoogleAiStudioConfiguration(GoogleSetupOptions options)
+    public GoogleVertexApiConfiguration(GoogleSetupOptions options)
     {
         ProjectId = options.ProjectId;
         _googleHttpClient = ServiceProviderHelper.GetService<IGoogleClientProvider>()!.GetGoogleHttpClient();

@@ -1,6 +1,6 @@
 ﻿namespace Aco228.AIGen.Gemini.Models.GoogleAiStudio.Images;
 
-public class GenerationConfig
+public class ImageGenerationConfig
 {
     public List<string> responseModalities { get; set; } = new() {"IMAGE"};
     public GenerationConfigConfig imageConfig { get; set; } = new();

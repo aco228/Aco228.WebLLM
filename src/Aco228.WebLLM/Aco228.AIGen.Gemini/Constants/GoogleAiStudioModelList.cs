@@ -11,8 +11,8 @@ internal static class GoogleAiStudioModelList
         {
             Provider = TextGenProvider.NanoBanana,
             PriceLevel = PriceLevel.High,
-            Name = GoogleAiStudioModelType.Gemini3_1Pro.ToString(),
-            ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioModelType.Gemini3_1Pro),
+            Name = GoogleAiStudioTextModelType.Gemini3_1Pro.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioTextModelType.Gemini3_1Pro),
             InputPricePerMillion = 2,
             OutputPricePerMillion = 12,
             Tier = ModelTier.High,
@@ -23,8 +23,8 @@ internal static class GoogleAiStudioModelList
         {
             Provider = TextGenProvider.NanoBanana,
             PriceLevel = PriceLevel.High,
-            Name = GoogleAiStudioModelType.Gemini3Pro.ToString(),
-            ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioModelType.Gemini3Pro),
+            Name = GoogleAiStudioTextModelType.Gemini3Pro.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioTextModelType.Gemini3Pro),
             InputPricePerMillion = 2,
             OutputPricePerMillion = 12,
             Tier = ModelTier.High,
@@ -35,8 +35,8 @@ internal static class GoogleAiStudioModelList
         {
             Provider = TextGenProvider.NanoBanana,
             PriceLevel = PriceLevel.Low,
-            Name = GoogleAiStudioModelType.Gemini3FlashPreview.ToString(),
-            ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioModelType.Gemini3FlashPreview),
+            Name = GoogleAiStudioTextModelType.Gemini3FlashPreview.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(GoogleAiStudioTextModelType.Gemini3FlashPreview),
             InputPricePerMillion = 0.5,
             OutputPricePerMillion = 3,
             Tier = ModelTier.Mid,

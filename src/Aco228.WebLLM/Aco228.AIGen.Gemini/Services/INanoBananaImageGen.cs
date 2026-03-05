@@ -35,8 +35,8 @@ public class NanoBananaImageGen : ImageGen, INanoBananaImageGen
 
         var request = new GoogleAiImageRequest();
         request.AddContent(prompt.Prompt);
-        request.generationConfig.imageConfig.aspectRatio = prompt.ImageSize.ToDefaultAspectRatio();
-        request.generationConfig.imageConfig.imageSize = prompt.Quality switch
+        request.ImageGenerationConfig.imageConfig.aspectRatio = prompt.ImageSize.ToDefaultAspectRatio();
+        request.ImageGenerationConfig.imageConfig.imageSize = prompt.Quality switch
         {
             ImageGenerationQuality.High => "4k",
             ImageGenerationQuality.Medium => "2k",

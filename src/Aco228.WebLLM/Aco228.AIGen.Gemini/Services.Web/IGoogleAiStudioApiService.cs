@@ -7,15 +7,15 @@ using Aco228.WService.Base;
 
 namespace Aco228.AIGen.Gemini.Services.Web;
 
-[ApiServiceDecorator(typeof(GeminiApiConfiguration))]
+[ApiServiceDecorator(typeof(GoogleAiStudioApiConfiguration))]
 public interface IGoogleAiStudioApiService : IApiService
 {
-    [ApiPost("{modelId}:streamGenerateContent")]
+    [ApiPost("models/{modelId}:streamGenerateContent")]
     Task<List<ResponseText>> GetResponse(string modelId, RequestText request);
     
-    [ApiPost("{modelId}:generateContent")]
+    [ApiPost("models/{modelId}:generateContent")]
     Task<ResponseText> GetImage(string modelId, GoogleAiImageRequest request);
     
-    [ApiPost("{modelId}:generateContent")]
+    [ApiPost("models/{modelId}:generateContent")]
     Task<string> GetImageString(string modelId, GoogleAiImageRequest request);
 }

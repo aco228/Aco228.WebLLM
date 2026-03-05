@@ -2,7 +2,7 @@
 
 namespace Aco228.AIGen.Gemini.Models;
 
-public enum GoogleAiStudioModelType
+public enum GoogleAiStudioTextModelType
 {
     [ModelType("gemini-3.1-pro-preview")]
     Gemini3_1Pro,
