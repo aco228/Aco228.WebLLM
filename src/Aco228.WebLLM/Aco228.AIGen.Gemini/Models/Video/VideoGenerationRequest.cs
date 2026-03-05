@@ -3,6 +3,15 @@
 public class VideoGenerationRequest
 {
     public List<VideoGenerationRequestInstance> instances { get; set; } = new();
+    public VideoGenerationRequestParameters parameters { get; set; } = new();
+
+    public void AddPrompt(string prompt)
+    {
+        instances.Add(new()
+        {
+            prompt = prompt,
+        });
+    }
 }
 
 public class VideoGenerationRequestInstance
@@ -13,7 +22,7 @@ public class VideoGenerationRequestInstance
 public class VideoGenerationRequestParameters
 {
     public string aspectRatio { get; set; } = "9:16";
-    public int numberOfVideos  { get; set; } = 1;
-    public bool personGeneration   { get; set; } = true;
+    public int durationSeconds  { get; set; } = 8;
+    public string personGeneration { get; set; } = "allow_all";
     public string resolution { get; set; } = "720p";
 }

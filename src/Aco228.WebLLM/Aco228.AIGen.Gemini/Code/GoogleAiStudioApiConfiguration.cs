@@ -1,5 +1,6 @@
 ﻿using Aco228.Common.Services;
 using Aco228.WService.Base;
+using YamlDotNet.Serialization.NodeTypeResolvers;
 
 namespace Aco228.AIGen.Gemini.Code;
 
@@ -12,6 +13,8 @@ public class GoogleAiStudioApiConfiguration : ApiServiceConf
     {
         ApiKey = secretProvider.Get("GOOGLE_AI_STUDIO_API_KEY") ?? throw new InvalidOperationException("GeminiApiKey is not set");
     }
+
+    public string GetApiKey() => ApiKey;
 
     public override HttpClient Prepare(HttpClient httpClient)
     {
