@@ -3,6 +3,7 @@
 public class MinimaxTextRequest
 {
     public required string model { get; set; }
+    public string? system_prompt { get; set; }
     public List<MinimaxTextRequestMessage> messages { get; set; } = new();
 
     public MinimaxTextRequest AddMessage(string role, string message, List<string>? imageUrls = null)

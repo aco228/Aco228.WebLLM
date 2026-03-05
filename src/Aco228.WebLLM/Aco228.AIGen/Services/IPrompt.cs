@@ -60,7 +60,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
         ModelDefinition?.ShuffleAgain();
         TextGenProviders?.ShuffleAgain();
         
-        var llmModels = ModelDefinition ?? TextGenManager.ModelDefinitions
+        var llmModels = ModelDefinition ?? TextGenManager.ModelDefinitions.ToList()
             .Where(x => !UsePremiumModels && x.PriceLevel != PriceLevel.High)
             .Where(x => PriceLevel == null || x?.PriceLevel == PriceLevel)
             .Where(x => TextGenProviders?.Contains(x.Provider) ?? true)
@@ -78,6 +78,8 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
             var textGenerationRequest = new TextGenerationRequest()
             {
                 Model = llmModel,
+                ModelName = llmModel.ModelApiName,
+                Provider = llmModel.Provider,
                 User = userText,
                 System = systemPrompt,
                 ImageUrls = GetImageUrls(request),

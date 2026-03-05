@@ -37,19 +37,6 @@ internal static class GrokModelList
         {
             Provider = TextGenProvider.Grok,
             PriceLevel = PriceLevel.Low,
-            Name = "Grok CodeFast",
-            ModelApiName = ModelTypeHelper.GetModelApiName(GrokModelType.GrokCodeFast1),
-            InputPricePerMillion = 0.20,
-            OutputPricePerMillion = 1.50,
-            Tier = ModelTier.Low,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false
-        },
-
-        new ModelDefinition
-        {
-            Provider = TextGenProvider.Grok,
-            PriceLevel = PriceLevel.Low,
             Name = "Grok 3 Mini",
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokModelType.Grok3Mini),
             InputPricePerMillion = 0.30,

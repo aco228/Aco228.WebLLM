@@ -8,7 +8,7 @@ namespace Aco228.AIGen.Services;
 
 public interface ITextGenManager : ISingleton
 {
-    List<ModelDefinition> ModelDefinitions { get; }
+    ConcurrentList<ModelDefinition> ModelDefinitions { get; }
     List<TextGenProvider> Providers { get; }
     Task<string> GetText(TextGenerationRequest request);
     Task<TextGenResponse> GetResponse(TextGenerationRequest request);
@@ -18,7 +18,7 @@ public interface ITextGenManager : ISingleton
 public class TextGenManager : ITextGenManager
 {
     ManagedList<ITextGen> _textGens = new();
-    public List<ModelDefinition> ModelDefinitions { get; private set; } = new();
+    public ConcurrentList<ModelDefinition> ModelDefinitions { get; private set; } = new();
     public List<TextGenProvider> Providers => ModelDefinitions.Select(x => x.Provider).Distinct().ToList();
 
     public async Task<TextGenResponse> GetResponse(TextGenerationRequest request)

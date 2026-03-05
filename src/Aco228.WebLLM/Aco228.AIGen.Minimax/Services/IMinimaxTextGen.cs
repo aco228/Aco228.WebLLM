@@ -53,8 +53,9 @@ public class MinimaxTexGen : TextGenBase, IMinimaxTextGen
     {
         var apiRequest = new MinimaxTextRequest(){ model = request.Model.ModelApiName };
         apiRequest.AddMessage("user", request.User, request.ImageUrls);
-        if(!string.IsNullOrEmpty(request.System))
-            apiRequest.AddMessage("system", request.User);
+        if (!string.IsNullOrEmpty(request.System))
+            apiRequest.system_prompt = request.System;
+        
         return apiRequest;
         
     }
