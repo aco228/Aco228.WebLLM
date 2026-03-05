@@ -9,4 +9,10 @@ public enum FalAiImageType
     
     [ModelType("bytedance/seedream/v4.5/text-to-image")]
     Seadream4_5,
+    
+    [ModelType("flux-2-pro")]
+    Flux2Pro,
+    
+    [ModelType("z-image/turbo")]
+    ZImageTurbo,
 }

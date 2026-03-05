@@ -25,5 +25,23 @@ internal static class ImageModels
             Name = FalAiImageType.Seadream4_5.ToString(),
             PricePerRequest = 0,
         },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.Flux2Pro),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.Flux2Pro.ToString(),
+            PricePerRequest = 0,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.ZImageTurbo),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.ZImageTurbo.ToString(),
+            PricePerRequest = 0,
+        },
     };
 }
