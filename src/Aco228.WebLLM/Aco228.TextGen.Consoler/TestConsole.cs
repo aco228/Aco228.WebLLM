@@ -9,6 +9,10 @@ using Aco228.AIGen.ChatGPT;
 using Aco228.AIGen.DeepAI;
 using Aco228.AIGen.DeepAI.Models.Web.CreateImage;
 using Aco228.AIGen.DeepAI.Services.Web;
+using Aco228.AIGen.FalAi;
+using Aco228.AIGen.FalAi.Core;
+using Aco228.AIGen.FalAi.Models;
+using Aco228.AIGen.FalAi.Services.Api;
 using Aco228.AIGen.Gemini;
 using Aco228.AIGen.Gemini.Models.Gemini;
 using Aco228.AIGen.Gemini.Models.GoogleAiStudio.Images;
@@ -40,7 +44,7 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
 {
     builder.RegisterGoogleServices(new()
     {
-        ProjectId = "arbo-487008-38359e7d2b41",
+        ProjectId = Environment.GetEnvironmentVariable("GOOGLE_PROJECT_ID") ?? throw new InvalidOperationException("GoogleProjectId is not set"),
         ServiceAccountCredentialsPath = @"C:\Users\Lenovo\Documents\CKArbo\app\google\credentials.json",
     });
     builder.RegisterPoyoAIServices();
@@ -56,8 +60,20 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterOpenRouterServices();
     builder.RegisterAtlasCloudServices();
     builder.RegisterDeepAiServices();
+    builder.RegisterFalAiServices();
     // builder.RegisterDeepSeekServices();
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
+});
+
+var cls = JsonToClassConverter.ConvertJsonToClass("FalAiImageResponse",
+    @"{""images"":[{""url"":""https://v3b.fal.media/files/b/0a90ef88/qywCveqM57BdZOXNQc4H7_0bc1c690279f4117829119c75fea35b2.png"",""content_type"":""image/png"",""file_name"":""0bc1c690279f4117829119c75fea35b2.png"",""file_size"":3539356,""width"":null,""height"":null}],""seed"":1547064457}");
+
+var falService = serviceProvider.GetService<IFalAiTextToImageApiService>()!;
+var falRes = await falService.RequestImage("bytedance/seedream/v5/lite/text-to-image", new()
+{
+    prompt = "A cute puppy playing in the grass",
+    image_size = FalImageSize.square.ToString(),
+    num_images = 1,
 });
 
 
@@ -75,7 +91,7 @@ var service = serviceProvider.GetService<ITextGenManager>()!;
 var res = await service.GetResponse(new()
 {
     PriceLevel = PriceLevel.Low,
-    Provider = TextGenProvider.GoogleAiStudio,
+    Provider = TextGenProvider.NanoBanana,
     User = "How are you?"
 });
 

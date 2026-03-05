@@ -13,4 +13,5 @@ public enum ImageGenProvider
     Recraft = 8,
     AtlasCloud = 9,
     GoogleAiStudio = 10,
+    FalAi = 11,
 }
