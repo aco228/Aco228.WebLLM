@@ -5,7 +5,7 @@ public class KlingStatusResponse
     public int code { get; set; }
     public string message { get; set; }
     public string request_id { get; set; }
-    public DataDTO data { get; set; }
+    public DataDTO? data { get; set; }
 }
 
 
@@ -40,7 +40,7 @@ public class DataDTO
     public string final_unit_deduction { get; set; }
     public KlingStatusResponseWatermarkInfoDTO watermark_info { get; set; }
     public KlingStatusResponseTaskInfoDTO task_info { get; set; }
-    public KlingStatusResponseTaskResultDTO task_result { get; set; }
+    public KlingStatusResponseTaskResultDTO? task_result { get; set; }
     public long created_at { get; set; }
     public long updated_at { get; set; }
 }
