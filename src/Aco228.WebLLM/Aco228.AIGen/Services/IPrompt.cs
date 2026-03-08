@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using Aco228.AIGen.Attributes;
 using Aco228.AIGen.Helpers;
 using Aco228.AIGen.Infrastructure.PromptSerializer;
@@ -86,12 +87,22 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
             };
             
             TextGenResponse? textGenResponse = null;
+            string? rawResponse;
             
             try
             {
                 textGenResponse = await TextGenManager.GetResponse(textGenerationRequest);
                 LastProviderUsed = llmModel.Provider;
-                return PromptHelper.DeserializeResponse<TRes>(textGenResponse.Response);
+                rawResponse = textGenResponse.Response;
+
+                var isResponseList = typeof(TRes).IsGenericType && typeof(TRes).GetGenericTypeDefinition() == typeof(List<>);
+                var regexPattern = isResponseList ? @"\[.*\]" : @"\{.*\}";
+                
+                var matches = Regex.Matches(rawResponse, regexPattern, RegexOptions.Singleline);
+                if (matches.Count > 0)
+                    rawResponse = matches[^1].Value;
+                
+                return PromptHelper.DeserializeResponse<TRes>(rawResponse);
             }
             catch(Exception ex)
             {

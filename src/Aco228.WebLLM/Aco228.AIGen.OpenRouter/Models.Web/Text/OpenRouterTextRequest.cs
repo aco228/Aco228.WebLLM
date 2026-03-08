@@ -4,6 +4,8 @@ public class OpenRouterTextRequest
 {
     public string model { get; set; }
     public List<OpenRouterTextRequestMessage> input { get; set; } = new();
+    public OpenRouterTextRequestResponseFormat responseFormat { get; set; } = new();
+    // public OpenRouterTextRequestResponseReasoning reasoning { get; set; } = new();
 
     public OpenRouterTextRequest AddInput(string role, string message, List<string>? imageFiles = null)
     {
@@ -37,6 +39,16 @@ public class OpenRouterTextRequestMessage
     public string type { get; set; } = "message";
     public string role { get; set; }
     public List<OpenRouterTextRequestMessageContent> content { get; set; } = new();
+}
+
+public class OpenRouterTextRequestResponseFormat
+{
+    public string type { get; set; } = "json_object";
+}
+
+public class OpenRouterTextRequestResponseReasoning
+{
+    public bool exclude { get; set; } = true;
 }
 
 public class OpenRouterTextRequestMessageContent

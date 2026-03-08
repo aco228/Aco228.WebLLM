@@ -6,7 +6,7 @@ using Aco228.WService.Base;
 
 namespace Aco228.AIGen.Gemini.Services.Web.Gemini;
 
-[ApiServiceDecorator(typeof(GoogleAiStudioApiConfiguration))]
+[ApiServiceDecorator(typeof(GoogleVertexApiConfiguration))]
 public interface IGeminiTextApiService : IApiService
 {
     [ApiPost("{modelId}:streamGenerateContent")]

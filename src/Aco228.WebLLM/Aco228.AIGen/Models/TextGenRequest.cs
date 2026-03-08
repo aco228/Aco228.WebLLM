@@ -2,7 +2,7 @@
 
 public class TextGenRequest
 {
-    public required ModelDefinition Model { get; set; }
+    public ModelDefinition? Model { get; set; }
     public required string User { get; set; }
     public string? System { get; set; }
     public List<string>? ImageUrls { get; set; }

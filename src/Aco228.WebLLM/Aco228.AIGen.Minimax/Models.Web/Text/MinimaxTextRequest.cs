@@ -3,21 +3,11 @@
 public class MinimaxTextRequest
 {
     public required string model { get; set; }
-    public string? system_prompt { get; set; }
     public List<MinimaxTextRequestMessage> messages { get; set; } = new();
 
     public MinimaxTextRequest AddMessage(string role, string message, List<string>? imageUrls = null)
     {
-        var msg = new MinimaxTextRequestMessage() { role = role };
-        msg.content.Add(new()
-        {
-            type = "text", 
-            text = message
-        });
-
-        if (imageUrls != null && imageUrls.Any())
-            foreach (var imageUrl in imageUrls)
-                msg.content.Add(new() {type = "image_url", image_url = new() { url = imageUrl}});
+        var msg = new MinimaxTextRequestMessage() { role = role, content = message };
         
         messages.Add(msg);
         return this;
@@ -27,7 +17,7 @@ public class MinimaxTextRequest
 public class MinimaxTextRequestMessage
 {
     public string role { get; set; } = "user";
-    public List<MinimaxTextRequestMessageContent> content { get; set; } = new();
+    public string content { get; set; }
 }
 
 public class MinimaxTextRequestMessageContent

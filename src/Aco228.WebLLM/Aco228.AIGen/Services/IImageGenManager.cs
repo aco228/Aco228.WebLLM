@@ -14,7 +14,6 @@ public interface IImageGenManager : ISingleton
     List<string> Models { get; }
     HttpClient GetHttpClientFrom(ImageGenProvider provider);
     ModelImageDefinition? GetModelDefinition(Enum apiName);
-    ManagedList<ModelImageDefinition> FilterModelsBySpecification(ImageGenerateSpecifications specifications);
     Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt);
     Task<GenerateImageResponse?> GetResultFor(ImageGenProvider provider, string taskId);
 }
@@ -51,15 +50,6 @@ public class ImageGenManager : IImageGenManager
         
         _generators.TryAdd(provider, generator);
         _models.AddRange(models);
-    }
-
-    public ManagedList<ModelImageDefinition> FilterModelsBySpecification(ImageGenerateSpecifications specifications)
-    {
-        var models = _models
-            .Where(x => x.PriceLevel == specifications.ModelPriceLevel)
-            .Where(x => specifications.Providers.Any() == false || specifications.Providers.Contains(x.Provider));
-
-        return models.Shuffle().ToManagedList();
     }
 
     public async Task<List<GenerateImageResponse>> Generate(GenerateImageRequest prompt)

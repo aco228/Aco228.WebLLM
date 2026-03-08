@@ -36,7 +36,7 @@ public class OpenRouteTextGen : TextGenBase, IOpenRouteTextGen
         result.OutputTokens = apiResponse.usage.output_tokens;
         
         var txtResponse = new StringBuilder();
-        foreach (var responseText in apiResponse.output)
+        foreach (var responseText in apiResponse.output.Where(x => !x.type.Equals("reasoning", StringComparison.InvariantCultureIgnoreCase)))
         foreach (var contentDto in responseText.content)
             txtResponse.Append(contentDto.text);
         
@@ -46,8 +46,10 @@ public class OpenRouteTextGen : TextGenBase, IOpenRouteTextGen
 
     private OpenRouterTextRequest PrepareRequest(TextGenRequest request)
     {
+        var model = request.Model ?? Constants.OpenRouterModelList.Models.Shuffle().First();
+        
         var apiRequest = new OpenRouterTextRequest();
-        apiRequest.model = request.Model.ModelApiName;
+        apiRequest.model = model.ModelApiName;
 
         if (!string.IsNullOrEmpty(request.System))
             apiRequest.AddInput("system", request.System);
