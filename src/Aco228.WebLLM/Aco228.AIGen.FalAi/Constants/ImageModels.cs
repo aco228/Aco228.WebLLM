@@ -43,5 +43,23 @@ internal static class ImageModels
             Name = FalAiImageType.ZImageTurbo.ToString(),
             PricePerRequest = 0,
         },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.ZImageTurbo),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.ZImageTurbo.ToString(),
+            PricePerRequest = 0,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.QwenImage2Pro),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.QwenImage2Pro.ToString(),
+            PricePerRequest = 0.07,
+        },
     };
 }

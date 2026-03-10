@@ -15,4 +15,7 @@ public enum FalAiImageType
     
     [ModelType("z-image/turbo")]
     ZImageTurbo,
+    
+    [ModelType("qwen-image-2/pro/text-to-image")]
+    QwenImage2Pro,
 }
