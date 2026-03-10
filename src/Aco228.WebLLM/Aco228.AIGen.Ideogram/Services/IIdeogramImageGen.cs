@@ -34,13 +34,6 @@ public class IdeogramImageGen : ImageGen, IIdeogramImageGen
             _ => "FLASH"
         };
 
-        var request = new IdeogramImageRequest()
-        {
-            prompt = prompt.Prompt,
-            aspect_ratio = prompt.ImageSize.ToDefaultAspectRatio().Replace(":", "x"),
-            rendering_speed = renderingSpeed,
-            num_images = prompt.Count,
-        };
         
         using var form = new MultipartFormDataContent();
         form.Add(new StringContent(prompt.Prompt), "prompt");

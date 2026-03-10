@@ -35,19 +35,6 @@ internal static class OpenRouterModelList
         new ModelDefinition()
         {
             Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "minimax/minimax-m2.5",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.High,
-            Name = "minimax/minimax-m2.5",
-            ContextWindow = 1000000,
-            IsVisionSupported = true,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.2,
-            OutputPricePerMillion = 1.2,
-        },
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
             ModelApiName = "z-ai/glm-5",
             PriceLevel = PriceLevel.Low,
             Tier = ModelTier.High,

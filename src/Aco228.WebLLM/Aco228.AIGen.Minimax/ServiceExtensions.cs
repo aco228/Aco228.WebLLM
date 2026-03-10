@@ -17,9 +17,9 @@ public static class ServiceExtensions
             services.RegisterApiServices(typeof(ServiceExtensions).Assembly);
             services.RegisterPostBuildAction((provider) =>
             {
-                var managerInterface = provider.GetService<ITextGenManager>()!;
-                var manager = managerInterface as TextGenManager;
-                manager.Register<IMinimaxTextGen>(TextGenProvider.OpenRouter, Constants.MinimaxTextModels.Models);
+                // var managerInterface = provider.GetService<ITextGenManager>()!;
+                // var manager = managerInterface as TextGenManager;
+                // manager.Register<IMinimaxTextGen>(TextGenProvider.Minimax, Constants.MinimaxTextModels.Models);
                 
                 var imageManager = provider.GetService<IImageGenManager>()! as ImageGenManager;
                 imageManager.RegisterGenerator<IMinimaxImageGen>(ImageGenProvider.Minimax, Constants.MinimaxImageModels.Models);

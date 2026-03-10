@@ -3,7 +3,7 @@
 public class ImageResponse
 {
     public int code { get; set; }
-    public ImageResponseData data { get; set; }
+    public ImageResponseData? data { get; set; }
 }
 
 public class ImageResponseData

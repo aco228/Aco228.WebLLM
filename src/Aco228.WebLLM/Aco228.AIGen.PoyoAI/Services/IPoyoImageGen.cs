@@ -40,6 +40,9 @@ public class PoyoImageGen : ImageGen, IPoyoImageGen
             }
         };
         var response = await _apiService.GenerateImage(request);
+        if (response.data == null)
+            return new();
+        
         return new()
         {
             new()
