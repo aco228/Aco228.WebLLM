@@ -35,6 +35,7 @@ public class RequestMessageEntryImage : RequestMessageEntry
 
 public class RequestMessageEntryImageSource
 {
+    public string type { get; } = "url";
     public string url { get; set; }
 }
 

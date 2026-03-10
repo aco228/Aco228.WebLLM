@@ -23,7 +23,6 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
 {
     protected virtual PriceLevel PriceLevel => Models.PriceLevel.Low;
     protected virtual ManagedList<TextGenProvider>? TextGenProviders => null;
-    protected virtual ManagedList<ModelDefinition>? ModelDefinition => null;
     protected virtual List<PromptSection> Sections { get; } = new();
     protected virtual bool UsePremiumModels => false;
     
@@ -49,6 +48,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     }
     
     protected virtual Task<string> ModifySystemPrompt(string systemPrompt, TReq request) => Task.FromResult(systemPrompt);
+    protected virtual ManagedList<ModelDefinition>? GetModelDefinitions() => null;   
     
     public async Task<string> GetPromptText(TReq request)
     {
@@ -58,10 +58,10 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     
     public async Task<TRes?> Execute(TReq request)
     {
-        ModelDefinition?.ShuffleAgain();
+        var modelDefinition = GetModelDefinitions()?.ShuffleAgain();
         TextGenProviders?.ShuffleAgain();
         
-        var llmModels = ModelDefinition ?? TextGenManager.ModelDefinitions.ToList()
+        var llmModels = modelDefinition ?? TextGenManager.ModelDefinitions.ToList()
             .Where(x => !UsePremiumModels && x.PriceLevel != PriceLevel.High)
             .Where(x => PriceLevel == null || x?.PriceLevel == PriceLevel)
             .Where(x => TextGenProviders?.Contains(x.Provider) ?? true)
@@ -102,7 +102,15 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
                 if (matches.Count > 0)
                     rawResponse = matches[^1].Value;
                 
-                return PromptHelper.DeserializeResponse<TRes>(rawResponse);
+                var result = PromptHelper.DeserializeResponse<TRes>(rawResponse);
+
+                if (result is PromptResponse promptRes)
+                {
+                    promptRes.InputCost = textGenResponse.InputCost;
+                    promptRes.OutputCost = textGenResponse.OuputCost;
+                }
+                    
+                return result;
             }
             catch(Exception ex)
             {
