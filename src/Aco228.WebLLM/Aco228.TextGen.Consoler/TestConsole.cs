@@ -35,6 +35,10 @@ using Aco228.AIGen.Recraft;
 using Aco228.AIGen.Services;
 using Aco228.Common;
 using Aco228.GoogleServices;
+using Aco228.AIGen.LeonardoAI;
+using Aco228.AIGen.LeonardoAI.Core;
+using Aco228.AIGen.LeonardoAI.Services;
+using Aco228.AIGen.LeonardoAI.Services.Api;
 using Aco228.TextGen.Claude;
 using Aco228.TextGen.Consoler;
 using Aco228.WService;
@@ -64,10 +68,22 @@ var serviceProvider = await ServiceProviderHelper.CreateProvider(typeof(Program)
     builder.RegisterDeepAiServices();
     builder.RegisterFalAiServices();
     builder.RegisterKlingAIServices();
+    builder.RegisterLeonardoAIServices();
     // builder.RegisterDeepSeekServices();
     builder.RegisterApiServices(typeof(RepoSmallDTO).Assembly);    
 });
 
+var leonardoApi = serviceProvider.GetService<ILeonardoGenerationApiService>()!;
+var gen = await leonardoApi.GetGenerationStatus("23fc2577-e0d5-4b63-a95d-7a85ff0afd86");
+
+
+var leonardoAI = serviceProvider.GetService<ILeonardoAIImageGen>()!;
+var lres = await leonardoAI.Generate(new()
+{
+    ImageSize = ImageSize.Square,
+    Prompt = "Wild puma is angry and is attacking a shark that is currently having a hiphop concert",
+    Count = 1,
+});
 
 var falService = serviceProvider.GetService<IKlingAiVideoGenerationApiService>()!;
 var vid = await falService.GetStatus("9c0d2066-9c23-44a3-b6b3-06242a8a2e7f");

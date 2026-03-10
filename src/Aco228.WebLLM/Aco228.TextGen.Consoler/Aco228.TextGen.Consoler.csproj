@@ -22,6 +22,7 @@
       <ProjectReference Include="..\Aco228.AIGen.PoyoAI\Aco228.AIGen.PoyoAI.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.Recraft\Aco228.AIGen.Recraft.csproj" />
       <ProjectReference Include="..\Aco228.AIGen\Aco228.AIGen.csproj" />
+      <ProjectReference Include="..\Aco228.AIGen.LeonardoAI\Aco228.AIGen.LeonardoAI.csproj" />
       <ProjectReference Include="..\Aco228.TextGen.Claude\Aco228.TextGen.Claude.csproj" />
       <ProjectReference Include="..\Aco228.TextGen.DeepSeek\Aco228.TextGen.DeepSeek.csproj" />
       <ProjectReference Include="..\Aco228.AIGen.Grok\Aco228.AIGen.Grok.csproj" />

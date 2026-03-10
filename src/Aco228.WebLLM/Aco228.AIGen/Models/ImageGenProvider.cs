@@ -14,4 +14,5 @@ public enum ImageGenProvider
     AtlasCloud = 9,
     GoogleAiStudio = 10,
     FalAi = 11,
+    LeonardoAI = 12,
 }
