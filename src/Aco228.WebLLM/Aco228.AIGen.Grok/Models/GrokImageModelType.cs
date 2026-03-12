@@ -10,7 +10,4 @@ public enum GrokImageModelType
     [ModelType("grok-imagine-image")]
     GrokImagineImage,
     
-    [ModelType("grok-2-image-1212")]
-    Grok2Image,
-    
 }

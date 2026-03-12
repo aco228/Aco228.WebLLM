@@ -16,13 +16,6 @@ internal static class GrokImageModelList
         },
         new(ImageGenProvider.Grok)
         {
-            PriceLevel = PriceLevel.Mid,
-            Name = GrokImageModelType.Grok2Image.ToString(),
-            ModelApiName = ModelTypeHelper.GetModelApiName(GrokImageModelType.Grok2Image),
-            PricePerRequest = 0.07,
-        },
-        new(ImageGenProvider.Grok)
-        {
             PriceLevel = PriceLevel.Low,
             Name = GrokImageModelType.GrokImagineImage.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(GrokImageModelType.GrokImagineImage),
