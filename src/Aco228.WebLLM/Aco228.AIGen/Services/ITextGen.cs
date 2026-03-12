@@ -24,9 +24,14 @@ public abstract class TextGenBase : ITextGen
         Prepare();
     }
     
-    public Task<TextGenResponse> Generate(TextGenRequest request)
+    public async Task<TextGenResponse> Generate(TextGenRequest request)
     {
-        return ExecuteRequest(request);
+        var response = await ExecuteRequest(request);
+        if (response == null || string.IsNullOrEmpty(response.Response))
+            return response;
+
+        response.Response = response.Response.Replace("—", "-");
+        return response;
     }
 
     protected void AddModels(List<ModelDefinition> models)
