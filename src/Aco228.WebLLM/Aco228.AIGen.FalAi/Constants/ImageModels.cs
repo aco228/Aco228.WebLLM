@@ -28,15 +28,6 @@ internal static class ImageModels
         new()
         {
             Provider = ImageGenProvider.FalAi,
-            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.Flux2Pro),
-            PriceLevel = PriceLevel.High,
-            Tier = ModelTier.High,
-            Name = FalAiImageType.Flux2Pro.ToString(),
-            PricePerRequest = 0,
-        },
-        new()
-        {
-            Provider = ImageGenProvider.FalAi,
             ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.ZImageTurbo),
             PriceLevel = PriceLevel.High,
             Tier = ModelTier.High,
@@ -60,6 +51,51 @@ internal static class ImageModels
             Tier = ModelTier.High,
             Name = FalAiImageType.QwenImage2Pro.ToString(),
             PricePerRequest = 0.07,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.Flux2Pro),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.Flux2Pro.ToString(),
+            PricePerRequest = 0,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.FluxSchnell),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.FluxSchnell.ToString(),
+            PricePerRequest = 0.03,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.FluxDev),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.FluxDev.ToString(),
+            PricePerRequest = 0.03,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.Flux2Turbo),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.Flux2Turbo.ToString(),
+            PricePerRequest = 0.03,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.Flux2Max),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.Flux2Max.ToString(),
+            PricePerRequest = 0.03,
         },
     };
 }

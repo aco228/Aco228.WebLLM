@@ -30,19 +30,28 @@ public class FalImageGen : ImageGen, IFalImageGen
         if (modelType == null)
             throw new ArgumentException("Invalid model name");
 
-        FalImageSize size = prompt.ImageSize switch
-        {
-            ImageSize.Square => FalImageSize.square_hd,
-            ImageSize.MiniPortrait => FalImageSize.portrait_4_3,
-            ImageSize.Portrait => FalImageSize.portrait_16_9,
-            ImageSize.StoryReel => FalImageSize.portrait_16_9,
-            _ => FalImageSize.square,
-        };
+        // FalImageSize size = prompt.ImageSize switch
+        // {
+        //     ImageSize.Square => FalImageSize.square_hd,
+        //     ImageSize.MiniPortrait => FalImageSize.portrait_4_3,
+        //     ImageSize.Portrait => FalImageSize.portrait_16_9,
+        //     ImageSize.StoryReel => FalImageSize.portrait_16_9,
+        //     _ => FalImageSize.square,
+        // };
+
+        var sizeString = prompt.ImageSize.ToDefaultSizeString();
+        var sizeStringSplit = sizeString.Split('x');
+        var sizeWidth = int.Parse(sizeStringSplit[0]);
+        var sizeHeight = int.Parse(sizeStringSplit[1]);
 
         var request = new FalImageRequest()
         {
             prompt = prompt.Prompt,
-            image_size = size.ToString(),
+            image_size = new()
+            {
+                width = sizeWidth,
+                height = sizeHeight,
+            },
             num_images = prompt.Count,
         };
 

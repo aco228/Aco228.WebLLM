@@ -74,19 +74,6 @@ internal static class OpenRouterModelList
         new ModelDefinition()
         {
             Provider = TextGenProvider.OpenRouter,
-            ModelApiName = "mistralai/ministral-14b-2512",
-            PriceLevel = PriceLevel.Low,
-            Tier = ModelTier.High,
-            Name = "mistralai/ministral-14b-2512",
-            ContextWindow = 1000000,
-            IsVisionSupported = true,
-            IsImageOutputSupported = false,
-            InputPricePerMillion = 0.2,
-            OutputPricePerMillion = 0.2,
-        },
-        new ModelDefinition()
-        {
-            Provider = TextGenProvider.OpenRouter,
             ModelApiName = "deepseek/deepseek-v3.2",
             PriceLevel = PriceLevel.Low,
             Tier = ModelTier.High,

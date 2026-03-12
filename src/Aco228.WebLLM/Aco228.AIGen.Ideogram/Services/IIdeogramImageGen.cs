@@ -34,7 +34,6 @@ public class IdeogramImageGen : ImageGen, IIdeogramImageGen
             _ => "FLASH"
         };
 
-        
         using var form = new MultipartFormDataContent();
         form.Add(new StringContent(prompt.Prompt), "prompt");
         form.Add(new StringContent(prompt.ImageSize.ToDefaultAspectRatio().Replace(":", "x")), "aspect_ratio");
