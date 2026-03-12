@@ -15,4 +15,5 @@ public enum ImageGenProvider
     GoogleAiStudio = 10,
     FalAi = 11,
     LeonardoAI = 12,
+    OpenRouter = 13,
 }

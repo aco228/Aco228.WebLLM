@@ -5,6 +5,7 @@ public class OpenRouterTextRequest
     public string model { get; set; }
     public List<OpenRouterTextRequestMessage> input { get; set; } = new();
     public OpenRouterTextRequestResponseFormat responseFormat { get; set; } = new();
+    public List<string> modalities { get; set; } = new() { "text" };
     // public OpenRouterTextRequestResponseReasoning reasoning { get; set; } = new();
 
     public OpenRouterTextRequest AddInput(string role, string message, List<string>? imageFiles = null)

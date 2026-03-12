@@ -11,8 +11,4 @@
       <ProjectReference Include="..\Aco228.AIGen\Aco228.AIGen.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Models\" />
-    </ItemGroup>
-
 </Project>

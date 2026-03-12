@@ -16,12 +16,14 @@ public static class ServiceExtensions
             services.RegisterApiServices(typeof(ServiceExtensions).Assembly);
             services.RegisterServicesFromAssembly(typeof(ServiceExtensions).Assembly);
             
-            
             services.RegisterPostBuildAction((serviceProvider) =>
             {
                 var managerInterface = serviceProvider.GetService<ITextGenManager>()!;
                 var manager = managerInterface as TextGenManager;
                 manager.Register<IOpenRouteTextGen>(TextGenProvider.OpenRouter, Constants.OpenRouterModelList.Models);
+                
+                var imageManager = serviceProvider.GetService<IImageGenManager>()! as ImageGenManager;
+                imageManager.RegisterGenerator<IOpenRouterImageGen>(ImageGenProvider.OpenRouter, Constants.OpenRouterImageModelList.Models);
             });
         });
 }
