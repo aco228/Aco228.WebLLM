@@ -19,7 +19,7 @@ public static class PromptHelper
         => ServiceProviderHelper.ConstructByType(type) as IPromptBase;
     
     
-    internal static TRes? DeserializeResponse<TRes>(string llmResponse)
+    public static TRes? DeserializeResponse<TRes>(string llmResponse)
     {
         if (string.IsNullOrEmpty(llmResponse))
             return default;

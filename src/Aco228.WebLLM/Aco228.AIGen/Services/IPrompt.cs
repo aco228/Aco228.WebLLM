@@ -32,8 +32,8 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
     protected abstract string PromptName { get; }
 
     public TextGenProvider LastProviderUsed { get; private set; } = TextGenProvider.Unknown;
-
-    private async Task<Tuple<string, string>> GetPromptData(TReq request)
+    
+    public async Task<Tuple<string, string>> GetPromptData(TReq request)
     {
         var outputData = new SerializePromptResponseHelper<TRes>().Serialize();
         var systemPrompt = await PromptTextsProvider.GetPromptText(PromptName);

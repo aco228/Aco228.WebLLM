@@ -8,7 +8,7 @@ public class SonarResponse
     public string model { get; set; }
     public int created { get; set; }
     public UsageDTO usage { get; set; }
-    public List<CitationDTO> citations { get; set; }
+    public List<string> citations { get; set; }
     public List<SearchResultDTO> search_results { get; set; }
     [JsonPropertyName("object")]
     public string Object { get; set; }
@@ -31,10 +31,6 @@ public class UsageDTO
     public int total_tokens { get; set; }
     public string search_context_size { get; set; }
     public CostDTO cost { get; set; }
-}
-
-public class CitationDTO
-{
 }
 
 public class SearchResultDTO
