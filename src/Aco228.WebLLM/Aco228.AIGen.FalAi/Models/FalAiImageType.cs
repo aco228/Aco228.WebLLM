@@ -7,6 +7,9 @@ public enum FalAiImageType
     [ModelType("bytedance/seedream/v5/lite/text-to-image")]
     Seadream5_lite,
     
+    [ModelType("bytedance/seedream/v5/lite/edit")]
+    Seadream5_lite_edit,
+    
     [ModelType("bytedance/seedream/v4.5/text-to-image")]
     Seadream4_5,
     
@@ -15,6 +18,15 @@ public enum FalAiImageType
     
     [ModelType("flux-2-max")]
     Flux2Max,
+    
+    [ModelType("flux-2-pro/edit")]
+    Flux2ProEdit,
+    
+    [ModelType("flux-2-max/edit")]
+    Flux2MaxEdit,
+    
+    [ModelType("nano-banana-2/edit")]
+    NanoBanana2Edit,
     
     [ModelType("flux-2/turbo")]
     Flux2Turbo,
