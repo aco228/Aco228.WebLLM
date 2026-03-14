@@ -22,4 +22,7 @@ public interface ILeonardoGenerationApiService : ILeonardoApiService
     
     [ApiGet("generations/{id}")]
     Task<LeonardoStatusResponse> GetGenerationStatus(string id);
+    
+    [ApiPost("init-image")]
+    Task<InitImageUploadResponse> UploadInitImage(UploadInitImageRequest request);
 }
