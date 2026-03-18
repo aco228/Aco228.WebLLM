@@ -13,7 +13,7 @@ namespace Aco228.TextGen.Perplexity.Services;
 public interface IPerplexitySonarService : ITransient
 {
     Task<PerplexitySonarResponse> Ask(string user, string? system = null);
-    Task<T> AskJson<T>(string user, string? system = null);
+    Task<T?> AskJson<T>( string user, string? system = null);
 }
 
 public class PerplexitySonarService : IPerplexitySonarService
@@ -50,7 +50,7 @@ public class PerplexitySonarService : IPerplexitySonarService
         return result;
     }
 
-    public async Task<T> AskJson<T>(string user, string? system = null)
+    public async Task<T?> AskJson<T>(string user, string? system = null)
     {
         var res = await Ask(user, system);
         var rawResponse = res.Response.Trim();
@@ -64,7 +64,15 @@ public class PerplexitySonarService : IPerplexitySonarService
         var matches = Regex.Matches(rawResponse, regexPattern, RegexOptions.Singleline);
         if (matches.Count > 0)
             rawResponse = matches[^1].Value;
+
+        try
+        {
+            return PromptHelper.DeserializeResponse<T>(rawResponse);    
+        }
+        catch (Exception ex)
+        {
+            return default;
+        }
         
-        return PromptHelper.DeserializeResponse<T>(rawResponse);
     }
 }
