@@ -11,10 +11,20 @@ internal static class OpenRouterImageModelList
         {
             Provider = ImageGenProvider.OpenRouter,
             ModelApiName = ModelTypeHelper.GetModelApiName(OpenRouterImageModelType.RiverFlowV2Pro),
-            PriceLevel = PriceLevel.Low,
+            PriceLevel = PriceLevel.High,
             Tier = ModelTier.High,
             Name = OpenRouterImageModelType.RiverFlowV2Pro.ToString(),
             PricePerRequest = 0.15
+        },
+        
+        new ModelImageDefinition()
+        {
+            Provider = ImageGenProvider.OpenRouter,
+            ModelApiName = ModelTypeHelper.GetModelApiName(OpenRouterImageModelType.RiverFlowV2Fast),
+            PriceLevel = PriceLevel.Low,
+            Tier = ModelTier.High,
+            Name = OpenRouterImageModelType.RiverFlowV2Fast.ToString(),
+            PricePerRequest = 0.5
         },
     };
 }

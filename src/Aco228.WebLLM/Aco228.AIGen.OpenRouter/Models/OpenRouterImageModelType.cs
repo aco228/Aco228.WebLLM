@@ -6,4 +6,7 @@ public enum OpenRouterImageModelType
 {
     [ModelType("sourceful/riverflow-v2-pro")]
     RiverFlowV2Pro,
+    
+    [ModelType("sourceful/riverflow-v2-fast")]
+    RiverFlowV2Fast,
 }
