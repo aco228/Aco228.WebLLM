@@ -84,5 +84,31 @@ internal static class OpenRouterModelList
             InputPricePerMillion = 0.25,
             OutputPricePerMillion = 0.4,
         },
+        new ModelDefinition()
+        {
+            Provider = TextGenProvider.OpenRouter,
+            ModelApiName = "xiaomi/mimo-v2-flash",
+            PriceLevel = PriceLevel.Low,
+            Tier = ModelTier.High,
+            Name = "xiaomi/mimo-v2-flash",
+            ContextWindow = 1000000,
+            IsVisionSupported = true,
+            IsImageOutputSupported = false,
+            InputPricePerMillion = 0.09,
+            OutputPricePerMillion = 0.29,
+        },
+        new ModelDefinition()
+        {
+            Provider = TextGenProvider.OpenRouter,
+            ModelApiName = "meta-llama/llama-4-maverick",
+            PriceLevel = PriceLevel.Low,
+            Tier = ModelTier.High,
+            Name = "meta-llama/llama-4-maverick",
+            ContextWindow = 1000000,
+            IsVisionSupported = true,
+            IsImageOutputSupported = false,
+            InputPricePerMillion = 0.15,
+            OutputPricePerMillion = 0.6,
+        },
     };
 }

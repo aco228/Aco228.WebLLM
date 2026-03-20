@@ -4,15 +4,12 @@ namespace Aco228.AIGen.Gemini.Models;
 
 public enum GeminiModelType
 {
-    [ModelType("gemini-3-pro-preview")]
-    Gemini3ProPreview,
+    [ModelType("gemini-3.1-pro-preview")]
+    GeminiPro,
     
     [ModelType("gemini-3-flash-preview")]
-    Gemini3FlashPreview,
+    GeminiFlash,
     
-    [ModelType("gemini-2.5-flash")]
-    Gemini2_5Flash,
-    
-    [ModelType("gemini-2.5-flash-lite")]
-    Gemini2_5FlashLite,
+    [ModelType("gemini-3.1-flash-lite-preview")]
+    GeminiLite,
 }

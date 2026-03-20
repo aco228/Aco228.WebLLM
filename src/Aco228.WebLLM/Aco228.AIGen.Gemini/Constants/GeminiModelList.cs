@@ -11,8 +11,8 @@ internal static class GeminiModelList
         {
             Provider = TextGenProvider.Gemini,
             PriceLevel = PriceLevel.High,
-            Name = GeminiModelType.Gemini3ProPreview.ToString(),
-            ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.Gemini3ProPreview),
+            Name = GeminiModelType.GeminiPro.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.GeminiPro),
             InputPricePerMillion = 2,
             OutputPricePerMillion = 12,
             Tier = ModelTier.High,
@@ -24,10 +24,10 @@ internal static class GeminiModelList
         {
             Provider = TextGenProvider.Gemini,
             PriceLevel = PriceLevel.Mid,
-            Name = GeminiModelType.Gemini3FlashPreview.ToString(),
-            ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.Gemini3FlashPreview),
-            InputPricePerMillion = 0.5,
-            OutputPricePerMillion = 3,
+            Name = GeminiModelType.GeminiFlash.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.GeminiFlash),
+            InputPricePerMillion = 2,
+            OutputPricePerMillion = 12,
             Tier = ModelTier.High,
             IsVisionSupported = false,
             IsImageOutputSupported = false
@@ -37,24 +37,11 @@ internal static class GeminiModelList
         {
             Provider = TextGenProvider.Gemini,
             PriceLevel = PriceLevel.Low,
-            Name = GeminiModelType.Gemini2_5Flash.ToString(),
-            ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.Gemini2_5Flash),
-            InputPricePerMillion = 0.5,
-            OutputPricePerMillion = 3,
-            Tier = ModelTier.Mid,
-            IsVisionSupported = false,
-            IsImageOutputSupported = false
-        },
-        
-        new ModelDefinition
-        {
-            Provider = TextGenProvider.Gemini,
-            PriceLevel = PriceLevel.Low,
-            Name = GeminiModelType.Gemini2_5FlashLite.ToString(),
-            ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.Gemini2_5FlashLite),
-            InputPricePerMillion = 0.5,
-            OutputPricePerMillion = 3,
-            Tier = ModelTier.Low,
+            Name = GeminiModelType.GeminiLite.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(GeminiModelType.GeminiLite),
+            InputPricePerMillion = 0.25,
+            OutputPricePerMillion = 1.5,
+            Tier = ModelTier.High,
             IsVisionSupported = false,
             IsImageOutputSupported = false
         },
