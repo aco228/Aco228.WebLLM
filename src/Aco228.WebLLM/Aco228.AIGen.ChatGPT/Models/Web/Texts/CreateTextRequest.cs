@@ -17,7 +17,7 @@ public class CreateTextRequest
         var res = new List<InputDtoContent> {new() {type = "input_text", text = userPrompt}};
         if(fileUrls != null && fileUrls.Any())
             foreach (var fileUrl in fileUrls)
-                res.Add(new() {type = "input_image", image_url = new() { url = fileUrl}});
+                res.Add(new() {type = "input_image", image_url = fileUrl });
         
         return res;
     }
@@ -37,7 +37,7 @@ public class CreateTextRequest
         if (imageUrls != null && imageUrls.Any())
         {
             foreach (var imageUrl in imageUrls)
-                input.content.Add(new() {type = "input_image", image_url = new() { url = imageUrl}});
+                input.content.Add(new() {type = "input_image", image_url =  imageUrl });
         }
                 
         Input.Add(input);
@@ -56,7 +56,7 @@ public class InputDtoContent
 {
     public string type { get; set; }
     public string? text { get; set; }
-    public InputDtoContentImageUrl? image_url { get; set; } = null;
+    public string? image_url { get; set; } = null;
 }
 
 public class InputDtoContentImageUrl
