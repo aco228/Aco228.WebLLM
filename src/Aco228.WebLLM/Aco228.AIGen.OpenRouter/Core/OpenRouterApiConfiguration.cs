@@ -16,7 +16,6 @@ public class OpenRouterApiConfiguration : ApiServiceConf
 
     public override HttpClient Prepare(HttpClient httpClient)
     {
-        httpClient.Timeout = TimeSpan.FromMinutes(1);
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", ApiKey);
         httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         httpClient.DefaultRequestHeaders.Add("X-Title", "ARBO");
