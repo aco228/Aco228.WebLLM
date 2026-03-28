@@ -45,7 +45,10 @@ public class IdeogramImageGen : ImageGen, IIdeogramImageGen
         var formResponse = await _apiService.HttpClient.PostAsync("https://api.ideogram.ai/v1/ideogram-v3/generate", form);
         var responseBody = await formResponse.Content.ReadAsStringAsync();
         var response = JsonSerializer.Deserialize<IdeogramImageResponse>(responseBody);
-        
+
+        if (response?.data == null)
+            throw new ArgumentException($"Invalid response. Response:: {responseBody}");
+            
         var result = new List<GenerateImageResponse>();
         foreach (var ideogramImageResponseData in response.data)
             result.Add(new()
