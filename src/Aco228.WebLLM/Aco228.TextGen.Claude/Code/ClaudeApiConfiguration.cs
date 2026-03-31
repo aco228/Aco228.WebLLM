@@ -17,6 +17,7 @@ public class ClaudeApiConfiguration : ApiServiceConf
     {
         httpClient.DefaultRequestHeaders.Add("x-api-key", ApiKey);
         httpClient.DefaultRequestHeaders.Add("anthropic-version", "2023-06-01");
+        httpClient.DefaultRequestHeaders.Add("anthropic-beta", "mcp-client-2025-04-04");
         return httpClient;
     }
 }

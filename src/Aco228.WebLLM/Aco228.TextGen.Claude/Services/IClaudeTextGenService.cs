@@ -41,9 +41,9 @@ public class ClaudeTextGenService : TextGenBase, IClaudeTextGenService
         return result;
     }
 
-    private MessageRequest CreateRequest(TextGenRequest request)
+    private ClaudeMessageRequest CreateRequest(TextGenRequest request)
     {
-        var apiRequest = new MessageRequest()
+        var apiRequest = new ClaudeMessageRequest()
         {
             model = request.Model.ModelApiName,
         };

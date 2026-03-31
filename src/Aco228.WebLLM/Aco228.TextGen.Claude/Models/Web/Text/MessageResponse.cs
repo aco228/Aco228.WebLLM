@@ -1,4 +1,6 @@
-﻿namespace Aco228.TextGen.Claude.Models.Web.Text;
+﻿using System.Text.Json.Serialization;
+
+namespace Aco228.TextGen.Claude.Models.Web.Text;
 
 public class MessageResponse
 {
@@ -17,6 +19,11 @@ public class ContentDTO
 {
     public string type { get; set; }
     public string text { get; set; }
+    public string? name { get; set; }
+    public string? id { get; set; }
+    
+    [JsonPropertyName("input")]
+    public Dictionary<string, string>? input_data { get; set; } 
 }
 
 public class CacheCreationDTO

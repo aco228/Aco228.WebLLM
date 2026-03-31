@@ -1,9 +1,14 @@
 ﻿namespace Aco228.TextGen.Claude.Models.Web.Text;
 
-public abstract class RequestMessageEntry
+public class RequestMessageEntry
 {
-    public abstract string type { get; }
+    public virtual string type { get; set; } = "text";
     public string? text { get; set; }
+    public string? name { get; set; }
+    public string? content { get; set; }
+    public string? tool_use_id { get; set; }
+    public string? id { get; set; }
+    public Dictionary<string, string>? input { get; set; }
     public RequestMessageEntryImageSource? source { get; set; }
 }
 
@@ -40,3 +45,25 @@ public class RequestMessageEntryImageSource
 }
 
 #endregion
+
+
+public class RequestMessageEntryTool : RequestMessageEntry
+{
+    public override string type => "tool_result";
+    public RequestMessageEntryTool(string id, string input)
+    {
+        tool_use_id = id;
+        content = input;
+    }
+}
+
+public class RequestMessageEntryToolRequest : RequestMessageEntry
+{
+    public override string type => "tool_use";
+    public RequestMessageEntryToolRequest(string id, string name, Dictionary<string, string> input)
+    {
+        this.id = id;
+        this.name = name;
+        this.input = input;
+    }
+}

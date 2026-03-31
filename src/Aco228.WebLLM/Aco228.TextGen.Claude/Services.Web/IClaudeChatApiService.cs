@@ -7,8 +7,8 @@ namespace Aco228.TextGen.Claude.Services.Web;
 public interface IClaudeChatApiService : IClaudeApiService
 {
     [ApiPost("messages")]
-    Task<MessageResponse> GetResponse(MessageRequest request);
+    Task<MessageResponse> GetResponse(ClaudeMessageRequest request);
     
     [ApiPost("messages")]
-    Task<string> GetString(MessageRequest request);
+    Task<string> GetString(ClaudeMessageRequest request);
 }
