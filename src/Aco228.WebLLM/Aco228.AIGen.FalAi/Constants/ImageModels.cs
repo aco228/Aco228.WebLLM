@@ -97,5 +97,41 @@ internal static class ImageModels
             Name = FalAiImageType.Flux2Max.ToString(),
             PricePerRequest = 0.03,
         },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.Phota),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.Phota.ToString(),
+            PricePerRequest = 0.09,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.WanPro),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.WanPro.ToString(),
+            PricePerRequest = 0.07,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.Wan),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.Wan.ToString(),
+            PricePerRequest = 0.03,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.LuminaImage),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.LuminaImage.ToString(),
+            PricePerRequest = 0.075,
+        },
     };
 }

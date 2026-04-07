@@ -42,4 +42,16 @@ public enum FalAiImageType
     
     [ModelType("qwen-image-2/pro/text-to-image")]
     QwenImage2Pro,
+    
+    [ModelType("wan/v2.7/pro/text-to-image")]
+    WanPro,
+    
+    [ModelType("wan/v2.7/text-to-image")]
+    Wan,
+    
+    [ModelType("phota")]
+    Phota,
+    
+    [ModelType("lumina-image/v2")]
+    LuminaImage,
 }
