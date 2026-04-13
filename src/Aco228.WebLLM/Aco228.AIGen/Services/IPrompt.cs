@@ -65,6 +65,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
             .Where(x => !UsePremiumModels && x.PriceLevel != PriceLevel.High)
             .Where(x => PriceLevel == null || x?.PriceLevel == PriceLevel)
             .Where(x => TextGenProviders?.Contains(x.Provider) ?? true)
+            .Shuffle()
             .ToManagedList();
         
         if(!llmModels.Any())
@@ -72,7 +73,7 @@ public abstract class PromptBase<TReq, TRes> : IPrompt<TReq, TRes> where TRes : 
 
         for (int i = 0; i < 6; i++)
         {
-            var llmModel = llmModels.Shuffle().First();
+            var llmModel = llmModels.Take();
             var (systemPrompt, userText) = await GetPromptData(request);
             Console.WriteLine($"Using LLM models: {llmModel.Provider}.{llmModel.ModelApiName}");
 
