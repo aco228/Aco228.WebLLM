@@ -11,5 +11,5 @@ public enum GoogleImageModelType
     Gemini3Pro = 2,
     
     [ModelType("gemini-3.1-flash-image-preview")]
-    Gemini3_1Flash = 2,
+    Gemini3_1Flash = 3,
 }
