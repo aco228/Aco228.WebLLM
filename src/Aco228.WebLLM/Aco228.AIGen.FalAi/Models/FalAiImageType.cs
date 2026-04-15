@@ -54,4 +54,10 @@ public enum FalAiImageType
     
     [ModelType("lumina-image/v2")]
     LuminaImage,
+    
+    [ModelType("ernie-image")]
+    Ernie,
+    
+    [ModelType("ernie-image/turbo")]
+    ErnieTurbo,
 }

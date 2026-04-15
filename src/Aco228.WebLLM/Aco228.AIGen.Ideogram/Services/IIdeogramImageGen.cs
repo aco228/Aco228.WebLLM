@@ -30,7 +30,7 @@ public class IdeogramImageGen : ImageGen, IIdeogramImageGen
         var renderingSpeed = prompt.Quality switch
         {
             ImageGenerationQuality.High => "QUALITY",
-            ImageGenerationQuality.Medium => "DEFAULT",
+            ImageGenerationQuality.Medium => "TURBO",
             _ => "FLASH"
         };
 

@@ -133,5 +133,23 @@ internal static class ImageModels
             Name = FalAiImageType.LuminaImage.ToString(),
             PricePerRequest = 0.075,
         },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.ErnieTurbo),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.ErnieTurbo.ToString(),
+            PricePerRequest = 0.01,
+        },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.Ernie),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.Ernie.ToString(),
+            PricePerRequest = 0.01,
+        },
     };
 }
