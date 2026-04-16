@@ -151,5 +151,14 @@ internal static class ImageModels
             Name = FalAiImageType.Ernie.ToString(),
             PricePerRequest = 0.01,
         },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.NucleusImage),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.NucleusImage.ToString(),
+            PricePerRequest = 0.01,
+        },
     };
 }

@@ -60,4 +60,7 @@ public enum FalAiImageType
     
     [ModelType("ernie-image/turbo")]
     ErnieTurbo,
+    
+    [ModelType("nucleus-image")]
+    NucleusImage,
 }
