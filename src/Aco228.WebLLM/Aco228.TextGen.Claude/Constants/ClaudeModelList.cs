@@ -11,7 +11,7 @@ internal static class ClaudeModelList
         {
             Provider = TextGenProvider.Claude,
             PriceLevel = PriceLevel.High,
-            Name = "Claude Opus 4.6",
+            Name = ClaudeModelType.ClaudeOpus.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeOpus),
             InputPricePerMillion = 5,
             OutputPricePerMillion = 25,
@@ -24,7 +24,7 @@ internal static class ClaudeModelList
         {
             Provider = TextGenProvider.Claude,
             PriceLevel = PriceLevel.Mid,
-            Name = "Claude Sonnet 4.5",
+            Name = ClaudeModelType.ClaudeSonnet.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeSonnet),
             InputPricePerMillion = 3.00,
             OutputPricePerMillion = 15.00,
@@ -37,7 +37,7 @@ internal static class ClaudeModelList
         {
             Provider = TextGenProvider.Claude,
             PriceLevel = PriceLevel.Low,
-            Name = "Claude Haiku 4.5",
+            Name = ClaudeModelType.ClaudeHaiku.ToString(),
             ModelApiName = ModelTypeHelper.GetModelApiName(ClaudeModelType.ClaudeHaiku),
             InputPricePerMillion = 1,
             OutputPricePerMillion = 5,
