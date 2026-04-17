@@ -63,4 +63,7 @@ public enum FalAiImageType
     
     [ModelType("nucleus-image")]
     NucleusImage,
+    
+    [ModelType("ovis-image")]
+    OvisImage,
 }

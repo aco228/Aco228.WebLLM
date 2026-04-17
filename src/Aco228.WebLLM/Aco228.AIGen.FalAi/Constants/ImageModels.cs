@@ -160,5 +160,14 @@ internal static class ImageModels
             Name = FalAiImageType.NucleusImage.ToString(),
             PricePerRequest = 0.01,
         },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.OvisImage),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.OvisImage.ToString(),
+            PricePerRequest = 0.012,
+        },
     };
 }
