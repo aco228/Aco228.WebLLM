@@ -67,6 +67,6 @@ public enum FalAiImageType
     [ModelType("ovis-image")]
     OvisImage,
     
-    [ModelType("imagineart-2.0-preview/text-to-image")]
+    [ModelType("imagineart/imagineart-2.0-preview/text-to-image")]
     ImagineArt,
 }
