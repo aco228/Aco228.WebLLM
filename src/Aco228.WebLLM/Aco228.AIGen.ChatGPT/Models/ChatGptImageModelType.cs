@@ -10,6 +10,9 @@ public enum ChatGptImageModelType
     [ModelType("gpt-image-1.5")]
     gpt_image_1_5,
     
+    [ModelType("gpt-image-2")]
+    gpt_image_2,
+    
     /// <summary>
     /// https://developers.openai.com/api/docs/models/gpt-image-1
     /// </summary>

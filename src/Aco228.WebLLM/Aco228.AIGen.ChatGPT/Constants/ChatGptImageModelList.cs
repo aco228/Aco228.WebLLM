@@ -31,5 +31,13 @@ internal static class ChatGptImageModelList
             PricePerRequest = 0.01,
         },
         
+        new(ImageGenProvider.OpenAI)
+        {
+            PriceLevel = PriceLevel.Low,
+            Name = ChatGptImageModelType.gpt_image_2.ToString(),
+            ModelApiName = ModelTypeHelper.GetModelApiName(ChatGptImageModelType.gpt_image_2),
+            PricePerRequest = 0.01,
+        },
+        
     };
 }
