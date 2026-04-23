@@ -69,4 +69,7 @@ public enum FalAiImageType
     
     [ModelType("imagineart/imagineart-2.0-preview/text-to-image")]
     ImagineArt,
+    
+    [ModelType("kling-image/v3/text-to-image")]
+    KlingImage,
 }

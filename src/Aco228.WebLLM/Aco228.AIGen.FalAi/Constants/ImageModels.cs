@@ -178,5 +178,14 @@ internal static class ImageModels
             Name = FalAiImageType.ImagineArt.ToString(),
             PricePerRequest = 0.03,
         },
+        new()
+        {
+            Provider = ImageGenProvider.FalAi,
+            ModelApiName = ModelTypeHelper.GetModelApiName(FalAiImageType.KlingImage),
+            PriceLevel = PriceLevel.High,
+            Tier = ModelTier.High,
+            Name = FalAiImageType.KlingImage.ToString(),
+            PricePerRequest = 0.028,
+        },
     };
 }

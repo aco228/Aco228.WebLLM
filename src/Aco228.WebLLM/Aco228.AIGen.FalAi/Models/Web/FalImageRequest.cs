@@ -6,6 +6,7 @@ public class FalImageRequest
     public FalImageSize? image_size { get; set; }
     public int num_images { get; set; } = 1;
     public string? image_url { get; set; }
+    public string? aspect_ratio { get; set; }
     public List<string>? image_urls { get; set; }
 }
 

@@ -55,6 +55,11 @@ public class FalImageGen : ImageGen, IFalImageGen
             num_images = prompt.Count,
         };
 
+        if (modelType.ModelApiName.Contains("kling"))
+        {
+            request.aspect_ratio = prompt.ImageSize.ToDefaultAspectRatio();
+        }
+
         var response = await _apiService.RequestImage(modelType.ModelApiName, request);
         var result = new List<GenerateImageResponse>();
         foreach (var responseImage in response.images)
