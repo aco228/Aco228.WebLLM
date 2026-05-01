@@ -46,6 +46,10 @@ public class NanoBananaImageGen : ImageGen, INanoBananaImageGen
         var response = await _apiService.GetImage(modelType.ModelApiName, request);
         var result = new List<GenerateImageResponse>();
         var tempFolder = StorageManager.Instance.GetTempFolder();
+        
+        if(response.candidates?.Any() == false)
+            throw new ArgumentException("Response contains no candidates");
+        
         foreach (var responseCandidate in response.candidates)
         foreach (var responsePart in responseCandidate.content.parts)
         {
